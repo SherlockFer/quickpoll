@@ -12,7 +12,7 @@ import com.apress.repository.PollRepository;
 
 @RestController
 public class PollController {
-//secondary
+//s
 	@Autowired
 	private PollRepository pollRepository;
 
