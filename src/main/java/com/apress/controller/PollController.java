@@ -40,15 +40,18 @@ public class PollController {
 	}
 
 	@RequestMapping(value = "/polls/{pollId}", method = RequestMethod.GET)
-	public ResponseEntity<?> getPoll(@PathVariable Long pollId) {
+	public ResponseEntity<Poll> getPoll(@PathVariable Long pollId) {
 		Optional<Poll> p = pollRepository.findById(pollId);
-		return new ResponseEntity<>(p, HttpStatus.OK);
+		if (p.isPresent()) {
+			return new ResponseEntity<>(p.get(), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(value = "/polls/{pollId}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollId) {
 		// Save the entity
-		Poll p = pollRepository.save(poll);
+		pollRepository.save(poll);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
