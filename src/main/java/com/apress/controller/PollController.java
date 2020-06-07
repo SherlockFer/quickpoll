@@ -23,6 +23,7 @@ public class PollController {
 	@Autowired
 	private PollRepository pollRepository;
 
+	// probando git
 	@RequestMapping(value = "/polls", method = RequestMethod.GET)
 	public ResponseEntity<Iterable<Poll>> getAllPolls() {
 		Iterable<Poll> allPolls = pollRepository.findAll();
