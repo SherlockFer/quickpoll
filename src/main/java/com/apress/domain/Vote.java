@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class Vote {
 	@Id
 	@GeneratedValue
-	@Column(name = "VOTE_ID")
+	@Column(name = "ID")
 	private Long id;
 
 	@ManyToOne
