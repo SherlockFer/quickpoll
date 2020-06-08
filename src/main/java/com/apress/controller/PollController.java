@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.apress.domain.Poll;
+import com.apress.exception.ResourceNotFoundException;
 import com.apress.repository.PollRepository;
 
 @RestController
@@ -48,7 +49,8 @@ public class PollController {
 		if (p.isPresent()) {
 			return new ResponseEntity<>(p.get(), HttpStatus.OK);
 		}
-		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		throw new ResourceNotFoundException("Poll with id " + pollId + " not found");
+
 	}
 
 	@RequestMapping(value = "/polls/{pollId}", method = RequestMethod.PUT)
