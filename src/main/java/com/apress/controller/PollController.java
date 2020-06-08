@@ -43,9 +43,9 @@ public class PollController {
 		return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
 	}
 
-	protected void verifyPoll(Long pollId) throws ResourceNotFoundException {
+	protected void verifyPoll(Long pollId){
 		Optional<Poll> poll = pollRepository.findById(pollId);
-		if (poll == null) {
+		if (!poll.isPresent()) {
 			throw new ResourceNotFoundException("Poll with id " + pollId + " not found");
 		}
 	}
