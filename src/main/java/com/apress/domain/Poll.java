@@ -15,7 +15,7 @@ import javax.persistence.OrderBy;
 public class Poll {
 	@Id
 	@GeneratedValue
-	@Column(name = "POLL_ID")
+	@Column(name = "ID")
 	private Long id;
 
 	@Column(name = "QUESTION")

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Option {
 	@Id
 	@GeneratedValue
-	@Column(name = "OPTION_ID")
+	@Column(name = "ID")
 	private Long id;
 
 	@Column(name = "OPTION_VALUE")
