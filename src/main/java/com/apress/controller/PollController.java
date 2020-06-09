@@ -1,6 +1,5 @@
 package com.apress.controller;
 
-import java.net.InetAddress;
 import java.net.URI;
 import java.util.Optional;
 
@@ -47,20 +46,15 @@ public class PollController {
 	protected void verifyPoll(Long pollId) {
 		Optional<Poll> poll = pollRepository.findById(pollId);
 		if (!poll.isPresent()) {
-			throw new ResourceNotFoundException("Poll with id " + pollId + " not found");
+			throw new ResourceNotFoundException(String.format("Poll with id %s not found", pollId));
 		}
 	}
 
 	@RequestMapping(value = "/polls/{pollId}", method = RequestMethod.GET)
 	public ResponseEntity<Poll> getPoll(@PathVariable Long pollId) throws Exception {
 		verifyPoll(pollId);
-		Optional<Poll> p = pollRepository.findById(pollId);
-
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.set("container", InetAddress.getLocalHost().getHostAddress());
-
-		return new ResponseEntity<>(p.get(), responseHeaders, HttpStatus.OK);
-
+		Optional<Poll> poll = pollRepository.findById(pollId);
+		return new ResponseEntity<>(poll.get(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/polls/{pollId}", method = RequestMethod.PUT)
