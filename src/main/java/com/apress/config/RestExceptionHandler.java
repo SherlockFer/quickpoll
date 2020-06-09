@@ -24,12 +24,12 @@ public class RestExceptionHandler {
 	}
 
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<Object> exceptionToDoHandler(Exception ex) {
+	public ResponseEntity<ErrorResponse> exceptionToDoHandler(Exception ex) {
 		LOG.error("Checked exception ocurred", ex);
 		ErrorResponse error = new ErrorResponse();
 		error.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		error.setMessage("An error ocurred, check api logs");
-		return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<ErrorResponse>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }
