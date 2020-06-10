@@ -1,5 +1,7 @@
 package com.apress.controller;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +18,8 @@ public class BookingController {
 	private BookingService bookingService;
 
 	@GetMapping(value = "/bookings")
-	public ResponseEntity<Iterable<BookingDTO>> getAllBookings() {
-		Iterable<BookingDTO> bookingDTOs = bookingService.findAll();
+	public ResponseEntity<Collection<BookingDTO>> getAllBookings() {
+		Collection<BookingDTO> bookingDTOs = bookingService.findAll();
 		return new ResponseEntity<>(bookingDTOs, HttpStatus.OK);
 	}
 

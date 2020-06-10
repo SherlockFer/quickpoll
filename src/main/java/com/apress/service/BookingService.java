@@ -1,34 +1,27 @@
 package com.apress.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
 import com.apress.repository.BookingRepository;
+import com.apress.service.mappers.BookingMapper;
 
 @Service
 public class BookingService {
 
 	@Autowired
 	private BookingRepository bookingRepository;
+	@Autowired
+	private BookingMapper bookingMapper;
 
-	public Iterable<BookingDTO> findAll() {
-		return toBookingDTOs(bookingRepository.findAll());
-	}
-
-	private Iterable<BookingDTO> toBookingDTOs(Iterable<Booking> bookings) {
-		List<BookingDTO> bookingDTOs = new ArrayList<BookingDTO>();
-		for (Booking booking : bookings) {
-			BookingDTO bookingDTO = new BookingDTO();
-			bookingDTO.setId(booking.getId());
-			bookingDTO.setDate(booking.getDate());
-			bookingDTOs.add(bookingDTO);
-		}
-		return bookingDTOs;
+	public Collection<BookingDTO> findAll() {
+		Collection<Booking> bookings = IterableUtils.toList(bookingRepository.findAll());
+		return bookingMapper.toBookingDTOs(bookings);
 	}
 
 }
