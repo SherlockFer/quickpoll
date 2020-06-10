@@ -1,17 +1,31 @@
 package com.apress.service.mappers;
 
-import org.mapstruct.Mapper;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
 
-@Mapper(componentModel = "spring")
-public interface BookingMapper {
+@Component
+public class BookingMapper {
 
-	BookingDTO toBookingDTO(Booking booking);
+	@Autowired
+	private ModelMapper modelMapper;
 
-	Iterable<BookingDTO> toBookingDTOs(Iterable<Booking> bookings);
+	public BookingDTO toBookingDTO(Booking booking) {
+		return modelMapper.map(booking, BookingDTO.class);
+	}
 
-	Booking toBooking(BookingDTO bookingDTO);
+	public Booking toBooking(BookingDTO bookingDTO) {
+		return modelMapper.map(bookingDTO, Booking.class);
+	}
+
+	public Collection<BookingDTO> toBookingDTOs(Collection<Booking> bookings) {
+		return bookings.stream().map(booking -> toBookingDTO(booking)).collect(Collectors.toList());
+	}
 
 }
