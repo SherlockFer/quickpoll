@@ -15,3 +15,6 @@ insert into option (id, option_value, poll_id) values (9, 'Football', 3);
 insert into option (id, option_value, poll_id) values (10, 'Basketball', 3);
 insert into option (id, option_value, poll_id) values (11, 'Cricket', 3);
 insert into option (id, option_value, poll_id) values (12, 'Baseball', 3);
+
+insert into booking (id, comments, date, vehicule_brand, vehicule_engine, vehicule_model, vehicule_number_plate) values (1,'comentario 1', '2019-10-01','Nissan', '1500', 'Sunny', 'AAA-111');
+insert into booking (id, comments, date, vehicule_brand, vehicule_engine, vehicule_model, vehicule_number_plate) values (2,'comentario 2', '2019-10-02','Nissan', '1600', 'Sunny', 'BBB-222');
