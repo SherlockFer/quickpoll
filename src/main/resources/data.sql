@@ -19,4 +19,3 @@ insert into option (id, option_value, poll_id) values (12, 'Baseball', 3);
 insert into user_entity (id, full_name, mobile, email, role, password) values (1, 'Mechanic-1' , '123456789' , 'mechanic-1@garage.com' , 'mechanic1' , '123456');
 insert into user_entity (id, full_name, mobile, email, role, password) values (2, 'Mechanic-2' , '123456789' , 'mechanic-2@garage.com' , 'mechanic2' , '123456');
 insert into user_entity (id, full_name, mobile, email, role, password) values (3, 'Mechanic-3' , '123456789' , 'mechanic-3@garage.com' , 'mechanic3' , '123456');
-insert into user_entity (id, full_name, mobile, email, role, password) values (3, 'Mechanic-3' , '123456789' , 'mechanic-3@garage.com' , 'mechanic3' , '123456');
