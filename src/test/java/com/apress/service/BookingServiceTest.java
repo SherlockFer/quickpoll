@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +31,7 @@ public class BookingServiceTest {
 		booking.setId(1L);
 		when(bookingRepository.findAll()).thenReturn(Arrays.asList(booking));
 
-		Iterable<BookingDTO> bookingDTOs = service.findAll();
+		Collection<BookingDTO> bookingDTOs = service.findAll();
 
 		assertThat(bookingDTOs.iterator().next().getId()).isEqualTo(1L);
 	}
