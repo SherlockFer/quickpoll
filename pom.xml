@@ -59,11 +59,11 @@
 			<artifactId>commons-collections4</artifactId>
 			<version>4.1</version>
 		</dependency>
-		
+
 		<dependency>
-		   <groupId>io.springfox</groupId>
-		   <artifactId>springfox-swagger2</artifactId>
-		   <version>2.9.2</version>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
 		</dependency>
 
 		<dependency>
@@ -76,6 +76,23 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-jdk8</artifactId>
+			<version>1.2.0.Final</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.2.0.Final</version>
 		</dependency>
 
 	</dependencies>
