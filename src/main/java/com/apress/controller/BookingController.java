@@ -3,23 +3,22 @@ package com.apress.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apress.domain.Booking;
-import com.apress.repository.BookingRepository;
+import com.apress.dto.BookingDTO;
+import com.apress.service.BookingService;
 
 @RestController
 public class BookingController {
 
 	@Autowired
-	private BookingRepository bookingRepository;
+	private BookingService bookingService;
 
-	@RequestMapping(value = "/bookings", method = RequestMethod.GET)
-	public ResponseEntity<Iterable<Booking>> getAllBookings() {
-		Iterable<Booking> allBookings = bookingRepository.findAll();
-		return new ResponseEntity<>(allBookings, HttpStatus.OK);
+	@GetMapping(value = "/bookings")
+	public ResponseEntity<Iterable<BookingDTO>> getAllBookings() {
+		Iterable<BookingDTO> bookingDTOs = bookingService.findAll();
+		return new ResponseEntity<>(bookingDTOs, HttpStatus.OK);
 	}
 
 }
