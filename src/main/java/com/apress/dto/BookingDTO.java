@@ -9,6 +9,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
+
 public class BookingDTO {
 
 	private Long id;

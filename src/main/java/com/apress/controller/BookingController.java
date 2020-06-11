@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apress.dto.BookingDTO;
 import com.apress.service.BookingService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+
 @RestController
 public class BookingController {
 
