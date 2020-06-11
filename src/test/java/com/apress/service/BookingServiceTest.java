@@ -31,7 +31,7 @@ public class BookingServiceTest {
 	private BookingMapper bookingMapper;
 
 	@Test
-	void testFindAll() {
+	void shouldReturnAllBookings() {
 		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
 		when(bookingRepository.findAll()).thenReturn(new ArrayList<Booking>());
 		when(bookingMapper.toBookingDTOs(any())).thenReturn(Arrays.asList(bookingDTO));
