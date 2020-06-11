@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apress.dto.UserDTO;
 import com.apress.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+
 @RestController
 public class UserController {
 
