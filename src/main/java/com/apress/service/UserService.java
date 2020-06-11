@@ -1,35 +1,27 @@
 package com.apress.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apress.domain.User_Entity;
 import com.apress.dto.UserDTO;
 import com.apress.repository.UserRepository;
+import com.apress.service.mappers.UserMapper;
 
 @Service
 public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private UserMapper userMapper;
 
-	public Iterable<UserDTO> findAll() {
-		return toUserDTOs(userRepository.findAll());
-	}
-
-	private Iterable<UserDTO> toUserDTOs(Iterable<User_Entity> users) {
-		List<UserDTO> userDTOs = new ArrayList<UserDTO>();
-		for (User_Entity user : users) {
-			UserDTO userDTO = new UserDTO();
-			userDTO.setFull_name(user.getFull_name());
-			userDTO.setEmail(user.getEmail());
-
-			userDTOs.add(userDTO);
-		}
-		return userDTOs;
+	public Collection<UserDTO> findAll() {
+		Collection<User_Entity> users = IterableUtils.toList(userRepository.findAll());
+		return userMapper.toUserDTOs(users);
 	}
 
 }
