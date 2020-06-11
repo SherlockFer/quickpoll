@@ -2,7 +2,6 @@ package com.apress.service;
 
 import java.util.Collection;
 
-import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,7 @@ public class BookingService {
 	private BookingMapper bookingMapper;
 
 	public Collection<BookingDTO> findAll() {
-		Collection<Booking> bookings = IterableUtils.toList(bookingRepository.findAll());
+		Collection<Booking> bookings = bookingRepository.findAll();
 		return bookingMapper.toBookingDTOs(bookings);
 	}
 
