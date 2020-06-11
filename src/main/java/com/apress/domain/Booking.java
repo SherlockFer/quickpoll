@@ -1,11 +1,15 @@
 package com.apress.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +24,9 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
+@Table(name = "BOOKINGS")
 public class Booking {
+
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -44,20 +50,21 @@ public class Booking {
 	@Column(name = "COMMENTS")
 	private String comments;
 
-	public Long getId() {
-		return id;
+	@Column(name = "CREATED_AT", insertable = true, updatable = false)
+	private LocalDateTime created;
+
+	@Column(name = "MODIFIED_AT")
+	private LocalDateTime modified;
+
+	@PrePersist
+	void onCreate() {
+		this.setCreated(LocalDateTime.now());
+		this.setModified(LocalDateTime.now());
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
+	@PreUpdate
+	void onUpdate() {
+		this.setModified(LocalDateTime.now());
 	}
 
 }

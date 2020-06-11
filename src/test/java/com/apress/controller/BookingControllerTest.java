@@ -26,14 +26,13 @@ public class BookingControllerTest {
 	private BookingService bookingService;
 
 	@Test
-	public void shouldReturnAllPost() {
+	public void shouldReturnAllBookingsWithHttpStatusOk() {
 		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
 		when(bookingService.findAll()).thenReturn(Arrays.asList(bookingDTO));
 
 		ResponseEntity<Collection<BookingDTO>> response = bookingController.getAllBookings();
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.hasBody()).isTrue();
 		assertThat(response.getBody().size()).isEqualTo(1);
 	}
 
