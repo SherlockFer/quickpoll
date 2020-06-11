@@ -1,5 +1,7 @@
 package com.apress.controller;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +22,8 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping(value = "/users")
-	public ResponseEntity<Iterable<UserDTO>> getAllUsers() {
-		Iterable<UserDTO> userDTOs = userService.findAll();
+	public ResponseEntity<Collection<UserDTO>> getAllUsers() {
+		Collection<UserDTO> userDTOs = userService.findAll();
 		return new ResponseEntity<>(userDTOs, HttpStatus.OK);
 	}
 
