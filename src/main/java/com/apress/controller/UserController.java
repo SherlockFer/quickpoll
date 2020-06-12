@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apress.dto.UserDTO;
@@ -42,6 +44,13 @@ public class UserController {
 		verifyUser(userId);
 		Optional<UserDTO> userDTO = userService.findUser(userId);
 		return new ResponseEntity<>(userDTO.get(), HttpStatus.OK);
+	}
+
+	@PutMapping(value = "/users/{userId}")
+	public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO, @PathVariable Long userId) {
+		verifyUser(userId);
+		userService.save(userDTO);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }
