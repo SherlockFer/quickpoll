@@ -32,4 +32,9 @@ public class UserService {
 		return Optional.empty();
 	}
 
+	public void saveUser(UserDTO userDTO) {
+		User user = userMapper.toUser(userDTO);
+		userRepository.save(user);
+	}
+
 }

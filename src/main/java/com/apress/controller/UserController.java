@@ -49,7 +49,7 @@ public class UserController {
 	@PutMapping(value = "/users/{userId}")
 	public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO, @PathVariable Long userId) {
 		verifyUser(userId);
-		userService.save(userDTO);
+		userService.saveUser(userDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
