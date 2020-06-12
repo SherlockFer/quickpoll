@@ -49,4 +49,8 @@ public class UserControllerTest {
 		assertThat(response.getBody().getId()).isEqualTo(1);
 	}
 
+	@Test
+	public void shouldReturnEmptyBookingDTOWhenIdDoesntExists() {
+		when(userService.findById(2L)).thenReturn(Optional.empty());
+	}
 }
