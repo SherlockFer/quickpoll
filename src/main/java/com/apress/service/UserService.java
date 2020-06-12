@@ -41,10 +41,9 @@ public class UserService {
 		userRepository.deleteById(userId);
 	}
 
-	public UserDTO saveUser(UserDTO userDTO) {
+	public void saveUser(UserDTO userDTO) {
 		User user = userMapper.toUser(userDTO);
 		userRepository.save(user);
-		return null;
 	}
 
 }
