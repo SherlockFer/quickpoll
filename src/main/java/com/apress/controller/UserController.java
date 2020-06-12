@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,7 @@ public class UserController {
 	}
 
 	protected void verifyUser(Long userId) {
-		Optional<UserDTO> userDTO = userService.findUser(userId);
+		Optional<UserDTO> userDTO = userService.findById(userId);
 		if (!userDTO.isPresent()) {
 			throw new ResourceNotFoundException(String.format("User with id %s not found", userId));
 		}
@@ -43,14 +44,14 @@ public class UserController {
 	@GetMapping(value = "/users/{userId}")
 	public ResponseEntity<UserDTO> getUser(@PathVariable Long userId) {
 		verifyUser(userId);
-		Optional<UserDTO> userDTO = userService.findUser(userId);
+		Optional<UserDTO> userDTO = userService.findById(userId);
 		return new ResponseEntity<>(userDTO.get(), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/users/{userId}")
 	public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO, @PathVariable Long userId) {
 		verifyUser(userId);
-		userService.saveUser(userDTO);
+		userService.updateUser(userDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
@@ -59,6 +60,12 @@ public class UserController {
 		verifyUser(userId);
 		userService.deleteUser(userId);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/users")
+	public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO) {
+		userDTO = userService.saveUser(userDTO);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 }

@@ -41,7 +41,7 @@ public class UserControllerTest {
 	@Test
 	public void shouldReturnUserDTOById() {
 		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
-		when(userService.findUser(1L)).thenReturn(Optional.of(userDTO));
+		when(userService.findById(1L)).thenReturn(Optional.of(userDTO));
 
 		ResponseEntity<UserDTO> response = controller.getUser(1L);
 

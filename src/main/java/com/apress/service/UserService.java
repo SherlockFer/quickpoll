@@ -24,7 +24,7 @@ public class UserService {
 		return userMapper.toUserDTOs(users);
 	}
 
-	public Optional<UserDTO> findUser(long id) {
+	public Optional<UserDTO> findById(long id) {
 		Optional<User> user = userRepository.findById(id);
 		if (user.isPresent()) {
 			return Optional.of(userMapper.toUserDTO(user.get()));
@@ -32,13 +32,19 @@ public class UserService {
 		return Optional.empty();
 	}
 
-	public void saveUser(UserDTO userDTO) {
+	public void updateUser(UserDTO userDTO) {
 		User user = userMapper.toUser(userDTO);
 		userRepository.save(user);
 	}
 
 	public void deleteUser(Long userId) {
 		userRepository.deleteById(userId);
+	}
+
+	public UserDTO saveUser(UserDTO userDTO) {
+		User user = userMapper.toUser(userDTO);
+		userRepository.save(user);
+		return null;
 	}
 
 }
