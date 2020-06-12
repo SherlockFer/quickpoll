@@ -1,6 +1,7 @@
 package com.apress.service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,11 @@ public class UserService {
 	public Collection<UserDTO> findAll() {
 		Collection<User> users = userRepository.findAll();
 		return userMapper.toUserDTOs(users);
+	}
+
+	public UserDTO findUser(long id) {
+		Optional<User> user = userRepository.findById(id);
+		return userMapper.toUserDTO(user);
 	}
 
 }
