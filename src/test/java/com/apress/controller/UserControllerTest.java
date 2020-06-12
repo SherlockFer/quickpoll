@@ -36,6 +36,17 @@ public class UserControllerTest {
 		assertThat(response.hasBody()).isTrue();
 		assertThat(response.getBody().size()).isEqualTo(1);
 	}
+	
+	@Test
+	public void shouldReturnUserDTOById() {
+		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
+
+		ResponseEntity<UserDTO> response = userController.getUser(1L);
+
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.hasBody()).isTrue();
+		assertThat(response.).isEqualTo(1);
+	}
 
 }
 
