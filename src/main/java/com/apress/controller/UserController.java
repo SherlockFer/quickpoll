@@ -64,7 +64,7 @@ public class UserController {
 
 	@PostMapping(value = "/users")
 	public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO) {
-		userDTO = userService.saveUser(userDTO);
+		userService.saveUser(userDTO);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
