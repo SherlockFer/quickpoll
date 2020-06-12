@@ -49,8 +49,9 @@ public class UserControllerTest {
 		assertThat(response.getBody().getId()).isEqualTo(1);
 	}
 
-	@Test
+	@Test(expected = IllegalStateException.class)
 	public void shouldReturnEmptyBookingDTOWhenIdDoesntExists() {
 		when(userService.findById(2L)).thenReturn(Optional.empty());
+		ResponseEntity<UserDTO> response = controller.getUser(2L);
 	}
 }
