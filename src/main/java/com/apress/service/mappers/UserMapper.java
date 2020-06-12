@@ -1,7 +1,6 @@
 package com.apress.service.mappers;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import org.mapstruct.Mapper;
 
@@ -16,7 +15,5 @@ public interface UserMapper {
 	public User toUser(UserDTO userDTO);
 
 	public Collection<UserDTO> toUserDTOs(Collection<User> users);
-
-	public UserDTO toUserDTO(Optional<User> user);
 
 }

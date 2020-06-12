@@ -1,6 +1,7 @@
 package com.apress.controller;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@GetMapping(value = "/users")
 	public ResponseEntity<Collection<UserDTO>> getAllUsers() {
 		Collection<UserDTO> userDTOs = userService.findAll();
@@ -30,17 +31,17 @@ public class UserController {
 	}
 
 	protected void verifyUser(Long userId) {
-		UserDTO userDTO = userService.findUser(userId);
-		if (userDTO == null) {
-			throw new ResourceNotFoundException(String.format("Poll with id %s not found", userId));
+		Optional<UserDTO> userDTO = userService.findUser(userId);
+		if (!userDTO.isPresent()) {
+			throw new ResourceNotFoundException(String.format("User with id %s not found", userId));
 		}
 	}
 
 	@GetMapping(value = "/users/{userId}")
 	public ResponseEntity<UserDTO> getUser(@PathVariable Long userId) throws Exception {
 		verifyUser(userId);
-		UserDTO userDTO = userService.findUser(userId);
-		return new ResponseEntity<>(userDTO, HttpStatus.OK);
+		Optional<UserDTO> userDTO = userService.findUser(userId);
+		return new ResponseEntity<>(userDTO.get(), HttpStatus.OK);
 	}
 
 }

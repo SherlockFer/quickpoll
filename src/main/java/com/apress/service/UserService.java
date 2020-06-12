@@ -24,9 +24,12 @@ public class UserService {
 		return userMapper.toUserDTOs(users);
 	}
 
-	public UserDTO findUser(long id) {
+	public Optional<UserDTO> findUser(long id) {
 		Optional<User> user = userRepository.findById(id);
-		return userMapper.toUserDTO(user);
+		if (user.isPresent()) {
+			return Optional.of(userMapper.toUserDTO(user.get()));
+		}
+		return Optional.empty();
 	}
 
 }
