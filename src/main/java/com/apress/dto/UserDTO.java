@@ -11,7 +11,7 @@ public class UserDTO {
 
 	private Long id;
 
-	private String full_name;
+	private String fullName;
 
 	private String mobile;
 

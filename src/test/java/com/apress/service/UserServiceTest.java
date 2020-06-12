@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.apress.domain.User_Entity;
+import com.apress.domain.User;
 import com.apress.dto.UserDTO;
 import com.apress.repository.UserRepository;
 import com.apress.service.mappers.UserMapper;
@@ -32,7 +32,7 @@ public class UserServiceTest {
 	@Test
 	void testFindAll() {
 		UserDTO userDTO = UserDTO.builder().id(1L).mobile("123456789").build();
-		when(userRepository.findAll()).thenReturn(new ArrayList<User_Entity>());
+		when(userRepository.findAll()).thenReturn(new ArrayList<User>());
 		when(userMapper.toUserDTOs(any())).thenReturn(Arrays.asList(userDTO));
 
 		Collection<UserDTO> userDTOs = service.findAll();
