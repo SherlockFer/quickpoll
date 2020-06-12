@@ -21,7 +21,7 @@ import com.apress.service.BookingService;
 public class BookingControllerTest {
 
 	@InjectMocks
-	private BookingController bookingController;
+	private BookingController controller;
 	@Mock
 	private BookingService bookingService;
 
@@ -30,7 +30,7 @@ public class BookingControllerTest {
 		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
 		when(bookingService.findAll()).thenReturn(Arrays.asList(bookingDTO));
 
-		ResponseEntity<Collection<BookingDTO>> response = bookingController.getAllBookings();
+		ResponseEntity<Collection<BookingDTO>> response = controller.getAllBookings();
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().size()).isEqualTo(1);

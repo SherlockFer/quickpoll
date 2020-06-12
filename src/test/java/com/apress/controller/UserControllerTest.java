@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +22,7 @@ import com.apress.service.UserService;
 public class UserControllerTest {
 
 	@InjectMocks
-	private UserController userController;
+	private UserController controller;
 	@Mock
 	private UserService userService;
 
@@ -30,23 +31,22 @@ public class UserControllerTest {
 		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
 		when(userService.findAll()).thenReturn(Arrays.asList(userDTO));
 
-		ResponseEntity<Collection<UserDTO>> response = userController.getAllUsers();
+		ResponseEntity<Collection<UserDTO>> response = controller.getAllUsers();
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.hasBody()).isTrue();
 		assertThat(response.getBody().size()).isEqualTo(1);
 	}
-	
+
 	@Test
 	public void shouldReturnUserDTOById() {
 		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
+		when(userService.findUser(1L)).thenReturn(Optional.of(userDTO));
 
-		ResponseEntity<UserDTO> response = userController.getUser(1L);
+		ResponseEntity<UserDTO> response = controller.getUser(1L);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.hasBody()).isTrue();
-		assertThat(response.).isEqualTo(1);
+		assertThat(response.getBody().getId()).isEqualTo(1);
 	}
 
 }
-

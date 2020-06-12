@@ -38,7 +38,7 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/users/{userId}")
-	public ResponseEntity<UserDTO> getUser(@PathVariable Long userId) throws Exception {
+	public ResponseEntity<UserDTO> getUser(@PathVariable Long userId) {
 		verifyUser(userId);
 		Optional<UserDTO> userDTO = userService.findUser(userId);
 		return new ResponseEntity<>(userDTO.get(), HttpStatus.OK);
