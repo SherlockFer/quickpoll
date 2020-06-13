@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apress.dto.BookingDTO;
@@ -43,6 +45,13 @@ public class BookingController {
 		verifyBooking(bookingId);
 		Optional<BookingDTO> bookingDTO = bookingService.findBooking(bookingId);
 		return new ResponseEntity<>(bookingDTO.get(), HttpStatus.OK);
+	}
+
+	@PutMapping(value = "/bookings/{bookingId}")
+	public ResponseEntity<?> update(@RequestBody BookingDTO bookingDTO, @PathVariable Long bookingId) {
+		verifyBooking(bookingId);
+		bookingService.saveBooking(bookingDTO);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }

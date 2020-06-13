@@ -26,9 +26,15 @@ public class BookingService {
 
 	public Optional<BookingDTO> findBooking(long id) {
 		Optional<Booking> booking = bookingRepository.findById(id);
-		if(booking.isPresent()) {
+		if (booking.isPresent()) {
 			return Optional.of(bookingMapper.toBookingDTO(booking.get()));
 		}
 		return Optional.empty();
 	}
+
+	public void saveBooking(BookingDTO bookingDTO) {
+		Booking booking = bookingMapper.toBooking(bookingDTO);
+		bookingRepository.save(booking);
+	}
+
 }
