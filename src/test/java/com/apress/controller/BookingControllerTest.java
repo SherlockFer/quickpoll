@@ -42,7 +42,7 @@ public class BookingControllerTest {
 	@Test
 	public void shouldReturnBookingDTOById() {
 		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
-		when(bookingService.findBooking(1L)).thenReturn(Optional.of(bookingDTO));
+		when(bookingService.findById(1L)).thenReturn(Optional.of(bookingDTO));
 
 		ResponseEntity<BookingDTO> response = controller.getBooking(1L);
 
@@ -52,7 +52,7 @@ public class BookingControllerTest {
 
 	@Test()
 	public void shouldThrowResourceNotFoundExceptionWhenBookingIdDoesntExist() {
-		when(bookingService.findBooking(-1L)).thenReturn(Optional.empty());
+		when(bookingService.findById(-1L)).thenReturn(Optional.empty());
 
 		Exception exception = assertThrows(ResourceNotFoundException.class, () -> {
 			controller.getBooking(-1L);

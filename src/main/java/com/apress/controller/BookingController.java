@@ -33,7 +33,7 @@ public class BookingController {
 	}
 
 	protected void verifyBooking(Long bookingId) {
-		Optional<BookingDTO> bookingDTO = bookingService.findBooking(bookingId);
+		Optional<BookingDTO> bookingDTO = bookingService.findById(bookingId);
 		if (!bookingDTO.isPresent()) {
 			throw new ResourceNotFoundException(String.format("Booking with id %s not found", bookingId));
 		}
@@ -43,14 +43,14 @@ public class BookingController {
 	@GetMapping(value = "/bookings/{bookingId}")
 	public ResponseEntity<BookingDTO> getBooking(@PathVariable Long bookingId) {
 		verifyBooking(bookingId);
-		Optional<BookingDTO> bookingDTO = bookingService.findBooking(bookingId);
+		Optional<BookingDTO> bookingDTO = bookingService.findById(bookingId);
 		return new ResponseEntity<>(bookingDTO.get(), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/bookings/{bookingId}")
-	public ResponseEntity<?> update(@RequestBody BookingDTO bookingDTO, @PathVariable Long bookingId) {
+	public ResponseEntity<?> updateBooking(@RequestBody BookingDTO bookingDTO, @PathVariable Long bookingId) {
 		verifyBooking(bookingId);
-		bookingService.saveBooking(bookingDTO);
+		bookingService.updateBooking(bookingDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 

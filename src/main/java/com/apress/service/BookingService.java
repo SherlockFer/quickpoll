@@ -24,7 +24,7 @@ public class BookingService {
 		return bookingMapper.toBookingDTOs(bookings);
 	}
 
-	public Optional<BookingDTO> findBooking(long id) {
+	public Optional<BookingDTO> findById(long id) {
 		Optional<Booking> booking = bookingRepository.findById(id);
 		if (booking.isPresent()) {
 			return Optional.of(bookingMapper.toBookingDTO(booking.get()));
@@ -32,7 +32,7 @@ public class BookingService {
 		return Optional.empty();
 	}
 
-	public void saveBooking(BookingDTO bookingDTO) {
+	public void updateBooking(BookingDTO bookingDTO) {
 		Booking booking = bookingMapper.toBooking(bookingDTO);
 		bookingRepository.save(booking);
 	}
