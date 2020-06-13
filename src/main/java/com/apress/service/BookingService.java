@@ -1,6 +1,7 @@
 package com.apress.service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,4 +24,11 @@ public class BookingService {
 		return bookingMapper.toBookingDTOs(bookings);
 	}
 
+	public Optional<BookingDTO> findBooking(long id) {
+		Optional<Booking> booking = bookingRepository.findById(id);
+		if(booking.isPresent()) {
+			return Optional.of(bookingMapper.toBookingDTO(booking.get()));
+		}
+		return Optional.empty();
+	}
 }

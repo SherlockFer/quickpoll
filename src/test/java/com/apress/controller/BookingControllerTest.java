@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,6 +35,18 @@ public class BookingControllerTest {
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().size()).isEqualTo(1);
+	}
+
+	@Test
+	public void shouldReturnBookingDTOById() {
+		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
+		when(bookingService.findBooking(1L)).thenReturn(Optional.of(bookingDTO));
+
+		ResponseEntity<BookingDTO> response = controller.getBooking(1L);
+
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.hasBody()).isTrue();
+		// assertThat(response.getBody()).isEqualTo(1);
 	}
 
 }
