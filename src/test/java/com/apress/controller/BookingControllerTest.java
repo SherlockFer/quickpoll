@@ -47,7 +47,7 @@ public class BookingControllerTest {
 		ResponseEntity<BookingDTO> response = controller.getBooking(1L);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody()).isEqualTo(1);
+		assertThat(response.getBody().getId()).isEqualTo(1);
 	}
 
 	@Test()
@@ -58,7 +58,7 @@ public class BookingControllerTest {
 			controller.getBooking(-1L);
 		});
 
-		assertThat(exception.getMessage()).isEqualTo("User with id -1 not found");
+		assertThat(exception.getMessage()).isEqualTo("Booking with id -1 not found");
 
 	}
 }
