@@ -22,3 +22,7 @@ insert into bookings (id, comments, date, vehicule_brand, vehicule_engine, vehic
 insert into users (id, full_name, mobile, email, role, password) values (1, 'Mechanic-1' , '123456789' , 'mechanic-1@garage.com' , 'mechanic1' , '123456');
 insert into users (id, full_name, mobile, email, role, password) values (2, 'Mechanic-2' , '123456789' , 'mechanic-2@garage.com' , 'mechanic2' , '123456');
 insert into users (id, full_name, mobile, email, role, password) values (3, 'Mechanic-3' , '123456789' , 'mechanic-3@garage.com' , 'mechanic3' , '123456');
+
+insert into products(id, name, category, price) values(1, 'Annual Service', 'base', 50);
+insert into products(id, name, category, price) values(2, 'Major Service', 'base', 60);
+insert into products(id, name, category, price) values(3, 'Repair or Fault', 'base', 70);
