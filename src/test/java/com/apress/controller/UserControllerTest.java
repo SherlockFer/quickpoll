@@ -64,7 +64,7 @@ public class UserControllerTest {
 			controller.findById(-1L);
 		});
 
-		assertThat(exception.getMessage()).isEqualTo("Booking with id -1 not found");
+		assertThat(exception.getMessage()).isEqualTo("User with id -1 not found");
 	}
 
 	@Test
