@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.apress.dto.PartDTO;
-import com.apress.exception.ResourceNotFoundException;
 import com.apress.service.PartService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +40,10 @@ public class PartController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<PartDTO> findById(@PathVariable Long id) {
-		verifyPart(id);
 		Optional<PartDTO> partDTO = partService.findById(id);
+		if (!partDTO.isPresent()) {
+			return new ResponseEntity<>(partDTO.get(), HttpStatus.OK);
+		}
 		return new ResponseEntity<>(partDTO.get(), HttpStatus.OK);
 	}
 
@@ -60,23 +61,21 @@ public class PartController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@RequestBody PartDTO partDTO, @PathVariable Long id) {
-		verifyPart(id);
+		if (!partService.findById(id).isPresent()) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		partDTO.setId(id);
 		partService.save(partDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		verifyPart(id);
+		if (!partService.findById(id).isPresent()) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
 		partService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
-
 	}
 
-	private void verifyPart(Long id) {
-		Optional<PartDTO> partDTO = partService.findById(id);
-		if (!partDTO.isPresent()) {
-			throw new ResourceNotFoundException(String.format("Part with id %s not found", id));
-		}
-	}
 }
