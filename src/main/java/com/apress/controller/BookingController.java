@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.apress.dto.BookingDTO;
-import com.apress.exception.ResourceNotFoundException;
 import com.apress.service.BookingService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +40,10 @@ public class BookingController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<BookingDTO> findById(@PathVariable Long id) {
-		verifyBooking(id);
 		Optional<BookingDTO> bookingDTO = bookingService.findById(id);
+		if (!bookingDTO.isPresent()) {
+			return new ResponseEntity<BookingDTO>(HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<>(bookingDTO.get(), HttpStatus.OK);
 	}
 
@@ -60,23 +61,21 @@ public class BookingController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@RequestBody BookingDTO bookingDTO, @PathVariable Long id) {
-		verifyBooking(id);
+		if (!bookingService.findById(id).isPresent()) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		bookingDTO.setId(id);
 		bookingService.save(bookingDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		verifyBooking(id);
+		if (!bookingService.findById(id).isPresent()) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
 		bookingService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
-	private void verifyBooking(Long bookingId) {
-		Optional<BookingDTO> bookingDTO = bookingService.findById(bookingId);
-		if (!bookingDTO.isPresent()) {
-			throw new ResourceNotFoundException(String.format("Booking with id %s not found", bookingId));
-		}
-
-	}
 }
