@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.apress.dto.ProductDTO;
-import com.apress.exception.ResourceNotFoundException;
 import com.apress.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +40,10 @@ public class ProductController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
-		verifyProduct(id);
 		Optional<ProductDTO> productDTO = productService.findById(id);
+		if (!productDTO.isPresent()) {
+			return new ResponseEntity<>(productDTO.get(), HttpStatus.OK);
+		}
 		return new ResponseEntity<>(productDTO.get(), HttpStatus.OK);
 	}
 
@@ -60,23 +61,21 @@ public class ProductController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@RequestBody ProductDTO productDTO, @PathVariable Long id) {
-		verifyProduct(id);
+		if (!productService.findById(id).isPresent()) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		productDTO.setId(id);
 		productService.save(productDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		verifyProduct(id);
+		if (!productService.findById(id).isPresent()) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
 		productService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
-	}
-
-	private void verifyProduct(Long id) {
-		Optional<ProductDTO> productDTO = productService.findById(id);
-		if (!productDTO.isPresent()) {
-			throw new ResourceNotFoundException(String.format("Product with id %s not found", id));
-		}
 	}
 
 }

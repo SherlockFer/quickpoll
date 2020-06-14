@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.apress.dto.UserDTO;
-import com.apress.exception.ResourceNotFoundException;
 import com.apress.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +40,10 @@ public class UserController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
-		verifyUser(id);
 		Optional<UserDTO> userDTO = userService.findById(id);
+		if (!userDTO.isPresent()) {
+			return new ResponseEntity<>(userDTO.get(), HttpStatus.OK);
+		}
 		return new ResponseEntity<>(userDTO.get(), HttpStatus.OK);
 	}
 
@@ -60,23 +61,21 @@ public class UserController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@RequestBody UserDTO userDTO, @PathVariable Long id) {
-		verifyUser(id);
+		if (!userService.findById(id).isPresent()) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		userDTO.setId(id);
 		userService.save(userDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		verifyUser(id);
+		if (!userService.findById(id).isPresent()) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
 		userService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
-	}
-
-	private void verifyUser(Long id) {
-		Optional<UserDTO> userDTO = userService.findById(id);
-		if (!userDTO.isPresent()) {
-			throw new ResourceNotFoundException(String.format("User with id %s not found", id));
-		}
 	}
 
 }
