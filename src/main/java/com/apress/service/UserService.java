@@ -32,18 +32,13 @@ public class UserService {
 		return Optional.empty();
 	}
 
-	public void updateUser(UserDTO userDTO) {
-		User user = userMapper.toUser(userDTO);
-		userRepository.save(user);
+	public UserDTO save(UserDTO userDTO) {
+		User user = userRepository.save(userMapper.toUser(userDTO));
+		return userMapper.toUserDTO(user);
 	}
 
-	public void deleteUser(Long userId) {
+	public void deleteById(Long userId) {
 		userRepository.deleteById(userId);
-	}
-
-	public void saveUser(UserDTO userDTO) {
-		User user = userMapper.toUser(userDTO);
-		userRepository.save(user);
 	}
 
 }

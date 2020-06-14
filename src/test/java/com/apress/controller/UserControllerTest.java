@@ -45,7 +45,7 @@ public class UserControllerTest {
 		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
 		when(userService.findById(1L)).thenReturn(Optional.of(userDTO));
 
-		ResponseEntity<UserDTO> response = controller.getUser(1L);
+		ResponseEntity<UserDTO> response = controller.findById(1L);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().getId()).isEqualTo(1);
@@ -56,7 +56,7 @@ public class UserControllerTest {
 		when(userService.findById(-1L)).thenReturn(Optional.empty());
 
 		Exception exception = assertThrows(ResourceNotFoundException.class, () -> {
-			controller.getUser(-1L);
+			controller.findById(-1L);
 		});
 
 		assertThat(exception.getMessage()).isEqualTo("User with id -1 not found");
