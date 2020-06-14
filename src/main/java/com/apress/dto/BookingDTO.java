@@ -16,13 +16,16 @@ public class BookingDTO {
 
 	private Long id;
 
+	@JsonProperty("vehicule_number_plate")
 	private String vehiculeNumberPlate;
 
+	@JsonProperty("vehicule_model")
 	private String vehiculeModel;
 
 	@JsonProperty("vehicule_brand")
 	private String vehiculeBrand;
 
+	@JsonProperty("vehicule_engine")
 	private String vehiculeEngine;
 
 	private LocalDate date;

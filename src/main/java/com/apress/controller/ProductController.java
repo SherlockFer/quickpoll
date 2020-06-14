@@ -18,40 +18,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.apress.dto.BookingDTO;
-import com.apress.service.BookingService;
+import com.apress.dto.ProductDTO;
+import com.apress.exception.ResourceNotFoundException;
+import com.apress.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 
 @RestController
-@RequestMapping("/bookings")
-public class BookingController {
-
+@RequestMapping("/products")
+public class ProductController {
+	
 	@Autowired
-	private BookingService bookingService;
+	private ProductService productService;
 
 	@GetMapping()
-	public ResponseEntity<Collection<BookingDTO>> findAll() {
-		Collection<BookingDTO> bookingDTOs = bookingService.findAll();
-		return new ResponseEntity<>(bookingDTOs, HttpStatus.OK);
+	public ResponseEntity<Collection<ProductDTO>> getAllProducts() {
+		Collection<ProductDTO> productDTOs = productService.findAll();
+		return new ResponseEntity<>(productDTOs, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<BookingDTO> findById(@PathVariable Long id) {
-		Optional<BookingDTO> bookingDTO = bookingService.findById(id);
-		if (!bookingDTO.isPresent()) {
-			return new ResponseEntity<BookingDTO>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(bookingDTO.get(), HttpStatus.OK);
+	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
+		verifyProduct(id);
+		Optional<ProductDTO> productDTO = productService.findById(id);
+		return new ResponseEntity<>(productDTO.get(), HttpStatus.OK);
 	}
 
 	@PostMapping()
-	public ResponseEntity<Void> create(@RequestBody BookingDTO bookingDTO) {
-		bookingDTO = bookingService.save(bookingDTO);
+	public ResponseEntity<Void> create(@RequestBody ProductDTO productDTO) {
+		productDTO = productService.save(productDTO);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(buildLocationUri(bookingDTO.getId()));
+		headers.setLocation(buildLocationUri(productDTO.getId()));
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
@@ -60,22 +59,24 @@ public class BookingController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@RequestBody BookingDTO bookingDTO, @PathVariable Long id) {
-		if (!bookingService.findById(id).isPresent()) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		}
-		bookingDTO.setId(id);
-		bookingService.save(bookingDTO);
+	public ResponseEntity<Void> update(@RequestBody ProductDTO productDTO, @PathVariable Long id) {
+		verifyProduct(id);
+		productService.save(productDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		if (!bookingService.findById(id).isPresent()) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		}
-		bookingService.deleteById(id);
+		verifyProduct(id);
+		productService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+	}
+
+	private void verifyProduct(Long id) {
+		Optional<ProductDTO> productDTO = productService.findById(id);
+		if (!productDTO.isPresent()) {
+			throw new ResourceNotFoundException(String.format("Product with id %s not found", id));
+		}
 	}
 
 }
