@@ -42,7 +42,7 @@ public class ProductController {
 	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
 		Optional<ProductDTO> productDTO = productService.findById(id);
 		if (!productDTO.isPresent()) {
-			return new ResponseEntity<>(productDTO.get(), HttpStatus.OK);
+			return new ResponseEntity<ProductDTO>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(productDTO.get(), HttpStatus.OK);
 	}
