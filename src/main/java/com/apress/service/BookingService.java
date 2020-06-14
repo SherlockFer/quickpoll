@@ -32,9 +32,13 @@ public class BookingService {
 		return Optional.empty();
 	}
 
-	public void updateBooking(BookingDTO bookingDTO) {
-		Booking booking = bookingMapper.toBooking(bookingDTO);
-		bookingRepository.save(booking);
+	public BookingDTO save(BookingDTO bookingDTO) {
+		Booking booking = bookingRepository.save(bookingMapper.toBooking(bookingDTO));
+		return bookingMapper.toBookingDTO(booking);
+	}
+
+	public void deleteById(Long id) {
+		bookingRepository.deleteById(id);
 	}
 
 }
