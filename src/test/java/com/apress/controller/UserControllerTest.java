@@ -2,6 +2,8 @@ package com.apress.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -15,6 +17,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.apress.dto.UserDTO;
 import com.apress.exception.ResourceNotFoundException;
@@ -29,11 +34,11 @@ public class UserControllerTest {
 	private UserService userService;
 
 	@Test
-	public void shouldReturnAllPost() {
+	public void shouldReturnAllUserDTOsWithHttpStatusOk() {
 		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
 		when(userService.findAll()).thenReturn(Arrays.asList(userDTO));
 
-		ResponseEntity<Collection<UserDTO>> response = controller.getAllUsers();
+		ResponseEntity<Collection<UserDTO>> response = controller.findAll();
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.hasBody()).isTrue();
@@ -41,8 +46,8 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void shouldReturnUserDTOById() {
-		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
+	public void shouldReturnuserDTOById() {
+		UserDTO userDTO = UserDTO.builder().id(1L).mobile("comment").build();
 		when(userService.findById(1L)).thenReturn(Optional.of(userDTO));
 
 		ResponseEntity<UserDTO> response = controller.findById(1L);
@@ -51,7 +56,7 @@ public class UserControllerTest {
 		assertThat(response.getBody().getId()).isEqualTo(1);
 	}
 
-	@Test()
+	@Test
 	public void shouldThrowResourceNotFoundExceptionWhenUserIdDoesntExist() {
 		when(userService.findById(-1L)).thenReturn(Optional.empty());
 
@@ -59,7 +64,42 @@ public class UserControllerTest {
 			controller.findById(-1L);
 		});
 
-		assertThat(exception.getMessage()).isEqualTo("User with id -1 not found");
-
+		assertThat(exception.getMessage()).isEqualTo("Booking with id -1 not found");
 	}
+
+	@Test
+	public void shouldCreateBookingWithHttpStatusCreated() {
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+		UserDTO userDTO = UserDTO.builder().id(1L).mobile("comment").build();
+		when(userService.save(any())).thenReturn(userDTO);
+
+		ResponseEntity<Void> response = controller.create(UserDTO.builder().mobile("12345678").build());
+
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+		assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("/1");
+	}
+
+	@Test
+	public void shouldUpdatedUserWithHttpStatusOk() {
+		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
+		when(userService.findById(1L)).thenReturn(Optional.of(userDTO));
+
+		ResponseEntity<Void> response = controller.update(UserDTO.builder().mobile("12345678").build(), 1L);
+
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		verify(userService).save(any());
+	}
+
+	@Test
+	public void shouldDeleteUserByIdWithHttpStatusAccepted() {
+		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
+		when(userService.findById(1L)).thenReturn(Optional.of(userDTO));
+
+		ResponseEntity<Void> response = controller.delete(1L);
+
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
+		verify(userService).deleteById(1L);
+	}
+
 }

@@ -34,7 +34,7 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping()
-	public ResponseEntity<Collection<UserDTO>> getAllUsers() {
+	public ResponseEntity<Collection<UserDTO>> findAll() {
 		Collection<UserDTO> userDTOs = userService.findAll();
 		return new ResponseEntity<>(userDTOs, HttpStatus.OK);
 	}
@@ -59,7 +59,7 @@ public class UserController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO, @PathVariable Long id) {
+	public ResponseEntity<Void> update(@RequestBody UserDTO userDTO, @PathVariable Long id) {
 		verifyUser(id);
 		userService.save(userDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -72,7 +72,7 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
-	protected void verifyUser(Long id) {
+	private void verifyUser(Long id) {
 		Optional<UserDTO> userDTO = userService.findById(id);
 		if (!userDTO.isPresent()) {
 			throw new ResourceNotFoundException(String.format("User with id %s not found", id));
