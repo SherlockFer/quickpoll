@@ -26,3 +26,7 @@ insert into users (id, full_name, mobile, email, role, password) values (3, 'Mec
 insert into products(id, name, category, price) values(1, 'Annual Service', 'base', 50);
 insert into products(id, name, category, price) values(2, 'Major Service', 'base', 60);
 insert into products(id, name, category, price) values(3, 'Repair or Fault', 'base', 70);
+
+insert into parts(id, name, price) values(1, 'Engine motor oil', 50);
+insert into parts(id, name, price) values(2, 'Filter oil', 60);
+insert into parts(id, name, price) values(3, 'Filer air', 70);
