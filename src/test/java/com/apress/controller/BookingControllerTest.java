@@ -1,7 +1,6 @@
 package com.apress.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,7 +21,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.apress.dto.BookingDTO;
-import com.apress.exception.ResourceNotFoundException;
 import com.apress.service.BookingService;
 
 @ExtendWith(MockitoExtension.class)
@@ -59,11 +57,9 @@ public class BookingControllerTest {
 	public void shouldThrowResourceNotFoundExceptionWhenBookingIdDoesntExist() {
 		when(bookingService.findById(-1L)).thenReturn(Optional.empty());
 
-		Exception exception = assertThrows(ResourceNotFoundException.class, () -> {
-			controller.findById(-1L);
-		});
+		ResponseEntity<BookingDTO> response = controller.findById(-1L);
 
-		assertThat(exception.getMessage()).isEqualTo("Booking with id -1 not found");
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
 	}
 
 	@Test
