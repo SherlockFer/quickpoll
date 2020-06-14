@@ -42,7 +42,7 @@ public class UserController {
 	public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
 		Optional<UserDTO> userDTO = userService.findById(id);
 		if (!userDTO.isPresent()) {
-			return new ResponseEntity<>(userDTO.get(), HttpStatus.OK);
+			return new ResponseEntity<UserDTO>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(userDTO.get(), HttpStatus.OK);
 	}

@@ -42,7 +42,7 @@ public class PartController {
 	public ResponseEntity<PartDTO> findById(@PathVariable Long id) {
 		Optional<PartDTO> partDTO = partService.findById(id);
 		if (!partDTO.isPresent()) {
-			return new ResponseEntity<>(partDTO.get(), HttpStatus.OK);
+			return new ResponseEntity<PartDTO>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(partDTO.get(), HttpStatus.OK);
 	}
