@@ -4,14 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -21,6 +19,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Singular;
 
 @Getter
 @Setter
@@ -58,9 +57,9 @@ public class Booking {
 	@Column(name = "STATUS")
 	private String status;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID")
-	@OrderBy
+	@Singular
+	@ManyToMany
+	@JoinColumn(name = "BOOKING_ID")
 	private Set<Product> products;
 
 	@Column(name = "CREATED_AT", insertable = true, updatable = false)
