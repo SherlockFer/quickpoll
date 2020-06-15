@@ -2,22 +2,15 @@ package com.apress.dto;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Builder
 @Setter
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 
 public class BookingDTO {
 
@@ -35,8 +28,9 @@ public class BookingDTO {
 	@JsonProperty("vehicule_engine")
 	private String vehiculeEngine;
 
-	@ApiModelProperty(required = true)
-	@NotNull
+	@JsonProperty("status")
+	private String status;
+
 	private LocalDate date;
 
 	private String comments;
