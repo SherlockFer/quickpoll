@@ -33,7 +33,7 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping()
-	public ResponseEntity<Collection<ProductDTO>> getAllProducts() {
+	public ResponseEntity<Collection<ProductDTO>> findAll() {
 		Collection<ProductDTO> productDTOs = productService.findAll();
 		return new ResponseEntity<>(productDTOs, HttpStatus.OK);
 	}
