@@ -26,16 +26,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/services")
 public class ProductController {
-	
+
 	@Autowired
 	private ProductService productService;
 
 	@GetMapping()
 	public ResponseEntity<Collection<ProductDTO>> findAll() {
 		Collection<ProductDTO> productDTOs = productService.findAll();
-		return new ResponseEntity<>(productDTOs, HttpStatus.OK);
+		return ResponseEntity.ok().body(productDTOs);
 	}
 
 	@GetMapping("/{id}")

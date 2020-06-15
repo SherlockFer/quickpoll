@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -48,7 +50,7 @@ public class BookingController {
 	}
 
 	@PostMapping()
-	public ResponseEntity<Void> create(@RequestBody BookingDTO bookingDTO) {
+	public ResponseEntity<Void> create(@Valid @RequestBody BookingDTO bookingDTO) {
 		bookingDTO = bookingService.save(bookingDTO);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(buildLocationUri(bookingDTO.getId()));

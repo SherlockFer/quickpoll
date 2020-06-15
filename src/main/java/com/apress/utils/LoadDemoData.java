@@ -36,16 +36,17 @@ public class LoadDemoData implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		log.info("Loading database");
+
 		bookingRepository.save(Booking.builder().comments("test1").build());
 		bookingRepository.save(Booking.builder().comments("test2").build());
-		
+
 		userRepository.save(User.builder().fullName("Mechanic-1").mobile("123456789").email("mechanic-1@garage.com")
 				.role("mechanic1").build());
 		userRepository.save(User.builder().fullName("Mechanic-2").mobile("123456789").email("mechanic-2@garage.com")
 				.role("mechanic2").build());
 		userRepository.save(User.builder().fullName("Mechanic-3").mobile("123456789").email("mechanic-3@garage.com")
 				.role("mechanic3").build());
-		
+
 		productRepository.save(Product.builder().name("Annual Service").category("base").price(50).build());
 		productRepository.save(Product.builder().name("Major Service").category("base").price(60).build());
 		productRepository.save(Product.builder().name("epair or Fault").category("base").price(70).build());
