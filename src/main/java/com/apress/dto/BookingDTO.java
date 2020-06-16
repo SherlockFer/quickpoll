@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.apress.domain.Part;
 import com.apress.domain.Product;
+import com.apress.domain.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
@@ -34,11 +35,20 @@ public class BookingDTO {
 	@JsonProperty("status")
 	private String status;
 
+	@JsonProperty("service_id")
+	private Product serviceId;
+
 	@JsonProperty("service_ids")
 	private Set<Product> products;
 
 	@JsonProperty("part_ids")
 	private Set<Part> parts;
+
+	@JsonProperty("mechanic_id")
+	private User mechanicId;
+
+	@JsonProperty("customer_id")
+	private User customerId;
 
 	private LocalDate date;
 

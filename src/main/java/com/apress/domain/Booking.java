@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -66,6 +67,18 @@ public class Booking {
 	@ManyToMany
 	@JoinColumn(name = "PART_ID")
 	private Set<Part> parts;
+
+	@OneToOne
+	@JoinColumn(name = "SERVICE_ID", referencedColumnName = "id")
+	private Product serviceId;
+
+	@OneToOne
+	@JoinColumn(name = "MECHANIC_ID", referencedColumnName = "id")
+	private User mechanicId;
+
+	@OneToOne
+	@JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "id")
+	private User customerId;
 
 	@Column(name = "CREATED_AT", insertable = true, updatable = false)
 	private LocalDateTime created;

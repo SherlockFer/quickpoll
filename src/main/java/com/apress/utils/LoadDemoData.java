@@ -39,18 +39,23 @@ public class LoadDemoData implements ApplicationRunner {
 
 		User user1 = userRepository
 				.save(User.builder().fullName("Administrator").mobile("123456789").email("admin@garage.com").build());
-
-		userRepository.save(User.builder().fullName("Mechanic-1").mobile("123456789").email("mechanic-1@garage.com")
+		User user2 = userRepository
+				.save(User.builder().fullName("Mechanic-1").mobile("123456789").email("mechanic-1@garage.com")
 				.role("mechanic").build());
-		userRepository.save(User.builder().fullName("Mechanic-2").mobile("123456789").email("mechanic-2@garage.com")
+		User user3 = userRepository
+				.save(User.builder().fullName("Mechanic-2").mobile("123456789").email("mechanic-2@garage.com")
 				.role("mechanic").build());
-		userRepository.save(User.builder().fullName("Mechanic-3").mobile("123456789").email("mechanic-3@garage.com")
-				.role("mechanic").build());
-		userRepository.save(User.builder().fullName("Customer-1").mobile("123456789").email("mechanic-1@garage.com")
+		User user4 = userRepository
+				.save(User.builder().fullName("Customer-3").mobile("123456789").email("Customer-3@garage.com")
+				.role("Customer").build());
+		User user5 = userRepository
+				.save(User.builder().fullName("Customer-1").mobile("123456789").email("Customer-1@garage.com")
 				.role("customer").build());
-		userRepository.save(User.builder().fullName("Customer-2").mobile("123456789").email("mechanic-2@garage.com")
+		User user6 = userRepository
+				.save(User.builder().fullName("Customer-2").mobile("123456789").email("mechanic-2@garage.com")
 				.role("customer").build());
-		userRepository.save(User.builder().fullName("Customer-3").mobile("123456789").email("mechanic-3@garage.com")
+		User user7 = userRepository
+				.save(User.builder().fullName("Customer-3").mobile("123456789").email("mechanic-3@garage.com")
 				.role("customer").build());
 
 		Product product1 = productRepository
@@ -72,9 +77,19 @@ public class LoadDemoData implements ApplicationRunner {
 		Part part2 = partRepository.save(Part.builder().name("Filter oil").price(60).build());
 		Part part3 = partRepository.save(Part.builder().name("Filer ai").price(70).build());
 
-		Booking booking1 = bookingRepository.save(Booking.builder().comments("comentario 1").status("booked")
-				.vehiculeBrand("Nisan").vehiculeEngine("1500").vehiculeModel("Sunny").vehiculeNumberPlate("AAA-111")
-				.product(product1).product(product2).part(part1).build());
+		Booking booking1 = bookingRepository
+				.save(Booking.builder()
+				.comments("comentario 1 comentario 1")
+				.status("booked")
+				.vehiculeBrand("Ford")
+				.vehiculeEngine("diesel")
+				.vehiculeModel("M5")
+				.vehiculeNumberPlate("AAA-111")
+				.product(product1).product(product2)
+				.part(part1)
+				.mechanicId(user2)
+				.customerId(user4)
+				.serviceId(product1).build());
 	}
 }
 
