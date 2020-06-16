@@ -1,7 +1,10 @@
 package com.apress.dto;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import com.apress.domain.Part;
+import com.apress.domain.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
@@ -30,6 +33,12 @@ public class BookingDTO {
 
 	@JsonProperty("status")
 	private String status;
+
+	@JsonProperty("service_ids")
+	private Set<Product> products;
+
+	@JsonProperty("part_ids")
+	private Set<Part> parts;
 
 	private LocalDate date;
 

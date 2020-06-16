@@ -62,6 +62,11 @@ public class Booking {
 	@JoinColumn(name = "BOOKING_ID")
 	private Set<Product> products;
 
+	@Singular
+	@ManyToMany
+	@JoinColumn(name = "PART_ID")
+	private Set<Part> parts;
+
 	@Column(name = "CREATED_AT", insertable = true, updatable = false)
 	private LocalDateTime created;
 
