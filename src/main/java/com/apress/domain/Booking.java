@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -60,8 +61,10 @@ public class Booking {
 
 	@Singular
 	@ManyToMany
-	@JoinColumn(name = "BOOKING_ID")
-	private Set<Product> products;
+	@JoinTable(name = "BOOKING_PRODUCTS",
+			   joinColumns = @JoinColumn(name = "BOOKING_ID"), 
+			   inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+	private Set<Product> extraProducts;
 
 	@Singular
 	@ManyToMany
@@ -69,16 +72,16 @@ public class Booking {
 	private Set<Part> parts;
 
 	@OneToOne
-	@JoinColumn(name = "SERVICE_ID", referencedColumnName = "id")
-	private Product serviceId;
+	@JoinColumn(name = "PRODUCT_ID")
+	private Product baseProduct;
 
 	@OneToOne
-	@JoinColumn(name = "MECHANIC_ID", referencedColumnName = "id")
-	private User mechanicId;
+	@JoinColumn(name = "MECHANIC_ID")
+	private User mechanic;
 
 	@OneToOne
-	@JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "id")
-	private User customerId;
+	@JoinColumn(name = "CUSTOMER_ID")
+	private User customer;
 
 	@Column(name = "CREATED_AT", insertable = true, updatable = false)
 	private LocalDateTime created;

@@ -1,13 +1,9 @@
 package com.apress.domain;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -39,9 +35,5 @@ public class Product {
 
 	@Column(name = "PRICE")
 	private Integer price;
-
-	@ManyToMany
-	@JoinColumn(name = "PRODUCT_ID")
-	private Set<Product> products;
 
 }

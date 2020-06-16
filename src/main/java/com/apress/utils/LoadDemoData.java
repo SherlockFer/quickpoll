@@ -77,19 +77,20 @@ public class LoadDemoData implements ApplicationRunner {
 		Part part2 = partRepository.save(Part.builder().name("Filter oil").price(60).build());
 		Part part3 = partRepository.save(Part.builder().name("Filer ai").price(70).build());
 
-		Booking booking1 = bookingRepository
-				.save(Booking.builder()
+		Booking booking1 = bookingRepository.save(
+				Booking.builder()
 				.comments("comentario 1 comentario 1")
 				.status("booked")
 				.vehiculeBrand("Ford")
 				.vehiculeEngine("diesel")
 				.vehiculeModel("M5")
 				.vehiculeNumberPlate("AAA-111")
-				.product(product1).product(product2)
 				.part(part1)
-				.mechanicId(user2)
-				.customerId(user4)
-				.serviceId(product1).build());
+				.mechanic(user2)
+				.customer(user4)
+				.baseProduct(product1)
+				.extraProduct(product2)
+				.extraProduct(product3).build());
 	}
 }
 
