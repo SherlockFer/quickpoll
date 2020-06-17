@@ -51,7 +51,7 @@ public class BookingController {
 
 	@PostMapping()
 	public ResponseEntity<Void> create(@Valid @RequestBody BookingDTO bookingDTO) {
-		bookingDTO = bookingService.save(bookingDTO);
+		bookingDTO = bookingService.save(bookingDTO.toBuilder().id(null).build());
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(buildLocationUri(bookingDTO.getId()));
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);

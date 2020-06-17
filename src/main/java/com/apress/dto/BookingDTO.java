@@ -1,23 +1,20 @@
 package com.apress.dto;
 
 import java.time.LocalDate;
+import java.util.Set;
 
-import javax.validation.constraints.NotNull;
-
+import com.apress.domain.Part;
+import com.apress.domain.Product;
+import com.apress.domain.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Builder
+@Builder(toBuilder = true)
 @Setter
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 
 public class BookingDTO {
 
@@ -35,8 +32,24 @@ public class BookingDTO {
 	@JsonProperty("vehicule_engine")
 	private String vehiculeEngine;
 
-	@ApiModelProperty(required = true)
-	@NotNull
+	@JsonProperty("status")
+	private String status;
+
+	@JsonProperty("service_id")
+	private Product serviceId;
+
+	@JsonProperty("service_ids")
+	private Set<Product> products;
+
+	@JsonProperty("part_ids")
+	private Set<Part> parts;
+
+	@JsonProperty("mechanic_id")
+	private User mechanicId;
+
+	@JsonProperty("customer_id")
+	private User customerId;
+
 	private LocalDate date;
 
 	private String comments;
