@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
@@ -12,6 +14,7 @@ import com.apress.repository.BookingRepository;
 import com.apress.service.mappers.BookingMapper;
 
 @Service
+
 public class BookingService {
 
 	@Autowired
@@ -32,9 +35,24 @@ public class BookingService {
 		return Optional.empty();
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED)
 	public BookingDTO save(BookingDTO bookingDTO) {
-		Booking booking = bookingRepository.save(bookingMapper.toBooking(bookingDTO));
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException ignored) {
+		}
+		Booking booking = this.doSave(bookingDTO);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException ignored) {
+		}
 		return bookingMapper.toBookingDTO(booking);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public Booking doSave(BookingDTO bookingDTO) {
+		Booking booking = bookingRepository.save(bookingMapper.toBooking(bookingDTO));
+		return booking;
 	}
 
 	public void deleteById(Long id) {

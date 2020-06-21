@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +29,7 @@ import lombok.Singular;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "BOOKINGS")
 public class Booking {
@@ -36,6 +37,7 @@ public class Booking {
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@Column(name = "VEHICULE_NUMBER_PLATE")
