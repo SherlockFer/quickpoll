@@ -16,6 +16,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NaturalId;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -37,8 +39,12 @@ public class Booking {
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
-	@EqualsAndHashCode.Include
 	private Long id;
+	
+	@NaturalId(mutable = false)
+	@EqualsAndHashCode.Include
+    @Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
+	private String reference;
 
 	@Column(name = "VEHICULE_NUMBER_PLATE")
 	private String vehiculeNumberPlate;

@@ -50,11 +50,15 @@ public class BookingController {
 	}
 
 	@PostMapping()
-	public ResponseEntity<Void> create(@Valid @RequestBody BookingDTO bookingDTO) {
+	public ResponseEntity<?> create(@Valid @RequestBody BookingDTO bookingDTO) {
 		bookingDTO = bookingService.save(bookingDTO.toBuilder().id(null).build());
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(buildLocationUri(bookingDTO.getId()));
-		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+		if(bookingDTO.hasErrors()) {
+			return ResponseEntity.badRequest().body(bookingDTO.getErrors());
+		}else {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(buildLocationUri(bookingDTO.getId()));
+			return new ResponseEntity<>(headers, HttpStatus.CREATED);
+		}
 	}
 
 	private URI buildLocationUri(Long id) {
