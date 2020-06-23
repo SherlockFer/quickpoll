@@ -16,9 +16,12 @@ import lombok.Setter;
 @Setter
 @Getter
 
-public class BookingDTO {
+public class BookingDTO extends BaseDTO{
 
 	private Long id;
+	
+	@JsonProperty("reference")
+	private String reference;
 
 	@JsonProperty("vehicule_number_plate")
 	private String vehiculeNumberPlate;

@@ -1,5 +1,7 @@
 package com.apress.utils;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -79,6 +81,7 @@ public class LoadDemoData implements ApplicationRunner {
 
 		Booking booking1 = bookingRepository.save(
 				Booking.builder()
+				.reference(UUID.randomUUID().toString())
 				.comments("comentario 1 comentario 1")
 				.status("booked")
 				.vehiculeBrand("Ford")

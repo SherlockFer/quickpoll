@@ -69,7 +69,7 @@ public class BookingControllerTest {
 		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
 		when(bookingService.save(any())).thenReturn(bookingDTO);
 
-		ResponseEntity<Void> response = controller.create(BookingDTO.builder().comments("comment").build());
+		ResponseEntity<?> response = controller.create(BookingDTO.builder().comments("comment").build());
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("/1");

@@ -16,8 +16,11 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NaturalId;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +31,7 @@ import lombok.Singular;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "BOOKINGS")
 public class Booking {
@@ -37,6 +40,11 @@ public class Booking {
 	@GeneratedValue
 	@Column(name = "ID")
 	private Long id;
+	
+	@NaturalId(mutable = false)
+	@EqualsAndHashCode.Include
+    @Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
+	private String reference;
 
 	@Column(name = "VEHICULE_NUMBER_PLATE")
 	private String vehiculeNumberPlate;
