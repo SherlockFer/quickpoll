@@ -32,12 +32,16 @@ public class BookingService {
 		return bookingMapper.toBookingDTOs(bookings);
 	}
 
-	public Optional<BookingDTO> findById(long id) {
+	public Optional<BookingDTO> findById(Long id) {
 		Optional<Booking> booking = bookingRepository.findById(id);
 		if (booking.isPresent()) {
 			return Optional.of(bookingMapper.toBookingDTO(booking.get()));
 		}
 		return Optional.empty();
+	}
+	
+	public boolean existsById(Long id) {
+		return bookingRepository.existsById(id);
 	}
 
 	@Transactional

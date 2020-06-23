@@ -14,7 +14,7 @@ public class BookingValidator {
 
 	private void validateComments(BookingDTO bookingDTO) {
 		if(StringUtils.isBlank(bookingDTO.getComments())) {
-			bookingDTO.getErrors().add("Comments can't be empty");
+			bookingDTO.addError("Comments can't be empty");
 		}
 	}
 
