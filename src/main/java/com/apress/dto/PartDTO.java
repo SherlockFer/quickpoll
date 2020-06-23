@@ -4,16 +4,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-@Builder
+@Builder(toBuilder = true)
 @Setter
 @Getter
 
-public class PartDTO {
+public class PartDTO extends BaseDTO {
 
 	private Long id;
 
 	private String name;
 
 	private Integer price;
+
+	private String sku;
 
 }

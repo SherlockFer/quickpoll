@@ -48,16 +48,16 @@ public class LoadDemoData implements ApplicationRunner {
 				.save(User.builder().fullName("Mechanic-2").mobile("123456789").email("mechanic-2@garage.com")
 				.role("mechanic").build());
 		User user4 = userRepository
-				.save(User.builder().fullName("Customer-3").mobile("123456789").email("Customer-3@garage.com")
+				.save(User.builder().fullName("Customer-3").mobile("123456789").email("mechanic-3@garage.com")
 				.role("Customer").build());
 		User user5 = userRepository
 				.save(User.builder().fullName("Customer-1").mobile("123456789").email("Customer-1@garage.com")
 				.role("customer").build());
 		User user6 = userRepository
-				.save(User.builder().fullName("Customer-2").mobile("123456789").email("mechanic-2@garage.com")
+				.save(User.builder().fullName("Customer-2").mobile("123456789").email("Customer-2@garage.com")
 				.role("customer").build());
 		User user7 = userRepository
-				.save(User.builder().fullName("Customer-3").mobile("123456789").email("mechanic-3@garage.com")
+				.save(User.builder().fullName("Customer-3").mobile("123456789").email("Customer-3@garage.com")
 				.role("customer").build());
 
 		Product product1 = productRepository
@@ -75,9 +75,12 @@ public class LoadDemoData implements ApplicationRunner {
 		Product product7 = productRepository
 				.save(Product.builder().name("Suspension").category("extra").price(70).build());
 
-		Part part1 = partRepository.save(Part.builder().name("Engine motor oil").price(50).build());
-		Part part2 = partRepository.save(Part.builder().name("Filter oil").price(60).build());
-		Part part3 = partRepository.save(Part.builder().name("Filer ai").price(70).build());
+		Part part1 = partRepository
+				.save(Part.builder().sku(UUID.randomUUID().toString()).name("Engine motor oil").price(50).build());
+		Part part2 = partRepository
+				.save(Part.builder().sku(UUID.randomUUID().toString()).name("Filter oil").price(60).build());
+		Part part3 = partRepository
+				.save(Part.builder().sku(UUID.randomUUID().toString()).name("Filer ai").price(70).build());
 
 		Booking booking1 = bookingRepository.save(
 				Booking.builder()

@@ -6,11 +6,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-@Builder
+@Builder(toBuilder = true)
 @Setter
 @Getter
 
-public class UserDTO {
+public class UserDTO extends BaseDTO {
 
 	private Long id;
 

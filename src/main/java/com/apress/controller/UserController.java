@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.apress.dto.UserDTO;
@@ -42,17 +43,21 @@ public class UserController {
 	public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
 		Optional<UserDTO> userDTO = userService.findById(id);
 		if (!userDTO.isPresent()) {
-			return new ResponseEntity<UserDTO>(HttpStatus.NOT_FOUND);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("%s not found", id));
 		}
 		return new ResponseEntity<>(userDTO.get(), HttpStatus.OK);
 	}
 
 	@PostMapping()
 	public ResponseEntity<Void> create(@RequestBody UserDTO userDTO) {
-		userDTO = userService.save(userDTO);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(buildLocationUri(userDTO.getId()));
-		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+		userDTO = userService.save(userDTO.toBuilder().id(null).build());
+		if (userDTO.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, userDTO.getErrors());
+		} else {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(buildLocationUri(userDTO.getId()));
+			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		}
 	}
 
 	private URI buildLocationUri(Long id) {
