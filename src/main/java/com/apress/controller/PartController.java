@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.apress.dto.PartDTO;
@@ -42,17 +43,21 @@ public class PartController {
 	public ResponseEntity<PartDTO> findById(@PathVariable Long id) {
 		Optional<PartDTO> partDTO = partService.findById(id);
 		if (!partDTO.isPresent()) {
-			return new ResponseEntity<PartDTO>(HttpStatus.NOT_FOUND);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("%s not found", id));
 		}
 		return new ResponseEntity<>(partDTO.get(), HttpStatus.OK);
 	}
 
 	@PostMapping()
 	public ResponseEntity<Void> create(@RequestBody PartDTO partDTO) {
-		partDTO = partService.save(partDTO);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(buildLocationUri(partDTO.getId()));
-		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+		partDTO = partService.save(partDTO.toBuilder().id(null).build());
+		if (partDTO.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, partDTO.getErrors());
+		} else {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(buildLocationUri(partDTO.getId()));
+			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		}
 	}
 
 	private URI buildLocationUri(Long id) {
