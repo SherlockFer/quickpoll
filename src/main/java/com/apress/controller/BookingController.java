@@ -4,8 +4,6 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.apress.dto.BookingDTO;
@@ -44,20 +43,20 @@ public class BookingController {
 	public ResponseEntity<BookingDTO> findById(@PathVariable Long id) {
 		Optional<BookingDTO> bookingDTO = bookingService.findById(id);
 		if (!bookingDTO.isPresent()) {
-			return new ResponseEntity<BookingDTO>(HttpStatus.NOT_FOUND);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("%s not found", id));
 		}
 		return new ResponseEntity<>(bookingDTO.get(), HttpStatus.OK);
 	}
 
 	@PostMapping()
-	public ResponseEntity<?> create(@Valid @RequestBody BookingDTO bookingDTO) {
+	public ResponseEntity<Void> create(@RequestBody BookingDTO bookingDTO) {
 		bookingDTO = bookingService.save(bookingDTO.toBuilder().id(null).build());
 		if(bookingDTO.hasErrors()) {
-			return ResponseEntity.badRequest().body(bookingDTO.getErrors());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bookingDTO.getErrors());
 		}else {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(buildLocationUri(bookingDTO.getId()));
-			return new ResponseEntity<>(headers, HttpStatus.CREATED);
+			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 		}
 	}
 
@@ -67,8 +66,8 @@ public class BookingController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@RequestBody BookingDTO bookingDTO, @PathVariable Long id) {
-		if (!bookingService.findById(id).isPresent()) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		if (!bookingService.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("%s not found", id));
 		}
 		bookingDTO.setId(id);
 		bookingService.save(bookingDTO);
@@ -77,8 +76,8 @@ public class BookingController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		if (!bookingService.findById(id).isPresent()) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		if (!bookingService.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("%s not found", id));
 		}
 		bookingService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
