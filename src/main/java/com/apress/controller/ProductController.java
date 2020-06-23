@@ -66,7 +66,7 @@ public class ProductController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@RequestBody ProductDTO productDTO, @PathVariable Long id) {
-		if (!productService.findById(id).isPresent()) {
+		if (!productService.existsById(id)) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		productDTO.setId(id);
@@ -76,7 +76,7 @@ public class ProductController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		if (!productService.findById(id).isPresent()) {
+		if (!productService.existsById(id)) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		productService.deleteById(id);

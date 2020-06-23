@@ -66,7 +66,7 @@ public class PartController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@RequestBody PartDTO partDTO, @PathVariable Long id) {
-		if (!partService.findById(id).isPresent()) {
+		if (!partService.existsById(id)) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		partDTO.setId(id);
@@ -76,7 +76,7 @@ public class PartController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		if (!partService.findById(id).isPresent()) {
+		if (!partService.existsById(id)) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		partService.deleteById(id);

@@ -66,7 +66,7 @@ public class UserController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@RequestBody UserDTO userDTO, @PathVariable Long id) {
-		if (!userService.findById(id).isPresent()) {
+		if (!userService.existsById(id)) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		userDTO.setId(id);
@@ -76,7 +76,7 @@ public class UserController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		if (!userService.findById(id).isPresent()) {
+		if (!userService.existsById(id)) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		userService.deleteById(id);
