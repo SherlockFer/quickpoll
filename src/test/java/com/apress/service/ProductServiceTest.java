@@ -19,6 +19,7 @@ import com.apress.domain.Product;
 import com.apress.dto.ProductDTO;
 import com.apress.repository.ProductRepository;
 import com.apress.service.mappers.ProductMapper;
+import com.apress.validation.ProductValidator;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTest {
@@ -30,6 +31,8 @@ public class ProductServiceTest {
 	private ProductRepository productRepository;
 	@Mock
 	private ProductMapper productMapper;
+	@Mock
+	private ProductValidator productValidator;
 
 	@Test
 	void shouldReturnAllProducts() {

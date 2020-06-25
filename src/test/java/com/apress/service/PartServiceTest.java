@@ -18,7 +18,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.apress.domain.Part;
 import com.apress.dto.PartDTO;
 import com.apress.repository.PartRepository;
+import com.apress.service.defaulter.PartDefaulter;
 import com.apress.service.mappers.PartMapper;
+import com.apress.validation.PartValidator;
 
 @ExtendWith(MockitoExtension.class)
 public class PartServiceTest {
@@ -30,6 +32,10 @@ public class PartServiceTest {
 	private PartRepository partRepository;
 	@Mock
 	private PartMapper partMapper;
+	@Mock
+	private PartDefaulter partDefaulter;
+	@Mock
+	private PartValidator partValidator;
 
 	@Test
 	void shouldReturnAllParts() {
