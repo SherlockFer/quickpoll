@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -48,9 +47,6 @@ public class Booking {
 	@Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
 	private String reference;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private User user;
-
 	@Column(name = "VEHICULE_NUMBER_PLATE")
 	private String vehiculeNumberPlate;
 
@@ -86,11 +82,11 @@ public class Booking {
 	@JoinColumn(name = "PRODUCT_ID")
 	private Product baseProduct;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "MECHANIC_ID")
 	private User mechanic;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "CUSTOMER_ID")
 	private User customer;
 
