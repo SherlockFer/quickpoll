@@ -6,11 +6,13 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -40,11 +42,14 @@ public class Booking {
 	@GeneratedValue
 	@Column(name = "ID")
 	private Long id;
-	
+
 	@NaturalId(mutable = false)
 	@EqualsAndHashCode.Include
-    @Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
+	@Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
 	private String reference;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user;
 
 	@Column(name = "VEHICULE_NUMBER_PLATE")
 	private String vehiculeNumberPlate;
@@ -69,9 +74,7 @@ public class Booking {
 
 	@Singular
 	@ManyToMany
-	@JoinTable(name = "BOOKING_PRODUCTS",
-			   joinColumns = @JoinColumn(name = "BOOKING_ID"), 
-			   inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+	@JoinTable(name = "BOOKING_PRODUCTS", joinColumns = @JoinColumn(name = "BOOKING_ID"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
 	private Set<Product> extraProducts;
 
 	@Singular
