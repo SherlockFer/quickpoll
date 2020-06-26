@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -40,10 +41,10 @@ public class Booking {
 	@GeneratedValue
 	@Column(name = "ID")
 	private Long id;
-	
+
 	@NaturalId(mutable = false)
 	@EqualsAndHashCode.Include
-    @Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
+	@Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
 	private String reference;
 
 	@Column(name = "VEHICULE_NUMBER_PLATE")
@@ -69,9 +70,7 @@ public class Booking {
 
 	@Singular
 	@ManyToMany
-	@JoinTable(name = "BOOKING_PRODUCTS",
-			   joinColumns = @JoinColumn(name = "BOOKING_ID"), 
-			   inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+	@JoinTable(name = "BOOKING_PRODUCTS", joinColumns = @JoinColumn(name = "BOOKING_ID"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
 	private Set<Product> extraProducts;
 
 	@Singular
@@ -83,11 +82,11 @@ public class Booking {
 	@JoinColumn(name = "PRODUCT_ID")
 	private Product baseProduct;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "MECHANIC_ID")
 	private User mechanic;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "CUSTOMER_ID")
 	private User customer;
 

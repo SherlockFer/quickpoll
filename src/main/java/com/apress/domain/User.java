@@ -46,7 +46,6 @@ public class User {
 	@Column(name = "MOBILE")
 	private String mobile;
 
-
 	@Column(name = "ROLE")
 	private String role;
 
