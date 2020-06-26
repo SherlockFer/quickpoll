@@ -20,9 +20,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.apress.dto.UserDTO;
-import com.apress.exception.ResourceNotFoundException;
 import com.apress.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
@@ -57,14 +57,14 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void shouldThrowResourceNotFoundExceptionWhenUserIdDoesntExist() {
+	public void shouldThrowResourceNotFoundExceptionWhenPartIdDoesntExist() {
 		when(userService.findById(-1L)).thenReturn(Optional.empty());
 
-		Exception exception = assertThrows(ResourceNotFoundException.class, () -> {
+		Exception exception = assertThrows(ResponseStatusException.class, () -> {
 			controller.findById(-1L);
 		});
 
-		assertThat(exception.getMessage()).isEqualTo("User with id -1 not found");
+		assertThat(exception.getMessage()).contains("-1 not found");
 	}
 
 	@Test
@@ -83,7 +83,7 @@ public class UserControllerTest {
 	@Test
 	public void shouldUpdatedUserWithHttpStatusOk() {
 		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
-		when(userService.findById(1L)).thenReturn(Optional.of(userDTO));
+		when(userService.existsById(1L)).thenReturn(true);
 
 		ResponseEntity<Void> response = controller.update(UserDTO.builder().mobile("12345678").build(), 1L);
 
@@ -94,7 +94,7 @@ public class UserControllerTest {
 	@Test
 	public void shouldDeleteUserByIdWithHttpStatusAccepted() {
 		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
-		when(userService.findById(1L)).thenReturn(Optional.of(userDTO));
+		when(userService.existsById(1L)).thenReturn(true);
 
 		ResponseEntity<Void> response = controller.delete(1L);
 
