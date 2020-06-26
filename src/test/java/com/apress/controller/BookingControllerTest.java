@@ -88,13 +88,12 @@ public class BookingControllerTest {
 
 	@Test
 	public void shouldDeleteBookingByIdWithHttpStatusAccepted() {
-		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
-		when(bookingService.findById(1L)).thenReturn(Optional.of(bookingDTO));
+		when(bookingService.existsById(1L)).thenReturn(true);
 
 		ResponseEntity<Void> response = controller.delete(1L);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
 		verify(bookingService).deleteById(1L);
-	}
+	}	
 
 }
