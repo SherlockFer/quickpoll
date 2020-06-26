@@ -1,6 +1,7 @@
 package com.apress.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -19,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.apress.dto.ProductDTO;
 import com.apress.service.ProductService;
@@ -53,13 +55,15 @@ public class ProductControllerTest {
 		assertThat(response.getBody().getId()).isEqualTo(1);
 	}
 
-	@Test
-	public void shouldThrowResourceNotFoundExceptionWhenProductIdDoesntExist() {
+	@Test()
+	public void shouldThrowResourceNotFoundExceptionWhenPartIdDoesntExist() {
 		when(productService.findById(-1L)).thenReturn(Optional.empty());
 
-		ResponseEntity<ProductDTO> response = controller.findById(-1L);
+		Exception exception = assertThrows(ResponseStatusException.class, () -> {
+			controller.findById(-1L);
+		});
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+		assertThat(exception.getMessage()).contains("-1 not found");
 	}
 
 	@Test
@@ -78,7 +82,7 @@ public class ProductControllerTest {
 	@Test
 	public void shouldUpdatedProductWithHttpStatusOk() {
 		ProductDTO productDTO = ProductDTO.builder().id(1L).name("Annual Service").build();
-		when(productService.findById(1L)).thenReturn(Optional.of(productDTO));
+		when(productService.existsById(1L)).thenReturn(true);
 
 		ResponseEntity<Void> response = controller.update(ProductDTO.builder().name("Annual Service").build(), 1L);
 
@@ -89,7 +93,7 @@ public class ProductControllerTest {
 	@Test
 	public void shouldDeleteProductByIdWithHttpStatusAccepted() {
 		ProductDTO productDTO = ProductDTO.builder().id(1L).name("Annual Service").build();
-		when(productService.findById(1L)).thenReturn(Optional.of(productDTO));
+		when(productService.existsById(1L)).thenReturn(true);
 
 		ResponseEntity<Void> response = controller.delete(1L);
 
