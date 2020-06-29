@@ -1,6 +1,7 @@
 package com.apress.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -19,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.apress.dto.BookingDTO;
 import com.apress.service.BookingService;
@@ -57,9 +59,11 @@ public class BookingControllerTest {
 	public void shouldThrowResourceNotFoundExceptionWhenBookingIdDoesntExist() {
 		when(bookingService.findById(-1L)).thenReturn(Optional.empty());
 
-		ResponseEntity<BookingDTO> response = controller.findById(-1L);
+		Exception exception = assertThrows(ResponseStatusException.class, () -> {
+			controller.findById(-1L);
+		});
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+		assertThat(exception.getMessage()).contains("-1 not found");
 	}
 
 	@Test
@@ -77,8 +81,7 @@ public class BookingControllerTest {
 
 	@Test
 	public void shouldUpdatedBookingWithHttpStatusOk() {
-		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
-		when(bookingService.findById(1L)).thenReturn(Optional.of(bookingDTO));
+		when(bookingService.existsById(1L)).thenReturn(true);
 
 		ResponseEntity<Void> response = controller.update(BookingDTO.builder().comments("comment").build(), 1L);
 
@@ -94,6 +97,6 @@ public class BookingControllerTest {
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
 		verify(bookingService).deleteById(1L);
-	}	
+	}
 
 }
