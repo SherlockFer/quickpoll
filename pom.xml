@@ -36,6 +36,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -145,6 +150,25 @@
 					<sourceDirectory>${project.basedir}/src/main/lombok</sourceDirectory>
 				</configuration>
 			</plugin>
+			<plugin>
+                    <groupId>org.jvnet.jaxb2.maven2</groupId>
+                    <artifactId>maven-jaxb2-plugin</artifactId>
+                    <version>0.14.0</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <schemaLanguage>WSDL</schemaLanguage>
+                        <schemaDirectory>src/main/resources/wsdl</schemaDirectory>
+                        <schemasIncludes>
+                            <schemaInclude>*.wsdl</schemaInclude>
+                        </schemasIncludes>
+                    </configuration>
+              </plugin>
 		</plugins>
 	</build>
 
