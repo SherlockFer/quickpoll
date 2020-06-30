@@ -107,4 +107,10 @@ public class Booking {
 		this.setModified(LocalDateTime.now());
 	}
 
+	@Column(name = "COUNTRY_CODE")
+	private String countryCode;
+
+	@Column(name = "VAT_NUMBER")
+	private String vatNumber;
+
 }

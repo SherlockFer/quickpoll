@@ -16,10 +16,10 @@ import lombok.Setter;
 @Setter
 @Getter
 
-public class BookingDTO extends BaseDTO{
+public class BookingDTO extends BaseDTO {
 
 	private Long id;
-	
+
 	@JsonProperty("reference")
 	private String reference;
 
@@ -56,5 +56,9 @@ public class BookingDTO extends BaseDTO{
 	private LocalDate date;
 
 	private String comments;
+
+	private String countryCode;
+
+	private String vatNumber;
 
 }
