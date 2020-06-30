@@ -164,9 +164,9 @@
                     <configuration>
                         <schemaLanguage>WSDL</schemaLanguage>
                         <schemaDirectory>src/main/resources/wsdl</schemaDirectory>
-                        <schemasIncludes>
+                        <schemaIncludes>
                             <schemaInclude>*.wsdl</schemaInclude>
-                        </schemasIncludes>
+                        </schemaIncludes>
                     </configuration>
               </plugin>
 		</plugins>
