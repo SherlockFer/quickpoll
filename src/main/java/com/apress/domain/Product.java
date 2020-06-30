@@ -37,7 +37,10 @@ public class Product {
 
 	@NaturalId(mutable = false)
 	@EqualsAndHashCode.Include
-	@Column(name = "NAME", nullable = false, updatable = false, unique = true)
+	@Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
+	private String reference;
+
+	@Column(name = "NAME")
 	private String name;
 
 	@Column(name = "CATEGORY")

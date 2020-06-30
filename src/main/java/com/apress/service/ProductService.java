@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.apress.domain.Product;
 import com.apress.dto.ProductDTO;
 import com.apress.repository.ProductRepository;
+import com.apress.service.defaulter.ProductDefaulter;
 import com.apress.service.mappers.ProductMapper;
 import com.apress.validation.ProductValidator;
 
@@ -22,6 +23,8 @@ public class ProductService {
 	private ProductMapper productMapper;
 	@Autowired
 	private ProductValidator productValidator;
+	@Autowired
+	private ProductDefaulter productDefaulter;
 
 	public Collection<ProductDTO> findAll() {
 		Collection<Product> products = productRepository.findAll();
@@ -42,6 +45,7 @@ public class ProductService {
 
 	@Transactional
 	public ProductDTO save(ProductDTO productDTO) {
+		productDefaulter.populateDefaults(productDTO);
 		productValidator.validate(productDTO);
 		if (productDTO.hasErrors()) {
 			return productDTO;

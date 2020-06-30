@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.apress.domain.User;
 import com.apress.dto.UserDTO;
 import com.apress.repository.UserRepository;
+import com.apress.service.defaulter.UserDefaulter;
 import com.apress.service.mappers.UserMapper;
 import com.apress.validation.UserValidator;
 
@@ -22,6 +23,8 @@ public class UserService {
 	private UserMapper userMapper;
 	@Autowired
 	private UserValidator userValidator;
+	@Autowired
+	private UserDefaulter userDefaulter;
 
 	public Collection<UserDTO> findAll() {
 		Collection<User> users = userRepository.findAll();
@@ -42,6 +45,7 @@ public class UserService {
 
 	@Transactional
 	public UserDTO save(UserDTO userDTO) {
+		userDefaulter.populateDefaults(userDTO);
 		userValidator.validate(userDTO);
 		if (userDTO.hasErrors()) {
 			return userDTO;

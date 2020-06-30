@@ -10,11 +10,25 @@ public class ProductValidator {
 
 	public void validate(ProductDTO productDTO) {
 		validateName(productDTO);
+		validateCategory(productDTO);
+		validatePrice(productDTO);
 	}
 
 	private void validateName(ProductDTO productDTO) {
 		if (StringUtils.isBlank(productDTO.getName())) {
 			productDTO.addError("Name can't be empty");
+		}
+	}
+
+	private void validateCategory(ProductDTO productDTO) {
+		if (StringUtils.isBlank(productDTO.getCategory())) {
+			productDTO.addError("Category can't be empty");
+		}
+	}
+
+	private void validatePrice(ProductDTO productDTO) {
+		if (StringUtils.isBlank(String.valueOf(productDTO.getPrice()))) {
+			productDTO.addError("Price can't be empty");
 		}
 	}
 

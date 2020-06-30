@@ -19,6 +19,8 @@ public class ProductDTO extends BaseDTO {
 
 	private String category;
 
+	private String reference;
+
 	private Integer price;
 
 }

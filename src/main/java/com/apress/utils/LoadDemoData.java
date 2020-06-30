@@ -61,19 +61,26 @@ public class LoadDemoData implements ApplicationRunner {
 				.role("customer").build());
 
 		Product product1 = productRepository
-				.save(Product.builder().name("Annual Service").category("base").price(50).build());
+				.save(Product.builder().reference(UUID.randomUUID().toString()).name("Annual Service").category("base")
+						.price(50).build());
 		Product product2 = productRepository
-				.save(Product.builder().name("Major Service").category("base").price(60).build());
+				.save(Product.builder().reference(UUID.randomUUID().toString()).name("Major Service").category("base")
+						.price(60).build());
 		Product product3 = productRepository
-				.save(Product.builder().name("Repair or Fault").category("base").price(70).build());
+				.save(Product.builder().reference(UUID.randomUUID().toString()).name("Repair or Fault").category("base")
+						.price(70).build());
 		Product product4 = productRepository
-				.save(Product.builder().name("Major Repair").category("base").price(80).build());
+				.save(Product.builder().reference(UUID.randomUUID().toString()).name("Major Repair").category("base")
+						.price(80).build());
 		Product product5 = productRepository
-				.save(Product.builder().name("Wheel alignment").category("extra").price(90).build());
+				.save(Product.builder().reference(UUID.randomUUID().toString()).name("Wheel alignment")
+						.category("extra").price(90).build());
 		Product product6 = productRepository
-				.save(Product.builder().name("Grease and lubricat").category("extra").price(70).build());
+				.save(Product.builder().reference(UUID.randomUUID().toString()).name("Grease and lubricat")
+						.category("extra").price(70).build());
 		Product product7 = productRepository
-				.save(Product.builder().name("Suspension").category("extra").price(70).build());
+				.save(Product.builder().reference(UUID.randomUUID().toString()).name("Suspension").category("extra")
+						.price(70).build());
 
 		Part part1 = partRepository
 				.save(Part.builder().sku(UUID.randomUUID().toString()).name("Engine motor oil").price(50).build());
