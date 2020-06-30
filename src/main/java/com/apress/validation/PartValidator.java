@@ -16,19 +16,19 @@ public class PartValidator {
 
 	private void validateComments(PartDTO bookingDTO) {
 		if (StringUtils.isBlank(bookingDTO.getSku())) {
-			bookingDTO.addError("sku can't be empty");
+			bookingDTO.addError("Sku can't be empty");
 		}
 	}
 
 	private void validateName(PartDTO bookingDTO) {
 		if (StringUtils.isBlank(bookingDTO.getName())) {
-			bookingDTO.addError("name can't be empty");
+			bookingDTO.addError("Name can't be empty");
 		}
 	}
 
 	private void validatePrice(PartDTO bookingDTO) {
 		if (StringUtils.isBlank(String.valueOf(bookingDTO.getPrice()))) {
-			bookingDTO.addError("price can't be empty");
+			bookingDTO.addError("Price can't be empty");
 		}
 	}
 
