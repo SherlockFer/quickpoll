@@ -19,12 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.apress.client.VatServiceClient;
 import com.apress.dto.BookingDTO;
 import com.apress.service.BookingService;
 
-import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVat;
-import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -36,23 +33,9 @@ public class BookingController {
 	@Autowired
 	private BookingService bookingService;
 
-	@Autowired
-	VatServiceClient client;
-
 	@GetMapping()
 	public ResponseEntity<Collection<BookingDTO>> findAll() {
 		Collection<BookingDTO> bookingDTOs = bookingService.findAll();
-
-		CheckVat checkVat = new CheckVat();
-		checkVat.setCountryCode("ES");
-		checkVat.setVatNumber("123456");
-		try {
-			CheckVatResponse checkVatResponse = client.checkVat(checkVat);
-
-		} catch (RuntimeException exception) {
-			exception.printStackTrace();
-		}
-
 		return new ResponseEntity<>(bookingDTOs, HttpStatus.OK);
 	}
 
