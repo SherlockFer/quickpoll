@@ -42,8 +42,8 @@ public class BookingValidator {
 	private void validateVatNumber(BookingDTO bookingDTO) {
 		if (!StringUtils.isBlank(bookingDTO.getVatNumber())) {
 			CheckVat checkVat = new CheckVat();
-			checkVat.setCountryCode("ES");
-			checkVat.setVatNumber("123456");
+			checkVat.setCountryCode(bookingDTO.getCountryCode());
+			checkVat.setVatNumber(bookingDTO.getVatNumber());
 			try {
 				CheckVatResponse checkVatResponse = client.checkVat(checkVat);
 				if (!checkVatResponse.isValid()) {
