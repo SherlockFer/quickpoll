@@ -20,7 +20,7 @@ public class BookingValidator {
 		validateComments(bookingDTO);
 		validateVehiculeNumberPlate(bookingDTO);
 		validateStatus(bookingDTO);
-		validateVatNumber(bookingDTO);
+		validateVatNumberAndCountryCode(bookingDTO);
 	}
 
 	private void validateComments(BookingDTO bookingDTO) {
@@ -41,8 +41,8 @@ public class BookingValidator {
 		}
 	}
 
-	private void validateVatNumber(BookingDTO bookingDTO) {
-		if (!StringUtils.isBlank(bookingDTO.getVatNumber())) {
+	private void validateVatNumberAndCountryCode(BookingDTO bookingDTO) {
+		if (!StringUtils.isBlank(bookingDTO.getVatNumber()) && !StringUtils.isBlank(bookingDTO.getCountryCode())) {
 			CheckVat checkVat = new CheckVat();
 			checkVat.setCountryCode(bookingDTO.getCountryCode());
 			checkVat.setVatNumber(bookingDTO.getVatNumber());
