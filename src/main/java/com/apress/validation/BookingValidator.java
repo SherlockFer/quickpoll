@@ -1,6 +1,7 @@
 package com.apress.validation;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.apress.client.VatServiceClient;
@@ -12,6 +13,7 @@ import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatResponse;
 @Component
 public class BookingValidator {
 
+	@Autowired
 	VatServiceClient client;
 
 	public void validate(BookingDTO bookingDTO) {
