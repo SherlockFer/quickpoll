@@ -49,7 +49,7 @@ public class BookingValidator {
 			try {
 				CheckVatResponse checkVatResponse = client.checkVat(checkVat);
 				if (!checkVatResponse.isValid()) {
-					bookingDTO.addError("invalid vatNumber");
+					bookingDTO.addError("Invalid vatNumber");
 				}
 			} catch (RuntimeException exception) {
 				exception.printStackTrace();

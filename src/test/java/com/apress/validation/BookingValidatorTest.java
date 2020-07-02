@@ -1,20 +1,29 @@
 package com.apress.validation;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.apress.client.VatServiceClient;
 import com.apress.dto.BookingDTO;
+
+import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatResponse;
 
 @ExtendWith(MockitoExtension.class)
 public class BookingValidatorTest {
 
 	@InjectMocks
 	private BookingValidator validator;
+
+	@Mock
+	private VatServiceClient client;
 
 	@Test
 	void shouldHasErrorWhenCommentIsNotPresent() {
@@ -39,12 +48,12 @@ public class BookingValidatorTest {
 
 	@Test
 	void shouldHasErrorWhenStatusIsNotPresent() {
-		BookingDTO bookingDTO = Mockito
-				.spy(BookingDTO.builder().comments("comment").vehiculeNumberPlate("AAA-111").status(" ").build());
-
+		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehiculeNumberPlate("AAA-111")
+				.status("booked").countryCode("ES").vatNumber("1234567").build());
+		when(client.checkVat(any())).thenReturn(new CheckVatResponse());
 		validator.validate(bookingDTO);
 
-		verify(bookingDTO).addError("Status can't be empty");
+		verify(bookingDTO).addError("Invalid vatNumber");
 	}
 
 }
