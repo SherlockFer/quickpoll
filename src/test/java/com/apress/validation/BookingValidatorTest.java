@@ -1,5 +1,6 @@
 package com.apress.validation;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -47,13 +48,27 @@ public class BookingValidatorTest {
 	}
 
 	@Test
-	void shouldHasErrorWhenStatusIsNotPresent() {
+	void shouldHasErrorWhenVatNumberIsNotValid() {
 		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehiculeNumberPlate("AAA-111")
 				.status("booked").countryCode("ES").vatNumber("1234567").build());
 		when(client.checkVat(any())).thenReturn(new CheckVatResponse());
 		validator.validate(bookingDTO);
 
 		verify(bookingDTO).addError("Invalid vatNumber");
+	}
+
+	@Test
+	void shouldHasErrorWhenVatNumberIsValid() {
+		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehiculeNumberPlate("AAA-111")
+				.status("booked").countryCode("ES").vatNumber("1234567").build());
+
+		CheckVatResponse checkVatResponse = new CheckVatResponse();
+		checkVatResponse.setValid(true);
+
+		when(client.checkVat(any())).thenReturn(checkVatResponse);
+		validator.validate(bookingDTO);
+
+		assertThat(bookingDTO.getErrors().length()).isEqualTo(0);
 	}
 
 }
