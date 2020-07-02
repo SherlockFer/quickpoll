@@ -2,13 +2,16 @@ package com.apress.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
 import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVat;
 import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatResponse;
+import lombok.extern.slf4j.Slf4j;
 
-@Component
+@Slf4j
+
+@Service
 public class VatServiceClient {
 
 	private WebServiceTemplate webServiceTemplate;
@@ -23,8 +26,17 @@ public class VatServiceClient {
 		webServiceTemplate.setUnmarshaller(marshaller);
 	}
 
+	/**
+	 * @param checkVat
+	 * @return {@code null} in case Vies Service is unavailable
+	 */
 	public CheckVatResponse checkVat(CheckVat checkVat) {
-		return (CheckVatResponse) webServiceTemplate.marshalSendAndReceive(checkVat);
-
+		CheckVatResponse checkVatResponse = null;
+		try {
+			checkVatResponse = (CheckVatResponse) webServiceTemplate.marshalSendAndReceive(checkVat);
+		}catch(RuntimeException exception) {
+			log.error("Vies Service unavailable", exception);
+		}
+		return checkVatResponse;
 	}
 }

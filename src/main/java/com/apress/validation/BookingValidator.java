@@ -46,15 +46,12 @@ public class BookingValidator {
 			CheckVat checkVat = new CheckVat();
 			checkVat.setCountryCode(bookingDTO.getCountryCode());
 			checkVat.setVatNumber(bookingDTO.getVatNumber());
-			try {
-				CheckVatResponse checkVatResponse = client.checkVat(checkVat);
-				if (!checkVatResponse.isValid()) {
-					bookingDTO.addError("Invalid vatNumber");
-				}
-			} catch (RuntimeException exception) {
-				exception.printStackTrace();
+			CheckVatResponse checkVatResponse = client.checkVat(checkVat);
+			if(checkVatResponse == null) {
+				bookingDTO.addError("Vies Service unavailable");
+			}else if (!checkVatResponse.isValid()) {
+				bookingDTO.addError("Invalid vatNumber");
 			}
-
 		}
 	}
 
