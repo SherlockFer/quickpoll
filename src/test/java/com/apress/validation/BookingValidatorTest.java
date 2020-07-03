@@ -51,8 +51,10 @@ public class BookingValidatorTest {
 	void shouldHasErrorWhenVatNumberIsNotValid() {
 		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehiculeNumberPlate("AAA-111")
 				.status("booked").countryCode("ES").vatNumber("1234567").build());
-		when(client.checkVat(any())).thenReturn(new CheckVatResponse());
-		
+		CheckVatResponse checkVatResponse = new CheckVatResponse();
+		checkVatResponse.setValid(false);
+		when(client.checkVat(any())).thenReturn(checkVatResponse);
+
 		validator.validate(bookingDTO);
 
 		verify(bookingDTO).addError("Invalid vatNumber");
@@ -65,10 +67,10 @@ public class BookingValidatorTest {
 		CheckVatResponse checkVatResponse = new CheckVatResponse();
 		checkVatResponse.setValid(true);
 		when(client.checkVat(any())).thenReturn(checkVatResponse);
-		
+
 		validator.validate(bookingDTO);
 
-		verify(bookingDTO,never()).addError(any());
+		verify(bookingDTO, never()).addError(any());
 	}
 
 }
