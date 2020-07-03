@@ -9,6 +9,9 @@ import com.apress.dto.BookingDTO;
 
 import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVat;
 import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatResponse;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 
 @Component
 public class BookingValidator {
@@ -48,7 +51,7 @@ public class BookingValidator {
 			checkVat.setVatNumber(bookingDTO.getVatNumber());
 			CheckVatResponse checkVatResponse = client.checkVat(checkVat);
 			if(checkVatResponse == null) {
-				bookingDTO.addError("Vies Service unavailable");
+				log.warn("Vies Service unavailable, vat validation skiped");
 			}else if (!checkVatResponse.isValid()) {
 				bookingDTO.addError("Invalid vatNumber");
 			}
