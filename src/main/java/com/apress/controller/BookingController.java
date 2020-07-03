@@ -1,5 +1,6 @@
 package com.apress.controller;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Optional;
@@ -19,8 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.apress.client.NumberConversionClient;
 import com.apress.dto.BookingDTO;
 import com.apress.service.BookingService;
+import com.dataaccess.webservicesserver.NumberToDollars;
+import com.dataaccess.webservicesserver.NumberToDollarsResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,8 +37,18 @@ public class BookingController {
 	@Autowired
 	private BookingService bookingService;
 
+	@Autowired
+	NumberConversionClient client;
+
 	@GetMapping()
 	public ResponseEntity<Collection<BookingDTO>> findAll() {
+
+		BigDecimal a = new BigDecimal("10.0");
+		NumberToDollars numberToDollars = new NumberToDollars();
+		numberToDollars.setDNum(a);
+
+		NumberToDollarsResponse numberToDollarsResponse = client.numberToWords(numberToDollars);
+
 		Collection<BookingDTO> bookingDTOs = bookingService.findAll();
 		return new ResponseEntity<>(bookingDTOs, HttpStatus.OK);
 	}
