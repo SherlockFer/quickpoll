@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -64,7 +66,10 @@ public class BookingController {
 	}
 
 	@PostMapping()
-	public ResponseEntity<Void> create(@RequestBody BookingDTO bookingDTO) {
+	public ResponseEntity<Void> create(@RequestBody BookingDTO bookingDTO, HttpServletRequest request) {
+		String ip = request.getRemoteAddr();
+		ip = bookingService.getHostAddress(ip);
+		bookingDTO.setIpSource(ip);
 		bookingDTO = bookingService.save(bookingDTO.toBuilder().id(null).build());
 		if (bookingDTO.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bookingDTO.getErrors());

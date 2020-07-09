@@ -96,6 +96,12 @@ public class Booking {
 	@Column(name = "MODIFIED_AT")
 	private LocalDateTime modified;
 
+	@Column(name = "IP_COUNTRY")
+	private String ipCountry;
+
+	@Column(name = "IP_CITY")
+	private String ipCity;
+
 	@PrePersist
 	void onCreate() {
 		this.setCreated(LocalDateTime.now());

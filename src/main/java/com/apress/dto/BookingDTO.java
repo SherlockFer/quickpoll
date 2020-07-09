@@ -6,6 +6,7 @@ import java.util.Set;
 import com.apress.domain.Part;
 import com.apress.domain.Product;
 import com.apress.domain.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
@@ -61,4 +62,12 @@ public class BookingDTO extends BaseDTO {
 
 	private String vatNumber;
 
+	@JsonIgnore
+	private String ipSource;
+
+	@JsonIgnore
+	private String ipCountry;
+
+	@JsonIgnore
+	private String ipCity;
 }

@@ -1,5 +1,7 @@
 package com.apress.service;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -26,7 +28,7 @@ public class BookingService {
 	private BookingDefaulter bookingDefaulter;
 	@Autowired
 	private BookingValidator bookingValidator;
-	
+
 	public Collection<BookingDTO> findAll() {
 		Collection<Booking> bookings = bookingRepository.findAll();
 		return bookingMapper.toBookingDTOs(bookings);
@@ -39,19 +41,19 @@ public class BookingService {
 		}
 		return Optional.empty();
 	}
-	
+
 	public boolean existsById(Long id) {
 		return bookingRepository.existsById(id);
 	}
 
 	@Transactional
-	public BookingDTO save(BookingDTO bookingDTO) {		
+	public BookingDTO save(BookingDTO bookingDTO) {
 		bookingDefaulter.populateDefaults(bookingDTO);
 		bookingValidator.validate(bookingDTO);
-		if(bookingDTO.hasErrors()) {
+		if (bookingDTO.hasErrors()) {
 			return bookingDTO;
 		}
-		Booking booking = bookingRepository.save(bookingMapper.toBooking(bookingDTO));	
+		Booking booking = bookingRepository.save(bookingMapper.toBooking(bookingDTO));
 		return bookingMapper.toBookingDTO(booking);
 	}
 
@@ -59,5 +61,21 @@ public class BookingService {
 	public void deleteById(Long id) {
 		bookingRepository.deleteById(id);
 	}
-	
+
+	public String getHostAddress(String ip) {
+		InetAddress inetAddress = null;
+		if (ip.equalsIgnoreCase("0:0:0:0:0:0:0:1")) {
+
+			try {
+				inetAddress = InetAddress.getLocalHost();
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String ipAddress = inetAddress.getHostAddress();
+			ip = ipAddress;
+		}
+		return ip;
+	}
+
 }
