@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
+import org.springframework.ws.soap.client.SoapFaultClientException;
 
 import garage.services.geolocation.types.GetLocationRequest;
 import garage.services.geolocation.types.GetLocationResponse;
@@ -30,8 +31,10 @@ public class GeoLocationClient {
 		GetLocationResponse getLocationResponse = null;
 		try {
 			getLocationResponse = (GetLocationResponse) webServiceTemplate.marshalSendAndReceive(getLocationRequest);
-		} catch (RuntimeException exception) {
-			log.error("Vies Service unavailable", exception);
+		} catch (SoapFaultClientException sfe) {
+			log.warn("Vies Service fault", sfe.getMessage());
+		} catch (RuntimeException e) {
+			log.error("Vies Service error", e);
 		}
 		return getLocationResponse;
 	}
