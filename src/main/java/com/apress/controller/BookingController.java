@@ -67,9 +67,7 @@ public class BookingController {
 
 	@PostMapping()
 	public ResponseEntity<Void> create(@RequestBody BookingDTO bookingDTO, HttpServletRequest request) {
-		String ip = request.getRemoteAddr();
-		ip = bookingService.getHostAddress(ip);
-		bookingDTO.setIpSource(ip);
+		bookingDTO.setIpSource(request.getRemoteAddr());
 		bookingDTO = bookingService.save(bookingDTO.toBuilder().id(null).build());
 		if (bookingDTO.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bookingDTO.getErrors());

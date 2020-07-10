@@ -1,7 +1,5 @@
 package com.apress.service;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -62,20 +60,20 @@ public class BookingService {
 		bookingRepository.deleteById(id);
 	}
 
-	public String getHostAddress(String ip) {
-		InetAddress inetAddress = null;
-		if (ip.equalsIgnoreCase("0:0:0:0:0:0:0:1")) {
-
-			try {
-				inetAddress = InetAddress.getLocalHost();
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String ipAddress = inetAddress.getHostAddress();
-			ip = ipAddress;
-		}
-		return ip;
-	}
+//	public String getHostAddress(String ip) {
+//		InetAddress inetAddress = null;
+//		if (ip.equalsIgnoreCase("0:0:0:0:0:0:0:1")) {
+//
+//			try {
+//				inetAddress = InetAddress.getLocalHost();
+//			} catch (UnknownHostException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			String ipAddress = inetAddress.getHostAddress();
+//			ip = ipAddress;
+//		}
+//		return ip;
+//	}
 
 }
