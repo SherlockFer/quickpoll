@@ -32,9 +32,9 @@ public class GeoLocationClient {
 		try {
 			getLocationResponse = (GetLocationResponse) webServiceTemplate.marshalSendAndReceive(getLocationRequest);
 		} catch (SoapFaultClientException sfe) {
-			log.warn("Vies Service fault", sfe.getMessage());
+			log.warn("Geolocation Service fault", sfe.getMessage());
 		} catch (RuntimeException e) {
-			log.error("Vies Service error", e);
+			log.error("Geolocation Service error", e);
 		}
 		return getLocationResponse;
 	}

@@ -10,12 +10,15 @@ import com.apress.dto.BookingDTO;
 
 import garage.services.geolocation.types.GetLocationRequest;
 import garage.services.geolocation.types.GetLocationResponse;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 
 @Component
 public class BookingDefaulter {
 
 	@Autowired
-	private GeoLocationClient client;
+	private GeoLocationClient geoLocationClient;
 
 	public void populateDefaults(BookingDTO bookingDTO) {
 		populateReference(bookingDTO);
@@ -29,7 +32,12 @@ public class BookingDefaulter {
 	public void populateCountryAndCity(BookingDTO bookingDTO) {
 		GetLocationRequest getLocationRequest = new GetLocationRequest();
 		getLocationRequest.setIp(bookingDTO.getIpSource());
-		GetLocationResponse getLocationResponse = client.getLocation(getLocationRequest);
+		GetLocationResponse getLocationResponse = geoLocationClient.getLocation(getLocationRequest);
+		if (getLocationResponse == null) {
+			log.warn("Geolocation Service unavailable");
+		} else if (getLocationResponse.getStatus() == "fail") {
+			bookingDTO.addError("Invalid query");
+		}
 		bookingDTO.setIpCountry(getLocationResponse.getCountry());
 		bookingDTO.setIpCity(getLocationResponse.getCity());
 	}
