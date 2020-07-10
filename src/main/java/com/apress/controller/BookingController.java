@@ -21,12 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.apress.client.GeoLocationClient;
 import com.apress.dto.BookingDTO;
 import com.apress.service.BookingService;
 
-import garage.services.geolocation.types.GetLocationRequest;
-import garage.services.geolocation.types.GetLocationResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -38,20 +35,8 @@ public class BookingController {
 	@Autowired
 	private BookingService bookingService;
 
-	@Autowired
-	GeoLocationClient client;
-
 	@GetMapping()
 	public ResponseEntity<Collection<BookingDTO>> findAll() {
-
-		GetLocationRequest getLocationRequest = new GetLocationRequest();
-		getLocationRequest.setIp("190.234.150.194");
-		try {
-			GetLocationResponse getLocationResponse = client.getLocation(getLocationRequest);
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-		}
-
 		Collection<BookingDTO> bookingDTOs = bookingService.findAll();
 		return new ResponseEntity<>(bookingDTOs, HttpStatus.OK);
 	}
