@@ -33,13 +33,13 @@ public class BookingDefaulter {
 		GetLocationRequest getLocationRequest = new GetLocationRequest();
 		getLocationRequest.setIp(bookingDTO.getIpSource());
 		GetLocationResponse getLocationResponse = geoLocationClient.getLocation(getLocationRequest);
-		if (getLocationResponse != null && getLocationResponse.getStatus().equals("sucess")) {
+		if (getLocationResponse != null && getLocationResponse.getStatus().equals("success")) {
 			bookingDTO.setIpCountry(getLocationResponse.getCountry());
 			bookingDTO.setIpCity(getLocationResponse.getCity());
-		}else {
+		} else {
 			bookingDTO.setIpCountry("Unknown");
 			bookingDTO.setIpCity("Unknown");
 		}
-		
+
 	}
 }
