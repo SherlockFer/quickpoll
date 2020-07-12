@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
+import org.springframework.ws.soap.client.SoapFaultClientException;
 
 import com.dataaccess.webservicesserver.NumberToDollars;
 import com.dataaccess.webservicesserver.NumberToDollarsResponse;
@@ -32,8 +33,10 @@ public class NumberConversionClient {
 		try {
 			numberToDollarsResponse = (NumberToDollarsResponse) webServiceTemplate
 					.marshalSendAndReceive(numberToDollars);
-		} catch (RuntimeException exception) {
-			log.error("Vies Service unavailable", exception);
+		} catch (SoapFaultClientException sfe) {
+			log.warn("NumberConversion Service fault", sfe.getMessage());
+		} catch (RuntimeException e) {
+			log.error("NumberConversion Service error", e);
 		}
 		return numberToDollarsResponse;
 	}
