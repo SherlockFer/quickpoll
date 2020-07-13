@@ -1,10 +1,13 @@
 package com.apress.client;
 
+import org.apache.ws.security.WSConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
+import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 import org.springframework.ws.soap.client.SoapFaultClientException;
+import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
 
 import garage.services.geolocation.types.GetLocationRequest;
 import garage.services.geolocation.types.GetLocationResponse;
@@ -25,6 +28,18 @@ public class GeoLocationClient {
 		marshaller.setPackagesToScan("garage.services.geolocation.types");
 		webServiceTemplate.setMarshaller(marshaller);
 		webServiceTemplate.setUnmarshaller(marshaller);
+		ClientInterceptor[] interceptors = new ClientInterceptor[] { getSecurityInterceptor() };
+		webServiceTemplate.setInterceptors(interceptors);
+	}
+
+	public Wss4jSecurityInterceptor getSecurityInterceptor() {
+		Wss4jSecurityInterceptor wss4jSecurityInterceptor = new Wss4jSecurityInterceptor();
+		wss4jSecurityInterceptor.setSecurementActions("UsernameToken");
+		wss4jSecurityInterceptor.setSecurementUsername("admin");
+		wss4jSecurityInterceptor.setSecurementPassword("secret");
+		wss4jSecurityInterceptor.setSecurementPasswordType(WSConstants.PW_TEXT);
+		wss4jSecurityInterceptor.setSecurementMustUnderstand(false);
+		return wss4jSecurityInterceptor;
 	}
 
 	public GetLocationResponse getLocation(GetLocationRequest getLocationRequest) {
