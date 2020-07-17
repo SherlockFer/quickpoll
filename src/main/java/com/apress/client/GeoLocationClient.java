@@ -23,7 +23,7 @@ public class GeoLocationClient {
 	@Autowired
 	public GeoLocationClient() {
 		this.webServiceTemplate = new WebServiceTemplate();
-		webServiceTemplate.setDefaultUri("http://localhost:8081/ws");
+		webServiceTemplate.setDefaultUri("https://localhost:8443/ws");
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 		marshaller.setPackagesToScan("garage.services.geolocation.types");
 		webServiceTemplate.setMarshaller(marshaller);
