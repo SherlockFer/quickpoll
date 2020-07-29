@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class VehiclePlateProducer {
 
 	@Autowired
-	private RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
+	private RabbitTemplate rabbitTemplate;
 
 	@RabbitListener(queues = "myQueue")
 	public void sendVehiclePlate(String vehiclePlate) {
