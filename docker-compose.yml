@@ -12,25 +12,14 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  redis:
-    image: redis:latest
+  rabbitmq:
+    image: "rabbitmq:3-management"
     ports:
-      - 6379:6379
-    command: ["redis-server", "--appendonly", "yes"]
+      - "5672:5672"
+      - "15672:15672"
     volumes:
-      - redis-data:/data
-
-  redis-commander:
-    image: rediscommander/redis-commander:latest
-    environment:
-      - REDIS_HOSTS=local:redis:6379
-      - HTTP_USER=root
-      - HTTP_PASSWORD=root
-    ports:
-      - 6081:8081
-    depends_on:
-      - redis
+      - rabbitmq_data
     
 volumes:
-  redis-data:
+  rabbitmq_data:
   postgres_data:

@@ -1,7 +1,8 @@
 package com.apress.producer;
 
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -11,12 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 public class VehiclePlateProducer {
 
 	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
-	private String queue = "garage.vehicule.plate";
+	private RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
 
+	@RabbitListener(queues = "myQueue")
 	public void sendVehiclePlate(String vehiclePlate) {
 		log.info("Sending Vehicle Plate details: {} " + vehiclePlate);
-		redisTemplate.convertAndSend(queue, vehiclePlate);
+		rabbitTemplate.convertAndSend("myQueue", vehiclePlate);
 	}
 
 }
