@@ -1,7 +1,7 @@
 version: "3.6"
 
 services:
-  db:
+  postgres:
     image: postgres:11.2-alpine
     environment:
       - POSTGRES_DB=poll
@@ -9,6 +9,8 @@ services:
       - POSTGRES_PASSWORD=root
     ports:
       - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   redis:
     image: redis:latest
@@ -25,9 +27,10 @@ services:
       - HTTP_USER=root
       - HTTP_PASSWORD=root
     ports:
-      - 9091:8081
+      - 6081:8081
     depends_on:
       - redis
     
 volumes:
   redis-data:
+  postgres_data:
