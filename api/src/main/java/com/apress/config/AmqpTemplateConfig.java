@@ -9,6 +9,6 @@ public class AmqpTemplateConfig {
 
 	@Bean
 	public Queue myQueue() {
-		return new Queue("myQueue", false);
+		return new Queue("garageVehiclePlate", false);
 	}
 }
