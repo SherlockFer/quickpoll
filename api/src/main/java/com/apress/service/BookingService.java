@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
-import com.apress.producer.VehiclePlateProducer;
 import com.apress.repository.BookingRepository;
+import com.apress.sender.PlateMessageSender;
 import com.apress.service.defaulter.BookingDefaulter;
 import com.apress.service.mappers.BookingMapper;
 import com.apress.validation.BookingValidator;
@@ -28,7 +28,7 @@ public class BookingService {
 	@Autowired
 	private BookingValidator bookingValidator;
 	@Autowired
-	private VehiclePlateProducer vehiclePlateProducer;
+	private PlateMessageSender plateMessageSender;
 
 	public Collection<BookingDTO> findAll() {
 		Collection<Booking> bookings = bookingRepository.findAll();
@@ -55,7 +55,7 @@ public class BookingService {
 			return bookingDTO;
 		}
 		Booking booking = bookingRepository.save(bookingMapper.toBooking(bookingDTO));
-		vehiclePlateProducer.sendVehiclePlate(booking.getVehiculeNumberPlate());
+		plateMessageSender.sendVehiclePlate(bookingMapper.toAuditDTO(booking));
 		return bookingMapper.toBookingDTO(booking);
 	}
 

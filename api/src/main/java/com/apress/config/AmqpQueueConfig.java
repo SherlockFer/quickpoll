@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AmqpTemplateConfig {
+public class AmqpQueueConfig {
 
 	@Bean
 	public Queue myQueue() {
-		return new Queue("garageVehiclePlate", false);
+		return new Queue("garage.vehicle.plate", false);
 	}
 }
