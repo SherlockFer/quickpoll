@@ -16,10 +16,6 @@ public class PlateMessageSender {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
-	public PlateMessageSender(final RabbitTemplate rabbitTemplate) {
-		this.rabbitTemplate = rabbitTemplate;
-	}
-
 	public void sendVehiclePlate(AuditDTO auditDTO) {
 		log.info("Sending Vehicle Plate details: {} " + auditDTO);
 		rabbitTemplate.convertAndSend("garage.vehicle.plate", auditDTO);
