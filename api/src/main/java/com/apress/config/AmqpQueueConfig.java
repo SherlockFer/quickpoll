@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class AmqpQueueConfig {
 
 	@Bean
-	public Queue myQueue() {
+	public Queue plateQueue() {
 		return new Queue("garage.vehicle.plate", false);
 	}
 }
