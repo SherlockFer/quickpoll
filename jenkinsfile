@@ -1,0 +1,19 @@
+pipeline{
+    agent any 
+       
+    options {
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+    
+    stages{       
+        
+        stage('Git: Clone') { 
+            steps{                    
+                git branch: "master", url: "git@github.com:SherlockFer/quickpoll.git"              
+            }
+        }       
+        
+    }
+  
+}
