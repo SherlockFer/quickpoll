@@ -10,7 +10,7 @@ pipeline{
         
         stage('Git: Clone') { 
             steps{                    
-                git branch: "master", url: "git@github.com:SherlockFer/quickpoll.git"              
+                git credentialsId: "jenkins-rsa", branch: "master", url: "git@github.com:SherlockFer/quickpoll.git"              
             }
         }       
         
