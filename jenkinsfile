@@ -12,7 +12,13 @@ pipeline{
             steps{                    
                 git credentialsId: "jenkins-rsa", branch: "master", url: "git@github.com:SherlockFer/quickpoll.git"              
             }
-        }       
+        } 
+        
+        stage('Mvn: Compile package') { 
+            steps{                    
+                sh "mvn clean compile package"              
+            }
+        }        
         
     }
   
