@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
 import com.apress.repository.BookingRepository;
+import com.apress.sender.PlateMessageSender;
 import com.apress.service.defaulter.BookingDefaulter;
 import com.apress.service.mappers.BookingMapper;
 import com.apress.validation.BookingValidator;
@@ -36,6 +37,8 @@ public class BookingServiceTest {
 	private BookingDefaulter bookingDefaulter;
 	@Mock
 	private BookingValidator bookingValidator;
+	@Mock
+	private PlateMessageSender plateMessageSender;
 
 	@Test
 	void shouldReturnAllBookings() {
@@ -62,6 +65,8 @@ public class BookingServiceTest {
 	@Test
 	void shouldSaveBooking() {
 		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
+		Booking booking = Booking.builder().id(1L).comments("comment").build();
+		when(bookingRepository.save(any())).thenReturn(booking);
 		when(bookingMapper.toBookingDTO(any())).thenReturn(bookingDTO);
 
 		BookingDTO returnedBookingDTO = service.save(bookingDTO);

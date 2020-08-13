@@ -73,15 +73,4 @@ public class BookingValidatorTest {
 		verify(bookingDTO, never()).addError(any());
 	}
 
-	@Test
-	void shouldHasErrorWhenCheckVatResponseHasRuntimeException() {
-		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehiculeNumberPlate("AAA-111")
-				.status("booked").countryCode("ES").vatNumber("1234567").build());
-		CheckVatResponse checkVatResponse = null;
-		when(client.checkVat(any())).thenReturn(checkVatResponse);
-
-		validator.validate(bookingDTO);
-
-		verify(bookingDTO).addError("Vies Service unavailable");
-	}
 }
