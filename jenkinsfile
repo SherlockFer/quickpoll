@@ -18,6 +18,18 @@ pipeline{
             steps{                    
                 sh "mvn clean compile package"              
             }
+        }  
+        
+        stage('Docker: Boot: Geolocation') { 
+            steps{                    
+                sh "docker-compose up --build geolocation"              
+            }
+        }
+        
+        stage('Docker: Boot: Api') { 
+            steps{                    
+                sh "docker-compose up --build api"              
+            }
         }        
         
     }
