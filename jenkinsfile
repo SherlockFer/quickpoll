@@ -20,18 +20,10 @@ pipeline{
             }
         }  
         
-        stage('Docker: Boot: Geolocation') { 
+        stage('Docker: Boot: Garage') { 
             steps{                    
-                sh "docker-compose up --build geolocation"              
+                sh "make up"              
             }
-        }
-        
-        stage('Docker: Boot: Api') { 
-            steps{                    
-                sh "docker-compose up --build api"              
-            }
-        }        
-        
+        }         
     }
-  
 }

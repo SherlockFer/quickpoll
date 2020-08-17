@@ -24,20 +24,32 @@ services:
   geolocation:
     build:
       context: geolocation
+    image: geolocation
     ports:
       - 8443:8443
+  
+  audit:
+    build:
+      context: audit
+    image: audit
+    ports:
+      - 8081:8081      
       
   api:
     build:
       context: api
+    image: api
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
     ports:
-      - 8181:8181
-#  
-#  audit:
-#    build:
-#      context: audit
-#    ports:
-#      - 8081:8081
+      - 8080:8080
+    depends_on:
+      - postgres
+      - rabbitmq
+      - geolocation
+      - audit
     
 volumes:
   rabbitmq_data:
