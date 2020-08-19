@@ -104,5 +104,6 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3).build());
+		
 	}
 }
