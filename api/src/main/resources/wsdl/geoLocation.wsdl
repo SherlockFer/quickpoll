@@ -49,7 +49,7 @@
   </wsdl:binding>
   <wsdl:service name="GeoLocationServiceService">
     <wsdl:port binding="tns:GeoLocationServiceSoap11" name="GeoLocationServiceSoap11">
-      <soap:address location="https://localhost:8443/ws"/>
+      <soap:address location="https://localhost:8081/ws"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
