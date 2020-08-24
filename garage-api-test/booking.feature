@@ -1,13 +1,12 @@
 Feature: Be able to booking
 
-    # Scenario: Get bookings
-    #     Given url "http://192.168.1.140:8080"
-    #     Given path "/bookings"
-    #     When method get
-    #     Then status 200
+    Scenario: Get bookings
+        Given url "http://192.168.1.140:8080"
+        Given path "/bookings"
+        When method get
+        Then status 200
     
     Scenario: Get bookings/id
-
         Given url "http://192.168.1.140:8080"
         Given path "/bookings/18"
         When method get
@@ -35,12 +34,13 @@ Feature: Be able to booking
         Then status 201
 
     Scenario: put bookings
-        Given url "http://192.168.1.140:8080/bookings/20"
-         And request { "comments": "abcd" }
         Given url "http://192.168.1.140:8080"
-        Given path "/bookings"
+        Given path "/bookings/26"
+        And request { "comments": "abcd" }
+        When method put
+        Then status 200
 
     Scenario: delete bookings
-        Given url "http://192.168.1.140:8080/bookings/20"
+        Given url "http://192.168.1.140:8080/bookings/26"
         When method delete
         Then status 202
