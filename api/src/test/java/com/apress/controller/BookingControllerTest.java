@@ -17,6 +17,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.apress.dto.BookingDTO;
@@ -63,18 +66,18 @@ public class BookingControllerTest {
 		assertThat(exception.getMessage()).contains("-1 not found");
 	}
 
-//	@Test
-//	public void shouldCreateBookingWithHttpStatusCreated() {
-//		MockHttpServletRequest request = new MockHttpServletRequest();
-//		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-//		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
-//		when(bookingService.save(any())).thenReturn(bookingDTO);
-//
-//		ResponseEntity<?> response = controller.create(BookingDTO.builder().comments("comment").build());
-//
-//		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-//		assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("/1");
-//	}
+	@Test
+	public void shouldCreateBookingWithHttpStatusCreated() {
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
+		when(bookingService.save(any())).thenReturn(bookingDTO);
+
+		ResponseEntity<?> response = controller.create(BookingDTO.builder().comments("comment").build(), request);
+
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+		assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("/1");
+	}
 
 	@Test
 	public void shouldUpdatedBookingWithHttpStatusOk() {
