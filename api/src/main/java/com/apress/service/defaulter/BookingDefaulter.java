@@ -26,7 +26,9 @@ public class BookingDefaulter {
 	}
 
 	public void populateReference(BookingDTO bookingDTO) {
-		bookingDTO.setReference(UUID.randomUUID().toString());
+		if (bookingDTO.getReference() == null) {
+			bookingDTO.setReference(UUID.randomUUID().toString());
+		}
 	}
 
 	public void populateCountryAndCity(BookingDTO bookingDTO) {
