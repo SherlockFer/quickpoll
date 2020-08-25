@@ -19,13 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class GeoLocationClient {
 
-	@Value("${garage.geolocation.url}")
-	private String geolocationUrl;
-
 	private WebServiceTemplate webServiceTemplate;
 
 	@Autowired
-	public GeoLocationClient() {
+	public GeoLocationClient(@Value("${garage.geolocation.url}") String geolocationUrl) {
 		this.webServiceTemplate = new WebServiceTemplate();
 		webServiceTemplate.setDefaultUri(geolocationUrl);
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
