@@ -2,6 +2,7 @@ package com.apress.client;
 
 import org.apache.ws.security.WSConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
@@ -21,9 +22,9 @@ public class GeoLocationClient {
 	private WebServiceTemplate webServiceTemplate;
 
 	@Autowired
-	public GeoLocationClient() {
+	public GeoLocationClient(@Value("${garage.geolocation.url}") String geolocationUrl) {
 		this.webServiceTemplate = new WebServiceTemplate();
-		webServiceTemplate.setDefaultUri("https://localhost:8443/ws");
+		webServiceTemplate.setDefaultUri(geolocationUrl);
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 		marshaller.setPackagesToScan("garage.services.geolocation.types");
 		webServiceTemplate.setMarshaller(marshaller);

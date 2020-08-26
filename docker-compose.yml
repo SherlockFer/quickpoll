@@ -25,15 +25,19 @@ services:
     build:
       context: geolocation
     image: geolocation
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     ports:
-      - 8443:8443
+      - 8081:8081
   
   audit:
     build:
       context: audit
     image: audit
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     ports:
-      - 8081:8081      
+      - 8082:8082      
       
   api:
     build:
@@ -41,8 +45,6 @@ services:
     image: api
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - POSTGRES_HOST=postgres
-      - POSTGRES_PORT=5432
     ports:
       - 8080:8080
     depends_on:

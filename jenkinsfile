@@ -11,7 +11,8 @@ pipeline{
     stages{       
         
         stage('Git: Clone') { 
-            steps{                    
+            steps{
+                sh "test -e .git && git clean -fdx 2>/dev/null || true"                    
                 git credentialsId: "jenkins-rsa", branch: "master", url: "git@github.com:SherlockFer/quickpoll.git"              
             }
         } 
@@ -26,6 +27,6 @@ pipeline{
             steps{                    
                 sh "make up"              
             }
-        }         
+        }     
     }
 }
