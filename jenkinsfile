@@ -27,27 +27,6 @@ pipeline{
             steps{                    
                 sh "make up"              
             }
-        }
-
-        stage('Run test booking'){
-            steps{
-                sh "cd garage-api-test && java -jar karate-0.9.5.jar booking.feature"
-            }
-        }
-    }
-
-    post {
-        always {
-            publishHTML(
-                target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: "target/cucumber-html-reports",
-                    reportFiles: 'overview-features.html',
-                    reportName: "Report"
-                ]
-            ) 
-        }
+        }     
     }
 }
