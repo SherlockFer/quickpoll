@@ -14,6 +14,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -30,6 +34,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "PRODUCTS")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
+@JsonIdentityReference(alwaysAsId = true)
 public class Product {
 
 	@Id

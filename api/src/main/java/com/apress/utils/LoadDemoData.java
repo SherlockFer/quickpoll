@@ -99,8 +99,25 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehiculeModel("M5")
 				.vehiculeNumberPlate("AAA-111")
 				.part(part1)
+				.part(part2)
 				.mechanic(user2)
-				.customer(user4)
+				.customer(user6)
+				.baseProduct(product1)
+				.extraProduct(product2)
+				.extraProduct(product3).build());
+		
+		Booking booking2 = bookingRepository.save(
+				Booking.builder()
+				.reference(UUID.randomUUID().toString())
+				.comments("comentario 1 comentario 1")
+				.status("booked")
+				.vehiculeBrand("Ford")
+				.vehiculeEngine("diesel")
+				.vehiculeModel("M5")
+				.vehiculeNumberPlate("AAA-111")
+				.part(part1)
+				.mechanic(user2)
+				.customer(user6)
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3).build());
