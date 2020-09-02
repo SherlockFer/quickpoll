@@ -33,7 +33,7 @@ public class BookingValidator {
 	}
 
 	private void validateVehiculeNumberPlate(BookingDTO bookingDTO) {
-		if (StringUtils.isBlank(bookingDTO.getVehiculeNumberPlate())) {
+		if (StringUtils.isBlank(bookingDTO.getVehicleNumberPlate())) {
 			bookingDTO.addError("Vehicule number plate can't be empty");
 		}
 	}
@@ -50,9 +50,9 @@ public class BookingValidator {
 			checkVat.setCountryCode(bookingDTO.getCountryCode());
 			checkVat.setVatNumber(bookingDTO.getVatNumber());
 			CheckVatResponse checkVatResponse = client.checkVat(checkVat);
-			if(checkVatResponse == null) {
+			if (checkVatResponse == null) {
 				log.warn("Vies Service unavailable, vat validation skiped");
-			}else if (!checkVatResponse.isValid()) {
+			} else if (!checkVatResponse.isValid()) {
 				bookingDTO.addError("Invalid vatNumber");
 			}
 		}

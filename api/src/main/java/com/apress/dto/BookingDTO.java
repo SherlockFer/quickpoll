@@ -7,7 +7,6 @@ import com.apress.domain.Part;
 import com.apress.domain.Product;
 import com.apress.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
@@ -25,17 +24,17 @@ public class BookingDTO extends BaseDTO {
 	@JsonProperty("reference")
 	private String reference;
 
-	@JsonProperty("vehicule_number_plate")
-	private String vehiculeNumberPlate;
+	@JsonProperty("vehicle_number_plate")
+	private String vehicleNumberPlate;
 
-	@JsonProperty("vehicule_model")
-	private String vehiculeModel;
+	@JsonProperty("vehicle_model")
+	private String vehicleModel;
 
-	@JsonProperty("vehicule_brand")
-	private String vehiculeBrand;
+	@JsonProperty("vehicle_brand")
+	private String vehicleBrand;
 
-	@JsonProperty("vehicule_engine")
-	private String vehiculeEngine;
+	@JsonProperty("vehicle_engine")
+	private String vehicleEngine;
 
 	@JsonProperty("status")
 	private String status;

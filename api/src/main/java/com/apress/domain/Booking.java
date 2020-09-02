@@ -16,14 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,7 +39,7 @@ import lombok.Singular;
 public class Booking {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="booking_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_id_seq")
 	@Column(name = "ID")
 	private Long id;
 
@@ -53,17 +48,17 @@ public class Booking {
 	@Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
 	private String reference;
 
-	@Column(name = "VEHICULE_NUMBER_PLATE")
-	private String vehiculeNumberPlate;
+	@Column(name = "VEHICLE_NUMBER_PLATE")
+	private String vehicleNumberPlate;
 
-	@Column(name = "VEHICULE_MODEL")
-	private String vehiculeModel;
+	@Column(name = "VEHICLE_MODEL")
+	private String vehicleModel;
 
-	@Column(name = "VEHICULE_BRAND")
-	private String vehiculeBrand;
+	@Column(name = "VEHICLE_BRAND")
+	private String vehicleBrand;
 
-	@Column(name = "VEHICULE_ENGINE")
-	private String vehiculeEngine;
+	@Column(name = "VEHICLE_ENGINE")
+	private String vehicleEngine;
 
 	@Column(name = "DATE")
 	private LocalDate date;

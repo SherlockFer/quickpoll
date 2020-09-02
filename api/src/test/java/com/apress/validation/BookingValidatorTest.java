@@ -29,7 +29,7 @@ public class BookingValidatorTest {
 	@Test
 	void shouldHasErrorWhenCommentIsNotPresent() {
 		BookingDTO bookingDTO = Mockito
-				.spy(BookingDTO.builder().comments(" ").vehiculeNumberPlate("AAA-111").status("booked").build());
+				.spy(BookingDTO.builder().comments(" ").vehicleNumberPlate("AAA-111").status("booked").build());
 
 		validator.validate(bookingDTO);
 
@@ -40,7 +40,7 @@ public class BookingValidatorTest {
 	@Test
 	void shouldHasErrorWhenVehiculeNumberPlateIsNotPresent() {
 		BookingDTO bookingDTO = Mockito
-				.spy(BookingDTO.builder().comments("comment").vehiculeNumberPlate(" ").status("booked").build());
+				.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate(" ").status("booked").build());
 
 		validator.validate(bookingDTO);
 
@@ -49,7 +49,7 @@ public class BookingValidatorTest {
 
 	@Test
 	void shouldHasErrorWhenVatNumberIsNotValid() {
-		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehiculeNumberPlate("AAA-111")
+		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate("AAA-111")
 				.status("booked").countryCode("ES").vatNumber("1234567").build());
 		CheckVatResponse checkVatResponse = new CheckVatResponse();
 		checkVatResponse.setValid(false);
@@ -62,7 +62,7 @@ public class BookingValidatorTest {
 
 	@Test
 	void shouldHasErrorWhenVatNumberIsValid() {
-		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehiculeNumberPlate("AAA-111")
+		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate("AAA-111")
 				.status("booked").countryCode("ES").vatNumber("1234567").build());
 		CheckVatResponse checkVatResponse = new CheckVatResponse();
 		checkVatResponse.setValid(true);
