@@ -60,6 +60,9 @@ public class Booking {
 	@Column(name = "VEHICLE_ENGINE")
 	private String vehicleEngine;
 
+	@Column(name = "VEHICLE_TYPE")
+	private String vehicleType;
+
 	@Column(name = "DATE")
 	private LocalDate date;
 

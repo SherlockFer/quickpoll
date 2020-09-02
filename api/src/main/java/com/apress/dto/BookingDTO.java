@@ -36,6 +36,9 @@ public class BookingDTO extends BaseDTO {
 	@JsonProperty("vehicle_engine")
 	private String vehicleEngine;
 
+	@JsonProperty("vehicle_type")
+	private String vehicleType;
+
 	@JsonProperty("status")
 	private String status;
 
