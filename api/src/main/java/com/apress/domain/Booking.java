@@ -82,8 +82,6 @@ public class Booking {
 	@Singular
 	@ManyToMany
 	@JoinColumn(name = "PART_ID")
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	@JsonIdentityReference(alwaysAsId = true)
 	private Set<Part> parts;
 
 	@OneToOne
