@@ -72,30 +72,41 @@ public class BookingService {
 	}
 	
 	private void calTotalOneBooking(Optional<BookingDTO> bookingDTO) {
-		int sum=0;
 		BookingDTO booking =bookingDTO.get();
-	    sum=booking.getBaseProduct().getPrice();
-		for (Product extraProduct : booking.getExtraProducts()) {
-			sum=sum+extraProduct.getPrice();
-		}
-		for (Part part : booking.getParts()) {
-			sum=sum+part.getPrice();
-		}
-		booking.setTotal(sum);
+		booking.setTotal(calPriceProductParts(booking));
 	}
 	
 	private void calTotalManyBooking(Collection<BookingDTO> bookingDTO) {
-		for (BookingDTO bookings : bookingDTO) {
-			int sum=0;
-			sum=bookings.getBaseProduct().getPrice();
-			for (Product extraProduct : bookings.getExtraProducts()) {
-				sum=sum+extraProduct.getPrice();
-			}
-			for (Part part : bookings.getParts()) {
-				sum=sum+part.getPrice();
-			}
-			bookings.setTotal(sum);		
+		for (BookingDTO booking : bookingDTO) {
+			booking.setTotal(calPriceProductParts(booking));		
 		}
+	}
+	
+	private int calPriceProductParts(BookingDTO bookingDTO) {
+		int baseProductPrice=getBaseProductPrice(bookingDTO);
+		int extraProductsPrice=getExtraProductPrice(bookingDTO);
+		int partsPrice=getPartsPrice(bookingDTO);
+		return (baseProductPrice+extraProductsPrice+partsPrice);
+	}
+
+	private int getBaseProductPrice(BookingDTO booking) {
+		return booking.getBaseProduct().getPrice();
+	}
+	
+	private int getExtraProductPrice(BookingDTO booking) {
+		int sum=0;
+		for (Product extraProduct : booking.getExtraProducts()) {
+			sum=sum+extraProduct.getPrice();
+		}
+		return sum;
+	}
+	
+	private int getPartsPrice(BookingDTO booking) {
+		int sum=0;
+		for (Part part : booking.getParts()) {
+			sum=sum+part.getPrice();
+		}
+		return sum;
 	}
 	
 }
