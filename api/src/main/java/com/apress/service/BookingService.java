@@ -84,7 +84,6 @@ public class BookingService {
 		booking.setTotal(sum);
 	}
 	
-
 	private void calTotalManyBooking(Collection<BookingDTO> bookingDTO) {
 		for (BookingDTO bookings : bookingDTO) {
 			int sum=0;
@@ -97,7 +96,6 @@ public class BookingService {
 			}
 			bookings.setTotal(sum);		
 		}
-		    
 	}
 	
 }
