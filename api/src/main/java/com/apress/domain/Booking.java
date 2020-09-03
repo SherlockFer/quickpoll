@@ -106,6 +106,8 @@ public class Booking {
 	@Column(name = "IP_CITY")
 	private String ipCity;
 
+	private String total;
+
 	@PrePersist
 	void onCreate() {
 		this.setCreated(LocalDateTime.now());

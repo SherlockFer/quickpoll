@@ -3,6 +3,7 @@ package com.apress.dto;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.apress.domain.Booking;
 import com.apress.domain.Part;
 import com.apress.domain.Product;
 import com.apress.domain.User;
@@ -62,6 +63,8 @@ public class BookingDTO extends BaseDTO {
 	private String comments;
 
 	private String countryCode;
+	
+	private Integer total;
 
 	private String vatNumber;
 
