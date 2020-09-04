@@ -3,10 +3,6 @@ package com.apress.dto;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.apress.domain.Booking;
-import com.apress.domain.Part;
-import com.apress.domain.Product;
-import com.apress.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -44,27 +40,27 @@ public class BookingDTO extends BaseDTO {
 	private String status;
 
 	@JsonProperty("service_id")
-	private Product baseProduct;
+	private ProductDTO baseProduct;
 
 	@JsonProperty("service_ids")
-	private Set<Product> extraProducts;
+	private Set<ProductDTO> extraProducts;
 
 	@JsonProperty("part_ids")
-	private Set<Part> parts;
+	private Set<PartDTO> parts;
 
 	@JsonProperty("mechanic_id")
-	private User mechanic;
+	private UserDTO mechanic;
 
 	@JsonProperty("customer_id")
-	private User customer;
+	private UserDTO customer;
 
 	private LocalDate date;
 
 	private String comments;
 
 	private String countryCode;
-	
-	private Integer total;
+
+	private Double total;
 
 	private String vatNumber;
 
