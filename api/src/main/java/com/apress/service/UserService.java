@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.apress.defaulter.UserDefaulter;
 import com.apress.domain.User;
 import com.apress.dto.UserDTO;
 import com.apress.repository.UserRepository;
-import com.apress.service.defaulter.UserDefaulter;
 import com.apress.service.mappers.UserMapper;
 import com.apress.validation.UserValidator;
 

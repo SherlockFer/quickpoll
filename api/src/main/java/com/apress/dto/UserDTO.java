@@ -28,8 +28,4 @@ public class UserDTO extends BaseDTO {
 
 	private String password;
 
-	public UserDTO(long id) {
-		this.id = id;
-	}
-
 }

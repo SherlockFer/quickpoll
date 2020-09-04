@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.apress.calcTotal.BookingTotal;
+import com.apress.defaulter.BookingDefaulter;
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
+import com.apress.helper.BookingTotal;
 import com.apress.repository.BookingRepository;
 import com.apress.sender.PlateMessageSender;
-import com.apress.service.defaulter.BookingDefaulter;
 import com.apress.service.mappers.BookingMapper;
 import com.apress.validation.BookingValidator;
 
@@ -37,7 +37,7 @@ public class BookingService {
 		Collection<Booking> bookings = bookingRepository.findAll();
 		Collection<BookingDTO> bookingDTOs = bookingMapper.toBookingDTOs(bookings);
 		for (BookingDTO bookingDTO : bookingDTOs) {
-			bookingTotal.calcTotal(bookingDTO);
+			bookingDTO.setTotal(bookingTotal.calcTotal(bookingDTO));
 		}
 		return bookingDTOs;
 	}
@@ -46,7 +46,7 @@ public class BookingService {
 		Optional<Booking> booking = bookingRepository.findById(id);
 		if (booking.isPresent()) {
 			BookingDTO bookingDTO = bookingMapper.toBookingDTO(booking.get());
-			bookingTotal.calcTotal(bookingDTO);
+			bookingDTO.setTotal(bookingTotal.calcTotal(bookingDTO));
 			return Optional.of(bookingDTO);
 		}
 		return Optional.empty();

@@ -15,10 +15,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.apress.defaulter.PartDefaulter;
 import com.apress.domain.Part;
 import com.apress.dto.PartDTO;
 import com.apress.repository.PartRepository;
-import com.apress.service.defaulter.PartDefaulter;
 import com.apress.service.mappers.PartMapper;
 import com.apress.validation.PartValidator;
 

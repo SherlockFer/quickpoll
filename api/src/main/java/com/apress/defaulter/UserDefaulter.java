@@ -1,4 +1,4 @@
-package com.apress.service.defaulter;
+package com.apress.defaulter;
 
 import org.springframework.stereotype.Component;
 

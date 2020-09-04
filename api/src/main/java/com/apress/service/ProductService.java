@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.apress.defaulter.ProductDefaulter;
 import com.apress.domain.Product;
 import com.apress.dto.ProductDTO;
 import com.apress.repository.ProductRepository;
-import com.apress.service.defaulter.ProductDefaulter;
 import com.apress.service.mappers.ProductMapper;
 import com.apress.validation.ProductValidator;
 
