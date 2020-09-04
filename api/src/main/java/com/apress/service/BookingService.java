@@ -35,7 +35,11 @@ public class BookingService {
 
 	public Collection<BookingDTO> findAll() {
 		Collection<Booking> bookings = bookingRepository.findAll();
-		return bookingMapper.toBookingDTOs(bookings);
+		Collection<BookingDTO> bookingDTOs = bookingMapper.toBookingDTOs(bookings);
+		for (BookingDTO bookingDTO : bookingDTOs) {
+			bookingTotal.calcTotal(bookingDTO);
+		}
+		return bookingDTOs;
 	}
 
 	public Optional<BookingDTO> findById(Long id) {
@@ -57,7 +61,7 @@ public class BookingService {
 		if (bookingDTO.hasErrors()) {
 			return bookingDTO;
 		}
-		bookingTotal.calcTotal(bookingDTO);
+//		bookingTotal.calcTotal(bookingDTO);
 		Booking booking = bookingRepository.save(bookingMapper.toBooking(bookingDTO));
 		plateMessageSender.sendVehiclePlate(bookingMapper.toAuditDTO(booking));
 		return bookingMapper.toBookingDTO(booking);

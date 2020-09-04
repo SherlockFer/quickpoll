@@ -30,6 +30,7 @@ public class BookingTotal {
 		}
 
 		bookingDTO.setTotal(sum);
+		double a = 1;
 
 	}
 
