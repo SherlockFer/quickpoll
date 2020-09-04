@@ -45,7 +45,9 @@ public class BookingService {
 	public Optional<BookingDTO> findById(Long id) {
 		Optional<Booking> booking = bookingRepository.findById(id);
 		if (booking.isPresent()) {
-			return Optional.of(bookingMapper.toBookingDTO(booking.get()));
+			BookingDTO bookingDTO = bookingMapper.toBookingDTO(booking.get());
+			bookingTotal.calcTotal(bookingDTO);
+			return Optional.of(bookingDTO);
 		}
 		return Optional.empty();
 	}
@@ -61,7 +63,6 @@ public class BookingService {
 		if (bookingDTO.hasErrors()) {
 			return bookingDTO;
 		}
-//		bookingTotal.calcTotal(bookingDTO);
 		Booking booking = bookingRepository.save(bookingMapper.toBooking(bookingDTO));
 		plateMessageSender.sendVehiclePlate(bookingMapper.toAuditDTO(booking));
 		return bookingMapper.toBookingDTO(booking);

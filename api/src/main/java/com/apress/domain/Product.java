@@ -9,14 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,12 +29,10 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "PRODUCTS")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
-@JsonIdentityReference(alwaysAsId = true)
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="product_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_seq")
 	@Column(name = "ID")
 	private Long id;
 

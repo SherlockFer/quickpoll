@@ -94,9 +94,6 @@ public class Booking {
 	@JoinColumn(name = "CUSTOMER_ID")
 	private User customer;
 
-	@Column(name = "TOTAL")
-	private Double total;
-
 	@Column(name = "CREATED_AT", insertable = true, updatable = false)
 	private LocalDateTime created;
 

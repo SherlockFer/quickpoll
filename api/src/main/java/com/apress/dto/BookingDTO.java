@@ -3,12 +3,17 @@ package com.apress.dto;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Singular;
 
 @Builder(toBuilder = true)
 @Setter
@@ -39,18 +44,25 @@ public class BookingDTO extends BaseDTO {
 	@JsonProperty("status")
 	private String status;
 
+	@OneToOne
 	@JsonProperty("service_id")
 	private ProductDTO baseProduct;
 
+	@Singular
+	@ManyToMany
 	@JsonProperty("service_ids")
 	private Set<ProductDTO> extraProducts;
 
+	@Singular
+	@ManyToMany
 	@JsonProperty("part_ids")
 	private Set<PartDTO> parts;
 
+	@ManyToOne
 	@JsonProperty("mechanic_id")
 	private UserDTO mechanic;
 
+	@ManyToOne
 	@JsonProperty("customer_id")
 	private UserDTO customer;
 
