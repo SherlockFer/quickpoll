@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.apress.calcTotal.BookingTotal;
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
 import com.apress.repository.BookingRepository;
@@ -37,6 +38,8 @@ public class BookingServiceTest {
 	private BookingDefaulter bookingDefaulter;
 	@Mock
 	private BookingValidator bookingValidator;
+	@Mock
+	private BookingTotal bookingTotal;
 	@Mock
 	private PlateMessageSender plateMessageSender;
 
