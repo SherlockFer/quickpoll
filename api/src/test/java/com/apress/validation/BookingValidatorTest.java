@@ -5,6 +5,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,8 +30,8 @@ public class BookingValidatorTest {
 
 	@Test
 	void shouldHasErrorWhenCommentIsNotPresent() {
-		BookingDTO bookingDTO = Mockito
-				.spy(BookingDTO.builder().comments(" ").vehicleNumberPlate("AAA-111").status("booked").build());
+		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments(" ").vehicleNumberPlate("AAA-111")
+				.status("booked").date(LocalDate.parse("2020-01-01")).build());
 
 		validator.validate(bookingDTO);
 
@@ -39,8 +41,8 @@ public class BookingValidatorTest {
 
 	@Test
 	void shouldHasErrorWhenVehiculeNumberPlateIsNotPresent() {
-		BookingDTO bookingDTO = Mockito
-				.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate(" ").status("booked").build());
+		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate(" ")
+				.status("booked").date(LocalDate.parse("2020-01-01")).build());
 
 		validator.validate(bookingDTO);
 
@@ -49,8 +51,9 @@ public class BookingValidatorTest {
 
 	@Test
 	void shouldHasErrorWhenVatNumberIsNotValid() {
-		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate("AAA-111")
-				.status("booked").countryCode("ES").vatNumber("1234567").build());
+		BookingDTO bookingDTO = Mockito
+				.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate("AAA-111")
+				.status("booked").date(LocalDate.parse("2020-01-01")).countryCode("ES").vatNumber("1234567").build());
 		CheckVatResponse checkVatResponse = new CheckVatResponse();
 		checkVatResponse.setValid(false);
 		when(client.checkVat(any())).thenReturn(checkVatResponse);
@@ -63,7 +66,7 @@ public class BookingValidatorTest {
 	@Test
 	void shouldHasErrorWhenVatNumberIsValid() {
 		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate("AAA-111")
-				.status("booked").countryCode("ES").vatNumber("1234567").build());
+				.status("booked").date(LocalDate.parse("2020-01-01")).countryCode("ES").vatNumber("1234567").build());
 		CheckVatResponse checkVatResponse = new CheckVatResponse();
 		checkVatResponse.setValid(true);
 		when(client.checkVat(any())).thenReturn(checkVatResponse);
