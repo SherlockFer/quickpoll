@@ -12,8 +12,8 @@ public class UserDefaulter {
 	}
 
 	public void populateRole(UserDTO userDTO) {
-		if (userDTO.getRole().isEmpty()) {
-		userDTO.setRole("customer");
+		if (userDTO.getRole() == null) {
+			userDTO.setRole("customer");
 		}
 	}
 

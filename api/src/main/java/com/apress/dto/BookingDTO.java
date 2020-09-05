@@ -45,25 +45,25 @@ public class BookingDTO extends BaseDTO {
 	private String status;
 
 	@OneToOne
-	@JsonProperty("service_id")
+	@JsonProperty("base_product")
 	private ProductDTO baseProduct;
 
 	@Singular
 	@ManyToMany
-	@JsonProperty("service_ids")
+	@JsonProperty("extra_products")
 	private Set<ProductDTO> extraProducts;
 
 	@Singular
 	@ManyToMany
-	@JsonProperty("part_ids")
+	@JsonProperty("parts")
 	private Set<PartDTO> parts;
 
 	@ManyToOne
-	@JsonProperty("mechanic_id")
+	@JsonProperty("mechanic")
 	private UserDTO mechanic;
 
 	@ManyToOne
-	@JsonProperty("customer_id")
+	@JsonProperty("customer")
 	private UserDTO customer;
 
 	private LocalDate date;
