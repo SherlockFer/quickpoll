@@ -24,6 +24,7 @@ public class BookingValidator {
 		validateVehiculeNumberPlate(bookingDTO);
 		validateStatus(bookingDTO);
 		validateVatNumberAndCountryCode(bookingDTO);
+		validateDate(bookingDTO);
 	}
 
 	private void validateComments(BookingDTO bookingDTO) {
@@ -41,6 +42,12 @@ public class BookingValidator {
 	private void validateStatus(BookingDTO bookingDTO) {
 		if (StringUtils.isBlank(bookingDTO.getStatus())) {
 			bookingDTO.addError("Status can't be empty");
+		}
+	}
+
+	private void validateDate(BookingDTO bookingDTO) {
+		if (bookingDTO.getDate() == null) {
+			bookingDTO.addError("Date can't be empty");
 		}
 	}
 
