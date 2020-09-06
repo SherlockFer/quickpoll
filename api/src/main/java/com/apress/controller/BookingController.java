@@ -73,7 +73,7 @@ public class BookingController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("%s not found", id));
 		}
 		bookingDTO.setId(id);
-		bookingService.save(bookingDTO);
+		bookingService.update(bookingDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
