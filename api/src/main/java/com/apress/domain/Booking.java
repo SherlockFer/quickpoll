@@ -72,12 +72,12 @@ public class Booking {
 	@Column(name = "STATUS")
 	private String status;
 
-	@Singular
+	@Singular(ignoreNullCollections = true)
 	@ManyToMany
 	@JoinTable(name = "BOOKING_PRODUCTS", joinColumns = @JoinColumn(name = "BOOKING_ID"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
 	private Set<Product> extraProducts;
 
-	@Singular
+	@Singular(ignoreNullCollections = true)
 	@ManyToMany
 	@JoinColumn(name = "PART_ID")
 	private Set<Part> parts;

@@ -48,12 +48,12 @@ public class BookingDTO extends BaseDTO {
 	@JsonProperty("base_product")
 	private ProductDTO baseProduct;
 
-	@Singular
+	@Singular(ignoreNullCollections = true)
 	@ManyToMany
 	@JsonProperty("extra_products")
 	private Set<ProductDTO> extraProducts;
 
-	@Singular
+	@Singular(ignoreNullCollections = true)
 	@ManyToMany
 	@JsonProperty("parts")
 	private Set<PartDTO> parts;
