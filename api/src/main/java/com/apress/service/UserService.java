@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.apress.defaulter.UserDefaulter;
 import com.apress.domain.User;
 import com.apress.dto.UserDTO;
+import com.apress.mappers.UserMapper;
 import com.apress.repository.UserRepository;
-import com.apress.service.mappers.UserMapper;
 import com.apress.validation.UserValidator;
 
 @Service

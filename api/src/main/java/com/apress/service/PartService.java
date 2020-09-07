@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.apress.defaulter.PartDefaulter;
 import com.apress.domain.Part;
 import com.apress.dto.PartDTO;
+import com.apress.mappers.PartMapper;
 import com.apress.repository.PartRepository;
-import com.apress.service.mappers.PartMapper;
 import com.apress.validation.PartValidator;
 
 @Service

@@ -11,9 +11,9 @@ import com.apress.defaulter.BookingDefaulter;
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
 import com.apress.helper.BookingTotal;
+import com.apress.mappers.BookingMapper;
 import com.apress.repository.BookingRepository;
 import com.apress.sender.PlateMessageSender;
-import com.apress.service.mappers.BookingMapper;
 import com.apress.validation.BookingValidator;
 
 @Service
@@ -58,10 +58,6 @@ public class BookingService {
 
 	@Transactional
 	public BookingDTO save(BookingDTO bookingDTO) {
-		if (bookingDTO.getId() != null) {
-			Optional<Booking> booking = bookingRepository.findById(bookingDTO.getId());
-			bookingDTO.setReference(booking.get().getReference());
-		}
 		bookingDefaulter.populateDefaults(bookingDTO);
 		bookingValidator.validate(bookingDTO);
 		if (bookingDTO.hasErrors()) {
