@@ -48,7 +48,7 @@ public class Booking {
 	@Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
 	private String reference;
 
-	@Column(name = "VEHICLE_NUMBER_PLATE")
+	@Column(name = "VEHICLE_NUMBER_PLATE", nullable = false)
 	private String vehicleNumberPlate;
 
 	@Column(name = "VEHICLE_MODEL")
@@ -60,10 +60,10 @@ public class Booking {
 	@Column(name = "VEHICLE_ENGINE")
 	private String vehicleEngine;
 
-	@Column(name = "VEHICLE_TYPE")
+	@Column(name = "VEHICLE_TYPE", nullable = false)
 	private String vehicleType;
 
-	@Column(name = "DATE")
+	@Column(name = "DATE", nullable = false)
 	private LocalDate date;
 
 	@Column(name = "COMMENTS")
@@ -83,7 +83,7 @@ public class Booking {
 	private Set<Part> parts;
 
 	@OneToOne
-	@JoinColumn(name = "PRODUCT_ID")
+	@JoinColumn(name = "PRODUCT_ID", nullable = false)
 	private Product baseProduct;
 
 	@ManyToOne

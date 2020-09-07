@@ -41,16 +41,16 @@ public class User {
 	@Column(name = "EMAIL", nullable = false, updatable = false, unique = true)
 	private String email;
 
-	@Column(name = "FULL_NAME")
+	@Column(name = "FULL_NAME", nullable = false)
 	private String fullName;
 
-	@Column(name = "MOBILE")
+	@Column(name = "MOBILE", nullable = false)
 	private String mobile;
 
 	@Column(name = "ROLE")
 	private String role;
 
-	@Column(name = "PASSWORD")
+	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
 	@Column(name = "CREATED_AT", insertable = true, updatable = false)
