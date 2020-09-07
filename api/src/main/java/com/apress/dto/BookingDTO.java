@@ -3,10 +3,6 @@ package com.apress.dto;
 import java.time.LocalDate;
 import java.util.Set;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,7 +19,7 @@ public class BookingDTO extends BaseDTO {
 
 	private Long id;
 
-	@JsonProperty("reference")
+	@JsonIgnore
 	private String reference;
 
 	@JsonProperty("vehicle_number_plate")
@@ -44,36 +40,36 @@ public class BookingDTO extends BaseDTO {
 	@JsonProperty("status")
 	private String status;
 
-	@OneToOne
 	@JsonProperty("base_product")
 	private ProductDTO baseProduct;
 
 	@Singular(ignoreNullCollections = true)
-	@ManyToMany
 	@JsonProperty("extra_products")
 	private Set<ProductDTO> extraProducts;
 
 	@Singular(ignoreNullCollections = true)
-	@ManyToMany
 	@JsonProperty("parts")
 	private Set<PartDTO> parts;
 
-	@ManyToOne
 	@JsonProperty("mechanic")
 	private UserDTO mechanic;
 
-	@ManyToOne
 	@JsonProperty("customer")
 	private UserDTO customer;
 
+	@JsonProperty("date")
 	private LocalDate date;
 
+	@JsonProperty("comments")
 	private String comments;
 
+	@JsonIgnore
 	private String countryCode;
 
+	@JsonProperty("total")
 	private Double total;
 
+	@JsonProperty("vat_number")
 	private String vatNumber;
 
 	@JsonIgnore
