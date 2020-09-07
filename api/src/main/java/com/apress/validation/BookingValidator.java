@@ -25,6 +25,7 @@ public class BookingValidator {
 		validateStatus(bookingDTO);
 		validateDate(bookingDTO);
 		validateBaseProduct(bookingDTO);
+		validateVehicleType(bookingDTO);
 		validateVatNumberAndCountryCode(bookingDTO);
 	}
 
@@ -55,6 +56,12 @@ public class BookingValidator {
 	private void validateBaseProduct(BookingDTO bookingDTO) {
 		if (bookingDTO.getBaseProduct() == null) {
 			bookingDTO.addError("BaseProduct can't be empty");
+		}
+	}
+
+	private void validateVehicleType(BookingDTO bookingDTO) {
+		if (StringUtils.isBlank(bookingDTO.getVehicleType())) {
+			bookingDTO.addError("Vehicle type can't be empty");
 		}
 	}
 
