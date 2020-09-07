@@ -71,7 +71,13 @@ public class UserController {
 		}
 		userDTO.setId(id);
 		userService.save(userDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
+		if (userDTO.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, userDTO.getErrors());
+		} else {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(buildLocationUri(userDTO.getId()));
+			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		}
 	}
 
 	@DeleteMapping("/{id}")

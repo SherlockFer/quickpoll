@@ -71,7 +71,13 @@ public class ProductController {
 		}
 		productDTO.setId(id);
 		productService.save(productDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
+		if (productDTO.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, productDTO.getErrors());
+		} else {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(buildLocationUri(productDTO.getId()));
+			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		}
 	}
 
 	@DeleteMapping("/{id}")

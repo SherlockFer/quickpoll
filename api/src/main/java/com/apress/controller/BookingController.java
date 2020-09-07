@@ -74,7 +74,13 @@ public class BookingController {
 		}
 		bookingDTO.setId(id);
 		bookingService.save(bookingDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
+		if (bookingDTO.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bookingDTO.getErrors());
+		} else {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(buildLocationUri(bookingDTO.getId()));
+			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		}
 	}
 
 	@DeleteMapping("/{id}")
