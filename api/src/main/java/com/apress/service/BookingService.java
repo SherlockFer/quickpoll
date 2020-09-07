@@ -69,12 +69,6 @@ public class BookingService {
 	}
 
 	@Transactional
-	public BookingDTO update(BookingDTO bookingDTO) {
-		Optional<Booking> bookingOp = bookingRepository.findById(bookingDTO.getId());
-		return bookingMapper.toBookingDTO(bookingRepository.save(bookingOp.get()));
-	}
-
-	@Transactional
 	public void deleteById(Long id) {
 		bookingRepository.deleteById(id);
 	}

@@ -79,15 +79,15 @@ public class BookingControllerTest {
 		assertThat(response.getHeaders().getLocation().getPath()).isEqualTo("/1");
 	}
 
-//	@Test
-//	public void shouldUpdatedBookingWithHttpStatusOk() {
-//		when(bookingService.existsById(1L)).thenReturn(true);
-//
-//		ResponseEntity<Void> response = controller.update(BookingDTO.builder().comments("comment").build(), 1L);
-//
-//		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-//		verify(bookingService).save(any());
-//	}
+	@Test
+	public void shouldUpdatedBookingWithHttpStatusOk() {
+		when(bookingService.existsById(1L)).thenReturn(true);
+
+		ResponseEntity<Void> response = controller.update(BookingDTO.builder().comments("comment").build(), 1L);
+
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		verify(bookingService).save(any());
+	}
 
 	@Test
 	public void shouldDeleteBookingByIdWithHttpStatusAccepted() {
@@ -98,5 +98,4 @@ public class BookingControllerTest {
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
 		verify(bookingService).deleteById(1L);
 	}
-
 }
