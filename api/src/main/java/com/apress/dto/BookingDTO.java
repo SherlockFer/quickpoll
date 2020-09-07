@@ -19,7 +19,6 @@ public class BookingDTO extends BaseDTO {
 
 	private Long id;
 
-	@JsonIgnore
 	private String reference;
 
 	@JsonProperty("vehicle_number_plate")
