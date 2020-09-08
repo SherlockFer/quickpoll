@@ -1,6 +1,6 @@
-Feature: Be able to product
+Feature: Be able to manage Products
      
-    Scenario: List products
+    Scenario: List Products
         Given url GARAGE_API_URL
         And path "/services"
         When method get
@@ -17,7 +17,7 @@ Feature: Be able to product
     		}
         """
         
-    Scenario: Get partById
+    Scenario: Get Products
         Given url GARAGE_API_URL
         And path "/services"
         When method get

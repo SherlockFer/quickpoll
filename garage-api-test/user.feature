@@ -1,6 +1,6 @@
-Feature: Be able to user
+Feature: Be able to manage Users
 
-    Scenario: Create users
+    Scenario: Create User
         Given url GARAGE_API_URL
         And path "/users"
         And request 
@@ -39,7 +39,7 @@ Feature: Be able to user
         When method delete
         Then status 202
         
-    Scenario: Get userById
+    Scenario: Get User
         Given url GARAGE_API_URL
         And path "/users/1"
         When method get
@@ -56,7 +56,7 @@ Feature: Be able to user
     		}
         """
             
-    Scenario: List users
+    Scenario: List Users
         Given url GARAGE_API_URL
         And path "/users"
         When method get
@@ -74,7 +74,7 @@ Feature: Be able to user
     		}
         """
         
-    Scenario: Update users
+    Scenario: Update User
         Given url GARAGE_API_URL
         And path "/users"
         And request 
@@ -113,7 +113,7 @@ Feature: Be able to user
         When method delete
         Then status 202
 
-    Scenario: Delete users
+    Scenario: Delete User
         Given url GARAGE_API_URL
         And path "/users"
         And request 

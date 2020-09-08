@@ -1,6 +1,6 @@
 Feature: Be able to booking
 
-    Scenario: Create bookings
+    Scenario: Create Booking
         Given url GARAGE_API_URL
         And path "/bookings"
         And request 
@@ -56,7 +56,7 @@ Feature: Be able to booking
     		}
         """
        
-		Scenario: Get bookingById
+		Scenario: Get Booking
         Given url GARAGE_API_URL
         And path "/bookings/1"
         When method get
@@ -90,7 +90,7 @@ Feature: Be able to booking
     		}
         """
         
-    Scenario: List bookings
+    Scenario: List Bookings
         Given url GARAGE_API_URL
         And path "/bookings"
         When method get
@@ -125,7 +125,7 @@ Feature: Be able to booking
     		}
         """
         
-    Scenario: Update bookings
+    Scenario: Update Booking
         Given url GARAGE_API_URL
         And path "/bookings"
         And request 
@@ -191,7 +191,7 @@ Feature: Be able to booking
         And match response.reference != null
         And match response.total != null
         
-    Scenario: Delete bookings
+    Scenario: Delete Booking
     		Given url GARAGE_API_URL
         And path "/bookings"
         And request 

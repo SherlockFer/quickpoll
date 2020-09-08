@@ -1,6 +1,6 @@
-Feature: Be able to part
+Feature: Be able to manage CarParts
      
-    Scenario: List parts
+    Scenario: List CarParts
         Given url GARAGE_API_URL
         And path "/vehicles/parts"
         When method get
@@ -16,7 +16,7 @@ Feature: Be able to part
     		}
         """
         
-    Scenario: Get partById
+    Scenario: Get CarPart
         Given url GARAGE_API_URL
         And path "/vehicles/parts/1"
         When method get
