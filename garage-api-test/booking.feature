@@ -56,7 +56,40 @@ Feature: Be able to booking
     		}
         """
        
-
+		Scenario: Get bookingById
+        Given url GARAGE_API_URL
+        And path "/bookings/1"
+        When method get
+        Then status 200
+        And print response
+        And match response contains
+        """
+        {
+        	 "date": "#string",
+    			 "comments": "#string",
+    			 "base_product": {
+    			 		"price": "#number",
+    			 		"name": "#string",
+    			 		"id": "#number",
+    			 		"category": "#string"
+    			 	},
+    			 "vat_number": "#present",
+    			 "vehicle_model": "#present",
+    			 "mechanic": "#present",
+    			 "vehicle_type": "#string",
+    			 "reference": "#string",
+    			 "vehicle_number_plate": "#string",
+    			 "vehicle_brand": "#present",
+    			 "total": "#number",
+    			 "extra_products": "#[]",
+    			 "parts": "#[]",
+    			 "id": "#number",
+    			 "vehicle_engine": "#present",
+    			 "status": "#string",
+    			 "customer": "#present"
+    		}
+        """
+        
     Scenario: List bookings
         Given url GARAGE_API_URL
         And path "/bookings"
@@ -91,6 +124,7 @@ Feature: Be able to booking
     			 "customer": "#present"
     		}
         """
+        
     Scenario: Update bookings
         Given url GARAGE_API_URL
         And path "/bookings"
@@ -117,16 +151,29 @@ Feature: Be able to booking
         Given path '/bookings/' + booking_id
         And request 
         """
-        {
-           "date": "2020-01-02",
-    			 "comments": "new comment",
-    			 "vehicle_number_plate" : "AAA-111",
-    			 "vehicle_type": "car",
-    			 "base_product": {
-        	 "id": 1
-    			 }
-        }
+				{
+				    "reference": "1d669e10-9b78-441e-871e-50586d7e2e2b",
+				    "vehicle_number_plate": "AAA-111",
+				    "vehicle_model": null,
+				    "vehicle_brand": null,
+				    "vehicle_engine": null,
+				    "vehicle_type": "car",
+				    "status": "booked",
+				    "base_product": {
+				        "id": 1,
+				        "name": "Annual Service",
+				        "category": "base",
+				    },
+				    "extra_products": [],
+				    "parts": [],
+				    "mechanic": null,
+				    "customer": null,
+				    "date": "2020-01-02",
+				    "comments": "new comment",
+				    "vat_number": null
+				}
         """
+
         When method put
         Then status 201
         
@@ -144,7 +191,6 @@ Feature: Be able to booking
         And match response.reference != null
         And match response.total != null
         
-
     Scenario: Delete bookings
     		Given url GARAGE_API_URL
         And path "/bookings"
