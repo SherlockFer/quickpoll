@@ -10,6 +10,7 @@ import com.apress.client.GeoLocationClient;
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
 import com.apress.repository.BookingRepository;
+import com.apress.utils.constantesWeb;
 
 import garage.services.geolocation.types.GetLocationRequest;
 import garage.services.geolocation.types.GetLocationResponse;
@@ -42,7 +43,7 @@ public class BookingDefaulter {
 
 	public void populateStatus(BookingDTO bookingDTO) {
 		if (bookingDTO.getStatus() == null) {
-			bookingDTO.setStatus("booked");
+			bookingDTO.setStatus(constantesWeb.STATUS_BOOKING_BOOKED);
 		}
 	}
 
