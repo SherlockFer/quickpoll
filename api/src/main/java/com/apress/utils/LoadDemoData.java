@@ -41,7 +41,7 @@ public class LoadDemoData implements ApplicationRunner {
 		log.info("Loading database");
 
 		User user1 = userRepository
-				.save(User.builder().password("123456").fullName("Administrator").mobile("123456789").email("admin@garage.com").build());
+				.save(User.builder().role("admin").password("123456").fullName("Administrator").mobile("123456789").email("admin@garage.com").build());
 		User user2 = userRepository
 				.save(User.builder().password("123456").fullName("Mechanic-1").mobile("123456789").email("mechanic-1@garage.com")
 				.role("mechanic").build());
