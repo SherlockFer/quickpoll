@@ -182,14 +182,33 @@ Feature: Be able to booking
         Then status 200
         And print response
         And match response.id == parseInt(booking_id)
-        And match response.comments == "new comment"
-        And match response.vehicle_number_plate == "AAA-111"
-        And match response.vehicle_type == "car"
-        And match response.base_product.id == 1
-
-        And match response.status != null
-        And match response.reference != null
-        And match response.total != null
+        And match response ==
+        """
+        {
+        	 "date": "2020-01-02",
+    			 "comments": "new comment",
+    			 "base_product": {
+    			 		"price": "#number",
+    			 		"name": "Annual Service",
+    			 		"id": 1,
+    			 		"category": "base"
+    			 	},
+    			 "vat_number": "#null",
+    			 "vehicle_model": "#null",
+    			 "mechanic": "#null",
+    			 "vehicle_type": "car",
+    			 "reference": "#string",
+    			 "vehicle_number_plate": "AAA-111",
+    			 "vehicle_brand": "#null",
+    			 "total": "#number",
+    			 "extra_products": "#[0]",
+    			 "parts": "#[0]",
+    			 "id": "#number",
+    			 "vehicle_engine": "#null",
+    			 "status": "booked",
+    			 "customer": "#null"
+    		}
+        """
         
     Scenario: Delete Booking
     		Given url GARAGE_API_URL
