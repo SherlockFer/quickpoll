@@ -17,7 +17,7 @@ Feature: Be able to manage Products
     		}
         """
 
-    Scenario: List Products category=base
+    Scenario: List Products when category=base
         Given url GARAGE_API_URL
         And path "/services"
         And param filter[category] = "base"
@@ -36,7 +36,7 @@ Feature: Be able to manage Products
     		}
         """
         
-     Scenario: List Products category=extra
+     Scenario: List Products when category=extra
         Given url GARAGE_API_URL
         And path "/services"
         And param filter[category] = "extra"

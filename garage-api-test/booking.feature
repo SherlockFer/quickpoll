@@ -124,7 +124,44 @@ Feature: Be able to booking
     			 "customer": "#present"
     		}
         """
-        
+    
+        Scenario: List Bookings when status=booked
+        Given url GARAGE_API_URL
+        And path "/bookings"
+        And param filter[status] = "booked"
+        And header Content-Type = 'application/json; charset=utf-8'
+        When method get
+        Then status 200
+        And print response
+        And match response == '#[]'
+        And match response contains
+         """
+        {
+        	 "date": "#string",
+    			 "comments": "#string",
+    			 "base_service": {
+    			 		"price": "#number",
+    			 		"name": "#string",
+    			 		"id": "#number",
+    			 		"category": "#string"
+    			 	},
+    			 "vat_number": "#present",
+    			 "vehicle_model": "#present",
+    			 "mechanic": "#present",
+    			 "vehicle_type": "#string",
+    			 "reference": "#string",
+    			 "vehicle_number_plate": "#string",
+    			 "vehicle_brand": "#present",
+    			 "total": "#number",
+    			 "extra_services": "#[]",
+    			 "parts": "#[]",
+    			 "id": "#number",
+    			 "vehicle_engine": "#present",
+    			 "status": "booked",
+    			 "customer": "#present"
+    		}
+        """
+    
     Scenario: Update Booking
         Given url GARAGE_API_URL
         And path "/bookings"
