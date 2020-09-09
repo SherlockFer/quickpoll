@@ -1,6 +1,6 @@
 package com.apress.utils;
 
-public class constantesWeb {
+public class WebConstants {
 	
 	public static final String STATUS_BOOKING_BOOKED="booked";
 	
