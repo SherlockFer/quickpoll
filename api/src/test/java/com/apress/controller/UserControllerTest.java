@@ -36,9 +36,9 @@ public class UserControllerTest {
 	@Test
 	public void shouldReturnAllUserDTOsWithHttpStatusOk() {
 		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
-		when(userService.findAll()).thenReturn(Arrays.asList(userDTO));
+		when(userService.findAll(any())).thenReturn(Arrays.asList(userDTO));
 
-		ResponseEntity<Collection<UserDTO>> response = controller.findAll(null);
+		ResponseEntity<Collection<UserDTO>> response = controller.findAll(any());
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.hasBody()).isTrue();
