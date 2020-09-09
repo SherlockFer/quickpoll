@@ -38,7 +38,7 @@ public class BookingControllerTest {
 		BookingDTO bookingDTO = BookingDTO.builder().id(1L).comments("comment").build();
 		when(bookingService.findAll()).thenReturn(Arrays.asList(bookingDTO));
 
-		ResponseEntity<Collection<BookingDTO>> response = controller.findAll();
+		ResponseEntity<Collection<BookingDTO>> response = controller.findAll(null);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().size()).isEqualTo(1);
@@ -85,7 +85,7 @@ public class BookingControllerTest {
 
 		ResponseEntity<Void> response = controller.update(BookingDTO.builder().comments("comment").build(), 1L);
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		verify(bookingService).save(any());
 	}
 

@@ -36,9 +36,9 @@ public class ProductControllerTest {
 	@Test
 	public void shouldReturnAllProductDTOsWithHttpStatusOk() {
 		ProductDTO productDTO = ProductDTO.builder().id(1L).name("Annual Service").build();
-		when(productService.findAll()).thenReturn(Arrays.asList(productDTO));
+		when(productService.findAll(any())).thenReturn(Arrays.asList(productDTO));
 
-		ResponseEntity<Collection<ProductDTO>> response = controller.findAll(null);
+		ResponseEntity<Collection<ProductDTO>> response = controller.findAll(any());
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().size()).isEqualTo(1);
@@ -86,7 +86,7 @@ public class ProductControllerTest {
 
 		ResponseEntity<Void> response = controller.update(ProductDTO.builder().name("Annual Service").build(), 1L);
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		verify(productService).save(any());
 	}
 

@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.apress.client.VatServiceClient;
 import com.apress.dto.BookingDTO;
+import com.apress.dto.ProductDTO;
 
 import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatResponse;
 
@@ -51,8 +52,7 @@ public class BookingValidatorTest {
 
 	@Test
 	void shouldHasErrorWhenVatNumberIsNotValid() {
-		BookingDTO bookingDTO = Mockito
-				.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate("AAA-111")
+		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate("AAA-111")
 				.status("booked").date(LocalDate.parse("2020-01-01")).countryCode("ES").vatNumber("1234567").build());
 		CheckVatResponse checkVatResponse = new CheckVatResponse();
 		checkVatResponse.setValid(false);
@@ -66,7 +66,8 @@ public class BookingValidatorTest {
 	@Test
 	void shouldHasErrorWhenVatNumberIsValid() {
 		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate("AAA-111")
-				.status("booked").date(LocalDate.parse("2020-01-01")).countryCode("ES").vatNumber("1234567").build());
+				.status("booked").date(LocalDate.parse("2020-01-01")).baseProduct(new ProductDTO()).countryCode("ES")
+				.vatNumber("1234567").vehicleType("car").build());
 		CheckVatResponse checkVatResponse = new CheckVatResponse();
 		checkVatResponse.setValid(true);
 		when(client.checkVat(any())).thenReturn(checkVatResponse);

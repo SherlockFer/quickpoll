@@ -87,7 +87,7 @@ public class UserControllerTest {
 
 		ResponseEntity<Void> response = controller.update(UserDTO.builder().mobile("12345678").build(), 1L);
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		verify(userService).save(any());
 	}
 
