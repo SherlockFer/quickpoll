@@ -42,7 +42,7 @@ public class ProductServiceTest {
 		ProductDTO productDTO = ProductDTO.builder().id(1L).name("Annual Service").build();
 		when(productMapper.toProductDTOs(any())).thenReturn(Arrays.asList(productDTO));
 
-		Collection<ProductDTO> productDTOs = service.findAll();
+		Collection<ProductDTO> productDTOs = service.findAll(null);
 
 		assertThat(productDTOs.size()).isEqualTo(1);
 	}

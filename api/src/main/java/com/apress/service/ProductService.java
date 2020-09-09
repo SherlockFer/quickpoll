@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,13 @@ public class ProductService {
 
 	public Collection<ProductDTO> findAll() {
 		Collection<Product> products = productRepository.findAll();
+		return productMapper.toProductDTOs(products);
+	}
+	
+	public Collection<ProductDTO> findAll(ProductDTO productDTO) {
+		Product product= productMapper.toProduct(productDTO);
+		Example<Product> example=Example.of(product);
+		Collection<Product> products = productRepository.findAll(example);
 		return productMapper.toProductDTOs(products);
 	}
 

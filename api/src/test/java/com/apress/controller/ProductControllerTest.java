@@ -38,7 +38,7 @@ public class ProductControllerTest {
 		ProductDTO productDTO = ProductDTO.builder().id(1L).name("Annual Service").build();
 		when(productService.findAll()).thenReturn(Arrays.asList(productDTO));
 
-		ResponseEntity<Collection<ProductDTO>> response = controller.findAll();
+		ResponseEntity<Collection<ProductDTO>> response = controller.findAll(null);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().size()).isEqualTo(1);
