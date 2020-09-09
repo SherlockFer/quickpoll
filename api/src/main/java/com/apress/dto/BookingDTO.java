@@ -39,11 +39,11 @@ public class BookingDTO extends BaseDTO {
 	@JsonProperty("status")
 	private String status;
 
-	@JsonProperty("base_product")
+	@JsonProperty("base_service")
 	private ProductDTO baseProduct;
 
 	@Singular(ignoreNullCollections = true)
-	@JsonProperty("extra_products")
+	@JsonProperty("extra_services")
 	private Set<ProductDTO> extraProducts;
 
 	@Singular(ignoreNullCollections = true)
