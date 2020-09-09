@@ -9,5 +9,5 @@ down: ## Shut down all containers defined in the docker-compose and remove volum
 	docker-compose down -v
 	
 karate: ## Run karate tests
-	cd garage-api-test && rm -fr target && java -jar /opt/karate/karate-0.9.5.jar booking.feature
+	cd garage-api-test && rm -fr target && java -jar /opt/karate/karate-0.9.6.jar booking.feature
 	
