@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,13 @@ public class BookingService {
 			bookingDTO.setTotal(bookingTotal.calcTotal(bookingDTO));
 		}
 		return bookingDTOs;
+	}
+
+	public Collection<BookingDTO> findAll(BookingDTO bookingDTO) {
+		Booking booking = bookingMapper.toBooking(bookingDTO);
+		Example<Booking> example = Example.of(booking);
+		Collection<Booking> bookings = bookingRepository.findAll(example);
+		return bookingMapper.toBookingDTOs(bookings);
 	}
 
 	public Optional<BookingDTO> findById(Long id) {
