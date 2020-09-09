@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,8 +35,10 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping()
-	public ResponseEntity<Collection<UserDTO>> findAll() {
-		Collection<UserDTO> userDTOs = userService.findAll();
+	public ResponseEntity<Collection<UserDTO>> findAll(@RequestParam(value="filter[role]", required=false)String role) {
+		UserDTO userDTO=new UserDTO();
+		userDTO.setRole(role);
+		Collection<UserDTO> userDTOs = userService.findAll(userDTO);
 		return new ResponseEntity<>(userDTOs, HttpStatus.OK);
 	}
 
