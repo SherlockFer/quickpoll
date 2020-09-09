@@ -9,8 +9,8 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.apress</groupId>
-	<artifactId>geolocation</artifactId>
-	<name>geolocation</name>
+	<artifactId>garage-geo</artifactId>
+	<name>garage-geo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

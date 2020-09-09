@@ -20,7 +20,7 @@
 	<!-- sub modules -->
 	<modules>
         <module>api</module>
-        <module>geolocation</module>
+        <module>garage-geo</module>
         <module>audit</module>
     </modules>
 
