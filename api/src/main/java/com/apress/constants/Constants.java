@@ -10,5 +10,16 @@ public interface Constants {
 		admin,
 		customer;
 	}
-			
+	
+	public enum VehicleType{
+		car,
+		small_van,
+		small_bus,
+		motorbike
+	}
+	
+	public enum ServiceCategory{
+		base,
+		extra;
+	}
 }
