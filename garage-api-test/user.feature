@@ -74,6 +74,66 @@ Feature: Be able to manage Users
     		}
         """
         
+    Scenario: List Users when role=admin
+        Given url GARAGE_API_URL
+        And path "/users"
+        And param filter[role] = "admin"
+        And header Content-Type = 'application/json; charset=utf-8'
+        When method get
+        Then status 200
+        And print response
+        And match response == '#[]'
+        And match response contains
+        """
+        {
+        	 "id": "#number",
+        	 "full_name": "#string",
+        	 "mobile": "#string",
+        	 "email": "#string",
+    			 "role": "admin"
+    		}
+        """
+        
+    Scenario: List Users when role=customer
+        Given url GARAGE_API_URL
+        And path "/users"
+        And param filter[role] = "customer"
+        And header Content-Type = 'application/json; charset=utf-8'
+        When method get
+        Then status 200
+        And print response
+        And match response == '#[]'
+        And match response contains
+        """
+        {
+        	 "id": "#number",
+        	 "full_name": "#string",
+        	 "mobile": "#string",
+        	 "email": "#string",
+    			 "role": "customer"
+    		}
+        """
+        
+        Scenario: List Users when role=mechanic
+        Given url GARAGE_API_URL
+        And path "/users"
+        And param filter[role] = "mechanic"
+        And header Content-Type = 'application/json; charset=utf-8'
+        When method get
+        Then status 200
+        And print response
+        And match response == '#[]'
+        And match response contains
+        """
+        {
+        	 "id": "#number",
+        	 "full_name": "#string",
+        	 "mobile": "#string",
+        	 "email": "#string",
+    			 "role": "mechanic"
+    		}
+        """  
+      
     Scenario: Update User
         Given url GARAGE_API_URL
         And path "/users"
