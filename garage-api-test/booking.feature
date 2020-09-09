@@ -10,7 +10,7 @@ Feature: Be able to booking
     			 "comments": "comment1",
     			 "vehicle_number_plate" : "AAA-111",
     			 "vehicle_type": "car",
-    			 "base_product": {
+    			 "base_service": {
         	 "id": 1
     			 }
         }
@@ -33,7 +33,7 @@ Feature: Be able to booking
         {
         	 "date": "2020-01-02",
     			 "comments": "comment1",
-    			 "base_product": {
+    			 "base_service": {
     			 		"price": "#number",
     			 		"name": "Annual Service",
     			 		"id": 1,
@@ -47,7 +47,7 @@ Feature: Be able to booking
     			 "vehicle_number_plate": "AAA-111",
     			 "vehicle_brand": "#null",
     			 "total": "#number",
-    			 "extra_products": "#[0]",
+    			 "extra_services": "#[0]",
     			 "parts": "#[0]",
     			 "id": "#number",
     			 "vehicle_engine": "#null",
@@ -67,7 +67,7 @@ Feature: Be able to booking
         {
         	 "date": "#string",
     			 "comments": "#string",
-    			 "base_product": {
+    			 "base_service": {
     			 		"price": "#number",
     			 		"name": "#string",
     			 		"id": "#number",
@@ -81,7 +81,7 @@ Feature: Be able to booking
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
     			 "total": "#number",
-    			 "extra_products": "#[]",
+    			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
     			 "vehicle_engine": "#present",
@@ -102,7 +102,7 @@ Feature: Be able to booking
         {
         	 "date": "#string",
     			 "comments": "#string",
-    			 "base_product": {
+    			 "base_service": {
     			 		"price": "#number",
     			 		"name": "#string",
     			 		"id": "#number",
@@ -116,7 +116,7 @@ Feature: Be able to booking
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
     			 "total": "#number",
-    			 "extra_products": "#[]",
+    			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
     			 "vehicle_engine": "#present",
@@ -135,7 +135,7 @@ Feature: Be able to booking
     			 "comments": "comment1",
     			 "vehicle_number_plate" : "AAA-111",
     			 "vehicle_type": "car",
-    			 "base_product": {
+    			 "base_service": {
         	 "id": 1
     			 }
         }
@@ -159,12 +159,12 @@ Feature: Be able to booking
 				    "vehicle_engine": null,
 				    "vehicle_type": "car",
 				    "status": "booked",
-				    "base_product": {
+				    "base_service": {
 				        "id": 1,
 				        "name": "Annual Service",
 				        "category": "base",
 				    },
-				    "extra_products": [],
+				    "extra_services": [],
 				    "parts": [],
 				    "mechanic": null,
 				    "customer": null,
@@ -187,7 +187,7 @@ Feature: Be able to booking
         {
         	 "date": "2020-01-02",
     			 "comments": "new comment",
-    			 "base_product": {
+    			 "base_service": {
     			 		"price": "#number",
     			 		"name": "Annual Service",
     			 		"id": 1,
@@ -201,7 +201,7 @@ Feature: Be able to booking
     			 "vehicle_number_plate": "AAA-111",
     			 "vehicle_brand": "#null",
     			 "total": "#number",
-    			 "extra_products": "#[0]",
+    			 "extra_services": "#[0]",
     			 "parts": "#[0]",
     			 "id": "#number",
     			 "vehicle_engine": "#null",
@@ -220,7 +220,7 @@ Feature: Be able to booking
     			 "comments": "comment1",
     			 "vehicle_number_plate" : "AAA-111",
     			 "vehicle_type": "car",
-    			 "base_product": {
+    			 "base_service": {
         	 "id": 1
     			 }
         }
