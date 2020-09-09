@@ -3,63 +3,76 @@ package com.apress.dto;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.apress.domain.Part;
-import com.apress.domain.Product;
-import com.apress.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Singular;
 
 @Builder(toBuilder = true)
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class BookingDTO extends BaseDTO {
 
 	private Long id;
 
-	@JsonProperty("reference")
 	private String reference;
 
-	@JsonProperty("vehicule_number_plate")
-	private String vehiculeNumberPlate;
+	@JsonProperty("vehicle_number_plate")
+	private String vehicleNumberPlate;
 
-	@JsonProperty("vehicule_model")
-	private String vehiculeModel;
+	@JsonProperty("vehicle_model")
+	private String vehicleModel;
 
-	@JsonProperty("vehicule_brand")
-	private String vehiculeBrand;
+	@JsonProperty("vehicle_brand")
+	private String vehicleBrand;
 
-	@JsonProperty("vehicule_engine")
-	private String vehiculeEngine;
+	@JsonProperty("vehicle_engine")
+	private String vehicleEngine;
+
+	@JsonProperty("vehicle_type")
+	private String vehicleType;
 
 	@JsonProperty("status")
 	private String status;
 
-	@JsonProperty("service_id")
-	private Product serviceId;
+	@JsonProperty("base_service")
+	private ProductDTO baseProduct;
 
-	@JsonProperty("service_ids")
-	private Set<Product> products;
+	@Singular(ignoreNullCollections = true)
+	@JsonProperty("extra_services")
+	private Set<ProductDTO> extraProducts;
 
-	@JsonProperty("part_ids")
-	private Set<Part> parts;
+	@Singular(ignoreNullCollections = true)
+	@JsonProperty("parts")
+	private Set<PartDTO> parts;
 
-	@JsonProperty("mechanic_id")
-	private User mechanicId;
+	@JsonProperty("mechanic")
+	private UserDTO mechanic;
 
-	@JsonProperty("customer_id")
-	private User customerId;
+	@JsonProperty("customer")
+	private UserDTO customer;
 
+	@JsonProperty("date")
 	private LocalDate date;
 
+	@JsonProperty("comments")
 	private String comments;
 
+	@JsonIgnore
 	private String countryCode;
 
+	@JsonProperty("total")
+	private Double total;
+
+	@JsonProperty("vat_number")
 	private String vatNumber;
 
 	@JsonIgnore

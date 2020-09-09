@@ -1,5 +1,6 @@
 package com.apress.utils;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,24 +41,24 @@ public class LoadDemoData implements ApplicationRunner {
 		log.info("Loading database");
 
 		User user1 = userRepository
-				.save(User.builder().fullName("Administrator").mobile("123456789").email("admin@garage.com").build());
+				.save(User.builder().role("admin").password("123456").fullName("Administrator").mobile("123456789").email("admin@garage.com").build());
 		User user2 = userRepository
-				.save(User.builder().fullName("Mechanic-1").mobile("123456789").email("mechanic-1@garage.com")
+				.save(User.builder().password("123456").fullName("Mechanic-1").mobile("123456789").email("mechanic-1@garage.com")
 				.role("mechanic").build());
 		User user3 = userRepository
-				.save(User.builder().fullName("Mechanic-2").mobile("123456789").email("mechanic-2@garage.com")
+				.save(User.builder().password("123456").fullName("Mechanic-2").mobile("123456789").email("mechanic-2@garage.com")
 				.role("mechanic").build());
 		User user4 = userRepository
-				.save(User.builder().fullName("Customer-3").mobile("123456789").email("mechanic-3@garage.com")
+				.save(User.builder().password("123456").fullName("Customer-3").mobile("123456789").email("mechanic-3@garage.com")
 				.role("Customer").build());
 		User user5 = userRepository
-				.save(User.builder().fullName("Customer-1").mobile("123456789").email("Customer-1@garage.com")
+				.save(User.builder().password("123456").fullName("Customer-1").mobile("123456789").email("Customer-1@garage.com")
 				.role("customer").build());
 		User user6 = userRepository
-				.save(User.builder().fullName("Customer-2").mobile("123456789").email("Customer-2@garage.com")
+				.save(User.builder().password("123456").fullName("Customer-2").mobile("123456789").email("Customer-2@garage.com")
 				.role("customer").build());
 		User user7 = userRepository
-				.save(User.builder().fullName("Customer-3").mobile("123456789").email("Customer-3@garage.com")
+				.save(User.builder().password("123456").fullName("Customer-3").mobile("123456789").email("Customer-3@garage.com")
 				.role("customer").build());
 
 		Product product1 = productRepository
@@ -91,16 +92,37 @@ public class LoadDemoData implements ApplicationRunner {
 
 		Booking booking1 = bookingRepository.save(
 				Booking.builder()
+				.date(LocalDate.parse("2020-01-01"))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 1 comentario 1")
 				.status("booked")
-				.vehiculeBrand("Ford")
-				.vehiculeEngine("diesel")
-				.vehiculeModel("M5")
-				.vehiculeNumberPlate("AAA-111")
+				.vehicleBrand("Ford")
+				.vehicleEngine("diesel")
+				.vehicleModel("M5")
+				.vehicleNumberPlate("AAA-111")
+				.vehicleType("Car1")
+				.part(part1)
+				.part(part2)
+				.mechanic(user2)
+				.customer(user6)
+				.baseProduct(product1)
+				.extraProduct(product2)
+				.extraProduct(product3).build());
+		
+		Booking booking2 = bookingRepository.save(
+				Booking.builder()
+				.date(LocalDate.parse("2020-01-02"))
+				.reference(UUID.randomUUID().toString())
+				.comments("comentario 1 comentario 1")
+				.status("booked")
+				.vehicleBrand("Ford")
+				.vehicleEngine("diesel")
+				.vehicleModel("M5")
+				.vehicleNumberPlate("AAA-111")
+				.vehicleType("Car2")
 				.part(part1)
 				.mechanic(user2)
-				.customer(user4)
+				.customer(user6)
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3).build());

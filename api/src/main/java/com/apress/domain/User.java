@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -31,7 +32,7 @@ import lombok.Setter;
 public class User {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
 	@Column(name = "ID")
 	private Long id;
 
@@ -40,16 +41,16 @@ public class User {
 	@Column(name = "EMAIL", nullable = false, updatable = false, unique = true)
 	private String email;
 
-	@Column(name = "FULL_NAME")
+	@Column(name = "FULL_NAME", nullable = false)
 	private String fullName;
 
-	@Column(name = "MOBILE")
+	@Column(name = "MOBILE", nullable = false)
 	private String mobile;
 
 	@Column(name = "ROLE")
 	private String role;
 
-	@Column(name = "PASSWORD")
+	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
 	@Column(name = "CREATED_AT", insertable = true, updatable = false)

@@ -38,7 +38,7 @@ public class UserControllerTest {
 		UserDTO userDTO = UserDTO.builder().id(1L).mobile("12345678").build();
 		when(userService.findAll()).thenReturn(Arrays.asList(userDTO));
 
-		ResponseEntity<Collection<UserDTO>> response = controller.findAll();
+		ResponseEntity<Collection<UserDTO>> response = controller.findAll(null);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.hasBody()).isTrue();
@@ -87,7 +87,7 @@ public class UserControllerTest {
 
 		ResponseEntity<Void> response = controller.update(UserDTO.builder().mobile("12345678").build(), 1L);
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		verify(userService).save(any());
 	}
 

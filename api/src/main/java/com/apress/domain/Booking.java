@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -38,7 +39,7 @@ import lombok.Singular;
 public class Booking {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_id_seq")
 	@Column(name = "ID")
 	private Long id;
 
@@ -47,19 +48,22 @@ public class Booking {
 	@Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
 	private String reference;
 
-	@Column(name = "VEHICULE_NUMBER_PLATE")
-	private String vehiculeNumberPlate;
+	@Column(name = "VEHICLE_NUMBER_PLATE", nullable = false)
+	private String vehicleNumberPlate;
 
-	@Column(name = "VEHICULE_MODEL")
-	private String vehiculeModel;
+	@Column(name = "VEHICLE_MODEL")
+	private String vehicleModel;
 
-	@Column(name = "VEHICULE_BRAND")
-	private String vehiculeBrand;
+	@Column(name = "VEHICLE_BRAND")
+	private String vehicleBrand;
 
-	@Column(name = "VEHICULE_ENGINE")
-	private String vehiculeEngine;
+	@Column(name = "VEHICLE_ENGINE")
+	private String vehicleEngine;
 
-	@Column(name = "DATE")
+	@Column(name = "VEHICLE_TYPE", nullable = false)
+	private String vehicleType;
+
+	@Column(name = "DATE", nullable = false)
 	private LocalDate date;
 
 	@Column(name = "COMMENTS")
@@ -68,18 +72,18 @@ public class Booking {
 	@Column(name = "STATUS")
 	private String status;
 
-	@Singular
+	@Singular(ignoreNullCollections = true)
 	@ManyToMany
 	@JoinTable(name = "BOOKING_PRODUCTS", joinColumns = @JoinColumn(name = "BOOKING_ID"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
 	private Set<Product> extraProducts;
 
-	@Singular
+	@Singular(ignoreNullCollections = true)
 	@ManyToMany
 	@JoinColumn(name = "PART_ID")
 	private Set<Part> parts;
 
 	@OneToOne
-	@JoinColumn(name = "PRODUCT_ID")
+	@JoinColumn(name = "PRODUCT_ID", nullable = false)
 	private Product baseProduct;
 
 	@ManyToOne

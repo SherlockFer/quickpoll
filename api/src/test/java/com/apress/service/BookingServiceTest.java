@@ -15,12 +15,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.apress.defaulter.BookingDefaulter;
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
+import com.apress.helper.BookingTotal;
+import com.apress.mappers.BookingMapper;
 import com.apress.repository.BookingRepository;
 import com.apress.sender.PlateMessageSender;
-import com.apress.service.defaulter.BookingDefaulter;
-import com.apress.service.mappers.BookingMapper;
 import com.apress.validation.BookingValidator;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,6 +38,8 @@ public class BookingServiceTest {
 	private BookingDefaulter bookingDefaulter;
 	@Mock
 	private BookingValidator bookingValidator;
+	@Mock
+	private BookingTotal bookingTotal;
 	@Mock
 	private PlateMessageSender plateMessageSender;
 

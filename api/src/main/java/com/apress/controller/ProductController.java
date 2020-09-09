@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,8 +35,10 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping()
-	public ResponseEntity<Collection<ProductDTO>> findAll() {
-		Collection<ProductDTO> productDTOs = productService.findAll();
+	public ResponseEntity<Collection<ProductDTO>> findAll(@RequestParam(value="filter[category]", required=false)String category) {
+		ProductDTO productDTO=new ProductDTO();
+		productDTO.setCategory(category);
+		Collection<ProductDTO> productDTOs = productService.findAll(productDTO);
 		return ResponseEntity.ok().body(productDTOs);
 	}
 
@@ -71,7 +74,13 @@ public class ProductController {
 		}
 		productDTO.setId(id);
 		productService.save(productDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
+		if (productDTO.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, productDTO.getErrors());
+		} else {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(buildLocationUri(productDTO.getId()));
+			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		}
 	}
 
 	@DeleteMapping("/{id}")

@@ -23,6 +23,9 @@ public class BookingValidator {
 		validateComments(bookingDTO);
 		validateVehiculeNumberPlate(bookingDTO);
 		validateStatus(bookingDTO);
+		validateDate(bookingDTO);
+		validateBaseProduct(bookingDTO);
+		validateVehicleType(bookingDTO);
 		validateVatNumberAndCountryCode(bookingDTO);
 	}
 
@@ -33,7 +36,7 @@ public class BookingValidator {
 	}
 
 	private void validateVehiculeNumberPlate(BookingDTO bookingDTO) {
-		if (StringUtils.isBlank(bookingDTO.getVehiculeNumberPlate())) {
+		if (StringUtils.isBlank(bookingDTO.getVehicleNumberPlate())) {
 			bookingDTO.addError("Vehicule number plate can't be empty");
 		}
 	}
@@ -44,15 +47,33 @@ public class BookingValidator {
 		}
 	}
 
+	private void validateDate(BookingDTO bookingDTO) {
+		if (bookingDTO.getDate() == null) {
+			bookingDTO.addError("Date can't be empty");
+		}
+	}
+
+	private void validateBaseProduct(BookingDTO bookingDTO) {
+		if (bookingDTO.getBaseProduct() == null) {
+			bookingDTO.addError("BaseProduct can't be empty");
+		}
+	}
+
+	private void validateVehicleType(BookingDTO bookingDTO) {
+		if (StringUtils.isBlank(bookingDTO.getVehicleType())) {
+			bookingDTO.addError("Vehicle type can't be empty");
+		}
+	}
+
 	private void validateVatNumberAndCountryCode(BookingDTO bookingDTO) {
 		if (!StringUtils.isBlank(bookingDTO.getVatNumber()) && !StringUtils.isBlank(bookingDTO.getCountryCode())) {
 			CheckVat checkVat = new CheckVat();
 			checkVat.setCountryCode(bookingDTO.getCountryCode());
 			checkVat.setVatNumber(bookingDTO.getVatNumber());
 			CheckVatResponse checkVatResponse = client.checkVat(checkVat);
-			if(checkVatResponse == null) {
+			if (checkVatResponse == null) {
 				log.warn("Vies Service unavailable, vat validation skiped");
-			}else if (!checkVatResponse.isValid()) {
+			} else if (!checkVatResponse.isValid()) {
 				bookingDTO.addError("Invalid vatNumber");
 			}
 		}

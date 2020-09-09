@@ -4,14 +4,15 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.apress.defaulter.UserDefaulter;
 import com.apress.domain.User;
 import com.apress.dto.UserDTO;
+import com.apress.mappers.UserMapper;
 import com.apress.repository.UserRepository;
-import com.apress.service.defaulter.UserDefaulter;
-import com.apress.service.mappers.UserMapper;
 import com.apress.validation.UserValidator;
 
 @Service
@@ -28,6 +29,13 @@ public class UserService {
 
 	public Collection<UserDTO> findAll() {
 		Collection<User> users = userRepository.findAll();
+		return userMapper.toUserDTOs(users);
+	}
+	
+	public Collection<UserDTO> findAll(UserDTO userDTO) {
+		User user=userMapper.toUser(userDTO);
+		Example<User> example=Example.of(user);
+		Collection<User> users = userRepository.findAll(example);
 		return userMapper.toUserDTOs(users);
 	}
 

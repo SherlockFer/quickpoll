@@ -4,14 +4,15 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.apress.defaulter.ProductDefaulter;
 import com.apress.domain.Product;
 import com.apress.dto.ProductDTO;
+import com.apress.mappers.ProductMapper;
 import com.apress.repository.ProductRepository;
-import com.apress.service.defaulter.ProductDefaulter;
-import com.apress.service.mappers.ProductMapper;
 import com.apress.validation.ProductValidator;
 
 @Service
@@ -28,6 +29,13 @@ public class ProductService {
 
 	public Collection<ProductDTO> findAll() {
 		Collection<Product> products = productRepository.findAll();
+		return productMapper.toProductDTOs(products);
+	}
+	
+	public Collection<ProductDTO> findAll(ProductDTO productDTO) {
+		Product product= productMapper.toProduct(productDTO);
+		Example<Product> example=Example.of(product);
+		Collection<Product> products = productRepository.findAll(example);
 		return productMapper.toProductDTOs(products);
 	}
 
