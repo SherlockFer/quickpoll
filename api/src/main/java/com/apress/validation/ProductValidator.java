@@ -1,8 +1,10 @@
 package com.apress.validation;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import com.apress.constants.Constants;
 import com.apress.dto.ProductDTO;
 
 @Component
@@ -21,8 +23,8 @@ public class ProductValidator {
 	}
 
 	private void validateCategory(ProductDTO productDTO) {
-		if (StringUtils.isBlank(productDTO.getCategory())) {
-			productDTO.addError("Category can't be empty");
+		if (!EnumUtils.isValidEnum(Constants.ServiceCategory.class, productDTO.getCategory())) {
+			productDTO.addError("Category value is not valid");
 		}
 	}
 

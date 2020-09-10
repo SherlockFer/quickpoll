@@ -1,8 +1,10 @@
 package com.apress.validation;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import com.apress.constants.Constants;
 import com.apress.dto.UserDTO;
 
 @Component
@@ -41,8 +43,8 @@ public class UserValidator {
 	}
 
 	private void validateRole(UserDTO userDTO) {
-		if (StringUtils.isBlank(userDTO.getRole())) {
-			userDTO.addError("Role can't be empty");
+		if (!EnumUtils.isValidEnum(Constants.UserRole.class, userDTO.getRole())) {
+			userDTO.addError("Role value is not valid");
 		}
 	}
 
