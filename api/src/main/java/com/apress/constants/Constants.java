@@ -35,19 +35,5 @@ public interface Constants {
 		base,
 		extra;
 	}
-	
-	public enum ServiceName{
-		annual_service,
-		major_service,
-		repair_or_fault,
-		major_repair,
-		wheel_alignment,
-		grease_and_lubricant,
-		suspension,
-		change_the_engine_oil,
-		replace_the_oil_filter,
-		replace_the_air_filet;
 		
-	}
-	
 }
