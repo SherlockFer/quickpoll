@@ -21,10 +21,10 @@ services:
     volumes:
       - rabbitmq_data
       
-  geolocation:
+  garage-geo:
     build:
-      context: geolocation
-    image: geolocation
+      context: garage-geo
+    image: garage-geo
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
@@ -50,7 +50,7 @@ services:
     depends_on:
       - postgres
       - rabbitmq
-      - geolocation
+      - garage-geo
       - audit
     
 volumes:
