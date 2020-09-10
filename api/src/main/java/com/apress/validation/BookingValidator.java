@@ -1,10 +1,12 @@
 package com.apress.validation;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.apress.client.VatServiceClient;
+import com.apress.constants.Constants;
 import com.apress.dto.BookingDTO;
 
 import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVat;
@@ -24,7 +26,7 @@ public class BookingValidator {
 		validateVehiculeNumberPlate(bookingDTO);
 		validateStatus(bookingDTO);
 		validateDate(bookingDTO);
-		validateBaseProduct(bookingDTO);
+		validateBaseService(bookingDTO);
 		validateVehicleType(bookingDTO);
 		validateVatNumberAndCountryCode(bookingDTO);
 	}
@@ -45,6 +47,9 @@ public class BookingValidator {
 		if (StringUtils.isBlank(bookingDTO.getStatus())) {
 			bookingDTO.addError("Status can't be empty");
 		}
+		if (!EnumUtils.isValidEnum(Constants.BookingStatus.class, bookingDTO.getStatus())) {
+			bookingDTO.addError("Status incorrect");
+		}
 	}
 
 	private void validateDate(BookingDTO bookingDTO) {
@@ -53,15 +58,18 @@ public class BookingValidator {
 		}
 	}
 
-	private void validateBaseProduct(BookingDTO bookingDTO) {
+	private void validateBaseService(BookingDTO bookingDTO) {
 		if (bookingDTO.getBaseProduct() == null) {
-			bookingDTO.addError("BaseProduct can't be empty");
+			bookingDTO.addError("BaseService can't be empty");
 		}
 	}
 
 	private void validateVehicleType(BookingDTO bookingDTO) {
 		if (StringUtils.isBlank(bookingDTO.getVehicleType())) {
 			bookingDTO.addError("Vehicle type can't be empty");
+		}
+		if (!EnumUtils.isValidEnum(Constants.VehicleType.class, bookingDTO.getVehicleType())) {
+			bookingDTO.addError("Vehicle type incorrect");
 		}
 	}
 
