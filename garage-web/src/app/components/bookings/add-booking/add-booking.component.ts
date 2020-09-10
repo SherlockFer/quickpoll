@@ -1,6 +1,6 @@
 import { Booking } from './../../../models/booking.model';
 import { Service } from './../../../models/service.model';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -17,29 +17,32 @@ import { VEHICLE_TYPES } from 'src/app/models/constants.model';
 export class AddBookingComponent implements OnInit {
 
   BOOKING_API     = `${environment.apiUrl}`;
+  form            : FormGroup;
   datetoday       = new Date();
   base_services   : Service[];
   vehicle_engines = VEHICLE_ENGINES;
   vehicle_types   = VEHICLE_TYPES;
 
   constructor(private router: Router,
+    private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private http: HttpClient) { }
 
-  form = new FormGroup({
-    date: new FormControl('', [Validators.required]),
-    base_service: new FormGroup({ 
-      id: new FormControl('', [Validators.required])
-    }),  
-    vehicle_type: new FormControl('', [Validators.required]),
-    vehicle_brand: new FormControl(''),
-    vehicle_number_plate: new FormControl('', [Validators.required]),
-    vehicle_model: new FormControl(''),
-    vehicle_engine: new FormControl(''),
-    comments: new FormControl(''),
-  })
-
   ngOnInit() {
+ 
+    this.form = this.formBuilder.group({
+      date: [, Validators.required],
+      base_service: this.formBuilder.group({ 
+        id: [, Validators.required]
+      }),  
+      vehicle_type: [],
+      vehicle_brand: [],
+      vehicle_number_plate:[, Validators.required],
+      vehicle_model: [],
+      vehicle_engine: [],
+      comments: [],
+    });
+
     this.http.get<Service[]>(`${this.BOOKING_API}/services/?filter[category]=base`).subscribe(
       res => {
         this.base_services = res;
