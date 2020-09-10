@@ -55,7 +55,11 @@ public class BookingService {
 		}
 		Pageable pageable=PageRequest.of(0,size, Sort.by("date").descending());
 		Collection<Booking> bookings = bookingRepository.findAll(example, pageable).toList();
-		return bookingMapper.toBookingDTOs(bookings);
+		Collection<BookingDTO> bookingDTOs = bookingMapper.toBookingDTOs(bookings);
+		for (BookingDTO opBookingDTO : bookingDTOs) {
+			opBookingDTO.setTotal(bookingTotal.calcTotal(opBookingDTO));
+		}
+		return bookingDTOs;
 	}
 
 	public Optional<BookingDTO> findById(final Long id) {
