@@ -236,7 +236,7 @@ Feature: Be able to booking
     		}
         """
         
-        Scenario: List Bookings when status=in_service
+    Scenario: List Bookings when status=in_service
         Given url GARAGE_API_URL
         And path "/bookings"
         And param filter[status] = "in_service"
@@ -269,6 +269,80 @@ Feature: Be able to booking
     			 "id": "#number",
     			 "vehicle_engine": "#present",
     			 "status": "in_service",
+    			 "customer": "#present"
+    		}
+        """
+        
+    Scenario: List Bookings when limit=1
+        Given url GARAGE_API_URL
+        And path "/bookings"
+        And param limit = 1
+        And header Content-Type = 'application/json; charset=utf-8'
+        When method get
+        Then status 200
+        And print response
+        And match response == '#[1]'
+        And match response contains
+        """
+        {
+        	 "date": "#string",
+    			 "comments": "#string",
+    			 "base_service": {
+    			 		"price": "#number",
+    			 		"name": "#string",
+    			 		"id": "#number",
+    			 		"category": "#string"
+    			 	},
+    			 "vat_number": "#present",
+    			 "vehicle_model": "#present",
+    			 "mechanic": "#present",
+    			 "vehicle_type": "#string",
+    			 "reference": "#string",
+    			 "vehicle_number_plate": "#string",
+    			 "vehicle_brand": "#present",
+    			 "total": "#present",
+    			 "extra_services": "#[]",
+    			 "parts": "#[]",
+    			 "id": "#number",
+    			 "vehicle_engine": "#present",
+    			 "status": "#string",
+    			 "customer": "#present"
+    		}
+        """
+        
+    Scenario: List Bookings when limit=2
+        Given url GARAGE_API_URL
+        And path "/bookings"
+        And param limit = 2
+        And header Content-Type = 'application/json; charset=utf-8'
+        When method get
+        Then status 200
+        And print response
+        And match response == '#[2]'
+        And match response contains
+        """
+        {
+        	 "date": "#string",
+    			 "comments": "#string",
+    			 "base_service": {
+    			 		"price": "#number",
+    			 		"name": "#string",
+    			 		"id": "#number",
+    			 		"category": "#string"
+    			 	},
+    			 "vat_number": "#present",
+    			 "vehicle_model": "#present",
+    			 "mechanic": "#present",
+    			 "vehicle_type": "#string",
+    			 "reference": "#string",
+    			 "vehicle_number_plate": "#string",
+    			 "vehicle_brand": "#present",
+    			 "total": "#present",
+    			 "extra_services": "#[]",
+    			 "parts": "#[]",
+    			 "id": "#number",
+    			 "vehicle_engine": "#present",
+    			 "status": "#string",
     			 "customer": "#present"
     		}
         """

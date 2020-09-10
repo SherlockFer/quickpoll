@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,14 +46,19 @@ public class BookingService {
 		return bookingDTOs;
 	}
 
-	public Collection<BookingDTO> findAll(BookingDTO bookingDTO) {
+	public Collection<BookingDTO> findAll(final BookingDTO bookingDTO, final Integer limit ) {
 		Booking booking = bookingMapper.toBooking(bookingDTO);
 		Example<Booking> example = Example.of(booking);
-		Collection<Booking> bookings = bookingRepository.findAll(example);
+		Integer size=100;
+		if(limit!=null) {
+			size=limit;
+		}
+		Pageable pageable=PageRequest.of(0,size, Sort.by("date").descending());
+		Collection<Booking> bookings = bookingRepository.findAll(example, pageable).toList();
 		return bookingMapper.toBookingDTOs(bookings);
 	}
 
-	public Optional<BookingDTO> findById(Long id) {
+	public Optional<BookingDTO> findById(final Long id) {
 		Optional<Booking> booking = bookingRepository.findById(id);
 		if (booking.isPresent()) {
 			BookingDTO bookingDTO = bookingMapper.toBookingDTO(booking.get());

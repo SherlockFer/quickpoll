@@ -37,10 +37,10 @@ public class BookingController {
 	private BookingService bookingService;
 
 	@GetMapping()
-	public ResponseEntity<Collection<BookingDTO>> findAll(@RequestParam(value="filter[status]", required=false)String status) {
+	public ResponseEntity<Collection<BookingDTO>> findAll(@RequestParam(value="filter[status]", required=false)String status, @RequestParam(value="limit", required=false)Integer limit) {
 		BookingDTO bookingDTO = new BookingDTO();
 		bookingDTO.setStatus(status);
-		Collection<BookingDTO> bookingDTOs = bookingService.findAll(bookingDTO);
+		Collection<BookingDTO> bookingDTOs = bookingService.findAll(bookingDTO, limit);
 		return new ResponseEntity<>(bookingDTOs, HttpStatus.OK);
 	}
 
