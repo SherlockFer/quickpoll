@@ -18,7 +18,7 @@ export class AddBookingComponent implements OnInit {
 
   BOOKING_API     = `${environment.apiUrl}`;
   datetoday       = new Date();
-  base_service   : Service[];
+  base_services   : Service[];
   vehicle_engines = VEHICLE_ENGINES;
   vehicle_types   = VEHICLE_TYPES;
 
@@ -28,7 +28,9 @@ export class AddBookingComponent implements OnInit {
 
   form = new FormGroup({
     date: new FormControl('', [Validators.required]),
-    base_service: new FormControl('', [Validators.required]),
+    base_service: new FormGroup({ 
+      id: new FormControl('', [Validators.required])
+    }),  
     vehicle_type: new FormControl('', [Validators.required]),
     vehicle_brand: new FormControl(''),
     vehicle_number_plate: new FormControl('', [Validators.required]),
@@ -40,7 +42,7 @@ export class AddBookingComponent implements OnInit {
   ngOnInit() {
     this.http.get<Service[]>(`${this.BOOKING_API}/services/?filter[category]=base`).subscribe(
       res => {
-        this.base_service = res;
+        this.base_services = res;
       }
     );
 
@@ -71,7 +73,7 @@ export class AddBookingComponent implements OnInit {
 
   public fillForm() {
     this.form.get("date").setValue("2019-08-20");
-    this.form.get("base_service").setValue("1");
+    this.form.get("base_service.id").setValue("1");
     this.form.get("vehicle_type").setValue("car");
     this.form.get("vehicle_number_plate").setValue("ABC-123");
     this.form.get("vehicle_brand").setValue("Ford");
