@@ -52,7 +52,13 @@ Feature: Be able to booking
     			 "id": "#number",
     			 "vehicle_engine": "#null",
     			 "status": "booked",
-    			 "customer": "#present"
+    			 "customer": {
+		            "id": 1,
+		            "full_name": "#string",
+		            "mobile": "#string",
+		            "email": "#string",
+		            "role": "#string"
+        		}
     		}
         """
        
@@ -86,7 +92,13 @@ Feature: Be able to booking
     			 "id": "#number",
     			 "vehicle_engine": "#present",
     			 "status": "#string",
-    			 "customer": "#present"
+    			 "customer": {
+		            "id": 1,
+		            "full_name": "#string",
+		            "mobile": "#string",
+		            "email": "#string",
+		            "role": "#string"
+        		}
     		}
         """
         
@@ -115,13 +127,19 @@ Feature: Be able to booking
     			 "reference": "#string",
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
-    			 "total": "#present",
+    			 "total": "#number",
     			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
     			 "vehicle_engine": "#present",
     			 "status": "#string",
-    			 "customer": "#present"
+    			 "customer": {
+		            "id": 1,
+		            "full_name": "#string",
+		            "mobile": "#string",
+		            "email": "#string",
+		            "role": "#string"
+        		}
     		}
         """
     
@@ -152,13 +170,19 @@ Feature: Be able to booking
     			 "reference": "#string",
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
-    			 "total": "#present",
+    			 "total": "#number",
     			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
     			 "vehicle_engine": "#present",
     			 "status": "booked",
-    			 "customer": "#present"
+    			 "customer": {
+		            "id": 1,
+		            "full_name": "#string",
+		            "mobile": "#string",
+		            "email": "#string",
+		            "role": "#string"
+        		}
     		}
         """
         
@@ -189,13 +213,19 @@ Feature: Be able to booking
     			 "reference": "#string",
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
-    			 "total": "#present",
+    			 "total": "#number",
     			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
     			 "vehicle_engine": "#present",
     			 "status": "fixed",
-    			 "customer": "#present"
+    			 "customer": {
+		            "id": 1,
+		            "full_name": "#string",
+		            "mobile": "#string",
+		            "email": "#string",
+		            "role": "#string"
+        		}
     		}
         """
         
@@ -226,13 +256,19 @@ Feature: Be able to booking
     			 "reference": "#string",
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
-    			 "total": "#present",
+    			 "total": "#number",
     			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
     			 "vehicle_engine": "#present",
     			 "status": "collected",
-    			 "customer": "#present"
+    			 "customer": {
+		            "id": 1,
+		            "full_name": "#string",
+		            "mobile": "#string",
+		            "email": "#string",
+		            "role": "#string"
+        		}
     		}
         """
         
@@ -263,13 +299,19 @@ Feature: Be able to booking
     			 "reference": "#string",
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
-    			 "total": "#present",
+    			 "total": "#number",
     			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
     			 "vehicle_engine": "#present",
     			 "status": "in_service",
-    			 "customer": "#present"
+    			 "customer": {
+		            "id": 1,
+		            "full_name": "#string",
+		            "mobile": "#string",
+		            "email": "#string",
+		            "role": "#string"
+        		}
     		}
         """
         
@@ -300,13 +342,19 @@ Feature: Be able to booking
     			 "reference": "#string",
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
-    			 "total": "#present",
+    			 "total": "#number",
     			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
     			 "vehicle_engine": "#present",
     			 "status": "#string",
-    			 "customer": "#present"
+    			 "customer": {
+		            "id": 1,
+		            "full_name": "#string",
+		            "mobile": "#string",
+		            "email": "#string",
+		            "role": "#string"
+        		}
     		}
         """
         
@@ -337,13 +385,19 @@ Feature: Be able to booking
     			 "reference": "#string",
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
-    			 "total": "#present",
+    			 "total": "#number",
     			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
     			 "vehicle_engine": "#present",
     			 "status": "#string",
-    			 "customer": "#present"
+    			 "customer": {
+		            "id": 1,
+		            "full_name": "#string",
+		            "mobile": "#string",
+		            "email": "#string",
+		            "role": "#string"
+        		}
     		}
         """
     
@@ -389,7 +443,13 @@ Feature: Be able to booking
 				    "extra_services": [],
 				    "parts": [],
 				    "mechanic": null,
-				    "customer": null,
+				    "customer": {
+		            "id": 1,
+		            "full_name": "#string",
+		            "mobile": "#string",
+		            "email": "#string",
+		            "role": "#string"
+        		},
 				    "date": "2020-01-02",
 				    "comments": "new comment",
 				    "vat_number": null

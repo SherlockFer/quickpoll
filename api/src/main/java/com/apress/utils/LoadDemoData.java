@@ -104,7 +104,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.part(part1)
 				.part(part2)
 				.mechanic(user2)
-				.customer(user6)
+				.customer(user1)
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3).build());
@@ -122,7 +122,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleType("car")
 				.part(part1)
 				.mechanic(user2)
-				.customer(user6)
+				.customer(user1)
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3).build());
@@ -140,7 +140,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleType("small_van")
 				.part(part1)
 				.mechanic(user2)
-				.customer(user6)
+				.customer(user1)
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3).build());
@@ -158,7 +158,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleType("small_bus")
 				.part(part1)
 				.mechanic(user2)
-				.customer(user6)
+				.customer(user1)
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3).build());
@@ -176,7 +176,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleType("small_bus")
 				.part(part1)
 				.mechanic(user2)
-				.customer(user6)
+				.customer(user1)
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3).build());
@@ -194,7 +194,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleType("car")
 				.part(part1)
 				.mechanic(user2)
-				.customer(user6)
+				.customer(user1)
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3).build());
