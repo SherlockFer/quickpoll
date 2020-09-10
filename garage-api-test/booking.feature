@@ -52,7 +52,7 @@ Feature: Be able to booking
     			 "id": "#number",
     			 "vehicle_engine": "#null",
     			 "status": "booked",
-    			 "customer": "#null"
+    			 "customer": "#present"
     		}
         """
        
@@ -115,7 +115,7 @@ Feature: Be able to booking
     			 "reference": "#string",
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
-    			 "total": "#number",
+    			 "total": "#present",
     			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
@@ -152,12 +152,123 @@ Feature: Be able to booking
     			 "reference": "#string",
     			 "vehicle_number_plate": "#string",
     			 "vehicle_brand": "#present",
-    			 "total": "#number",
+    			 "total": "#present",
     			 "extra_services": "#[]",
     			 "parts": "#[]",
     			 "id": "#number",
     			 "vehicle_engine": "#present",
     			 "status": "booked",
+    			 "customer": "#present"
+    		}
+        """
+        
+    Scenario: List Bookings when status=fixed
+        Given url GARAGE_API_URL
+        And path "/bookings"
+        And param filter[status] = "fixed"
+        And header Content-Type = 'application/json; charset=utf-8'
+        When method get
+        Then status 200
+        And print response
+        And match response == '#[]'
+        And match response contains
+         """
+        {
+        	 "date": "#string",
+    			 "comments": "#string",
+    			 "base_service": {
+    			 		"price": "#number",
+    			 		"name": "#string",
+    			 		"id": "#number",
+    			 		"category": "#string"
+    			 	},
+    			 "vat_number": "#present",
+    			 "vehicle_model": "#present",
+    			 "mechanic": "#present",
+    			 "vehicle_type": "#string",
+    			 "reference": "#string",
+    			 "vehicle_number_plate": "#string",
+    			 "vehicle_brand": "#present",
+    			 "total": "#present",
+    			 "extra_services": "#[]",
+    			 "parts": "#[]",
+    			 "id": "#number",
+    			 "vehicle_engine": "#present",
+    			 "status": "fixed",
+    			 "customer": "#present"
+    		}
+        """
+        
+    Scenario: List Bookings when status=collected
+        Given url GARAGE_API_URL
+        And path "/bookings"
+        And param filter[status] = "collected"
+        And header Content-Type = 'application/json; charset=utf-8'
+        When method get
+        Then status 200
+        And print response
+        And match response == '#[]'
+        And match response contains
+         """
+        {
+        	 "date": "#string",
+    			 "comments": "#string",
+    			 "base_service": {
+    			 		"price": "#number",
+    			 		"name": "#string",
+    			 		"id": "#number",
+    			 		"category": "#string"
+    			 	},
+    			 "vat_number": "#present",
+    			 "vehicle_model": "#present",
+    			 "mechanic": "#present",
+    			 "vehicle_type": "#string",
+    			 "reference": "#string",
+    			 "vehicle_number_plate": "#string",
+    			 "vehicle_brand": "#present",
+    			 "total": "#present",
+    			 "extra_services": "#[]",
+    			 "parts": "#[]",
+    			 "id": "#number",
+    			 "vehicle_engine": "#present",
+    			 "status": "collected",
+    			 "customer": "#present"
+    		}
+        """
+        
+        Scenario: List Bookings when status=in_service
+        Given url GARAGE_API_URL
+        And path "/bookings"
+        And param filter[status] = "in_service"
+        And header Content-Type = 'application/json; charset=utf-8'
+        When method get
+        Then status 200
+        And print response
+        And match response == '#[]'
+        And match response contains
+         """
+        {
+        	 "date": "#string",
+    			 "comments": "#string",
+    			 "base_service": {
+    			 		"price": "#number",
+    			 		"name": "#string",
+    			 		"id": "#number",
+    			 		"category": "#string"
+    			 	},
+    			 "vat_number": "#present",
+    			 "vehicle_model": "#present",
+    			 "mechanic": "#present",
+    			 "vehicle_type": "#string",
+    			 "reference": "#string",
+    			 "vehicle_number_plate": "#string",
+    			 "vehicle_brand": "#present",
+    			 "total": "#present",
+    			 "extra_services": "#[]",
+    			 "parts": "#[]",
+    			 "id": "#number",
+    			 "vehicle_engine": "#present",
+    			 "status": "in_service",
     			 "customer": "#present"
     		}
         """
@@ -243,7 +354,7 @@ Feature: Be able to booking
     			 "id": "#number",
     			 "vehicle_engine": "#null",
     			 "status": "booked",
-    			 "customer": "#null"
+    			 "customer": "#present"
     		}
         """
         
