@@ -40,7 +40,7 @@ public class BookingController {
 	public ResponseEntity<Collection<BookingDTO>> findAll(@RequestParam(value="filter[status]", required=false)String status) {
 		BookingDTO bookingDTO = new BookingDTO();
 		bookingDTO.setStatus(status);
-		Collection<BookingDTO> bookingDTOs = bookingService.findAll();
+		Collection<BookingDTO> bookingDTOs = bookingService.findAll(bookingDTO);
 		return new ResponseEntity<>(bookingDTOs, HttpStatus.OK);
 	}
 

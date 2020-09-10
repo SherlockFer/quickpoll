@@ -127,5 +127,23 @@ public class LoadDemoData implements ApplicationRunner {
 				.extraProduct(product2)
 				.extraProduct(product3).build());
 		
+		Booking booking3 = bookingRepository.save(
+				Booking.builder()
+				.date(LocalDate.parse("2020-01-02"))
+				.reference(UUID.randomUUID().toString())
+				.comments("comentario 3")
+				.status("fixed")
+				.vehicleBrand("Ford")
+				.vehicleEngine("diesel")
+				.vehicleModel("M5")
+				.vehicleNumberPlate("AAA-111")
+				.vehicleType("Car2")
+				.part(part1)
+				.mechanic(user2)
+				.customer(user6)
+				.baseProduct(product1)
+				.extraProduct(product2)
+				.extraProduct(product3).build());
+		
 	}
 }
