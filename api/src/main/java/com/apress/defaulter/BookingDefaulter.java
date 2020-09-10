@@ -9,8 +9,12 @@ import org.springframework.stereotype.Component;
 import com.apress.client.GeoLocationClient;
 import com.apress.constants.Constants.BookingStatus;
 import com.apress.domain.Booking;
+import com.apress.domain.User;
 import com.apress.dto.BookingDTO;
+import com.apress.dto.UserDTO;
+import com.apress.mappers.UserMapper;
 import com.apress.repository.BookingRepository;
+import com.apress.repository.UserRepository;
 
 import garage.services.geolocation.types.GetLocationRequest;
 import garage.services.geolocation.types.GetLocationResponse;
@@ -24,12 +28,23 @@ public class BookingDefaulter {
 	@Autowired
 	private BookingRepository bookingRepository;
 	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private UserMapper userMapper;
+	@Autowired
 	private GeoLocationClient geoLocationClient;
 
 	public void populateDefaults(BookingDTO bookingDTO) {
 		populateReference(bookingDTO);
 		populateStatus(bookingDTO);
 		populateCountryAndCity(bookingDTO);
+		populateCustomer(bookingDTO);
+	}
+
+	private void populateCustomer(BookingDTO bookingDTO) {
+		Optional<User> user=userRepository.findById((long) 1);
+		UserDTO userDTO=userMapper.toUserDTO(user.get());
+		bookingDTO.setCustomer(userDTO);
 	}
 
 	public void populateReference(BookingDTO bookingDTO) {
