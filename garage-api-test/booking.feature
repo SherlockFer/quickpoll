@@ -35,7 +35,7 @@ Feature: Be able to booking
     			 "comments": "comment1",
     			 "base_service": {
     			 		"price": "#number",
-    			 		"name": "Annual Service",
+    			 		"name": "annual_service",
     			 		"id": 1,
     			 		"category": "base"
     			 	},
@@ -437,7 +437,7 @@ Feature: Be able to booking
 				    "status": "booked",
 				    "base_service": {
 				        "id": 1,
-				        "name": "Annual Service",
+				        "name": "annual_service",
 				        "category": "base",
 				    },
 				    "extra_services": [],
@@ -471,7 +471,7 @@ Feature: Be able to booking
     			 "comments": "new comment",
     			 "base_service": {
     			 		"price": "#number",
-    			 		"name": "Annual Service",
+    			 		"name": "annual_service",
     			 		"id": 1,
     			 		"category": "base"
     			 	},
