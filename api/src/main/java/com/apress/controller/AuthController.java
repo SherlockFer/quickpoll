@@ -15,7 +15,7 @@ public class AuthController {
 	public ResponseEntity<Map> login(String email, String password) {
 		Map<String, String> res = new HashMap<String, String>();
 		res.put("token",
-				"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJyb2xlIjoiY3VzdG9tZXIiLCJmdWxsX25hbWUiOiJDdXN0b21lci0xIn0.Na1kXMpa6C2p4jayU40itxVqzFnoyZqq0CuOZ8v--b0");
+				"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJmdWxsX25hbWUiOiJBZG1pbmlzdHJhdG9yIn0.9xKCI00vzibf0sKFixDOXQLZC5lHUF9ugG43zEIvAG8");
 		return ResponseEntity.status(HttpStatus.OK).body(res);
 	}
 
