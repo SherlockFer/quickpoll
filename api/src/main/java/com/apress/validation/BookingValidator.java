@@ -22,7 +22,6 @@ public class BookingValidator {
 	VatServiceClient client;
 
 	public void validate(BookingDTO bookingDTO) {
-		validateComments(bookingDTO);
 		validateVehiculeNumberPlate(bookingDTO);
 		validateStatus(bookingDTO);
 		validateDate(bookingDTO);
@@ -30,12 +29,6 @@ public class BookingValidator {
 		validateVehicleType(bookingDTO);
 		validateVehicleEngine(bookingDTO);
 		validateVatNumberAndCountryCode(bookingDTO);
-	}
-
-	private void validateComments(BookingDTO bookingDTO) {
-		if (StringUtils.isBlank(bookingDTO.getComments())) {
-			bookingDTO.addError("Comments can't be empty");
-		}
 	}
 
 	private void validateVehiculeNumberPlate(BookingDTO bookingDTO) {
