@@ -28,6 +28,7 @@ public class BookingValidator {
 		validateDate(bookingDTO);
 		validateBaseService(bookingDTO);
 		validateVehicleType(bookingDTO);
+		validateVehicleEngine(bookingDTO);
 		validateVatNumberAndCountryCode(bookingDTO);
 	}
 
@@ -44,11 +45,8 @@ public class BookingValidator {
 	}
 
 	private void validateStatus(BookingDTO bookingDTO) {
-		if (StringUtils.isBlank(bookingDTO.getStatus())) {
-			bookingDTO.addError("Status can't be empty");
-		}
 		if (!EnumUtils.isValidEnum(Constants.BookingStatus.class, bookingDTO.getStatus())) {
-			bookingDTO.addError("Status incorrect");
+			bookingDTO.addError("Status value is not valid");
 		}
 	}
 
@@ -65,11 +63,14 @@ public class BookingValidator {
 	}
 
 	private void validateVehicleType(BookingDTO bookingDTO) {
-		if (StringUtils.isBlank(bookingDTO.getVehicleType())) {
-			bookingDTO.addError("Vehicle type can't be empty");
-		}
 		if (!EnumUtils.isValidEnum(Constants.VehicleType.class, bookingDTO.getVehicleType())) {
-			bookingDTO.addError("Vehicle type incorrect");
+			bookingDTO.addError("Vehicle type value is not valid");
+		}
+	}
+
+	private void validateVehicleEngine(BookingDTO bookingDTO) {
+		if (bookingDTO.getVehicleEngine() != null && !EnumUtils.isValidEnum(Constants.VehicleEngine.class, bookingDTO.getVehicleEngine())) {
+				bookingDTO.addError("Vehicle engine value is not valid");
 		}
 	}
 
