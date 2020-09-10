@@ -3,12 +3,18 @@ package com.apress.constants;
 public interface Constants {
 	
 	public enum BookingStatus{
-		booked;
+		booked,
+		in_service,
+		fixed,
+		collected,
+		unrepairable
+		
 	}
 	
 	public enum UserRole{
 		admin,
-		customer;
+		customer,
+		mechanic
 	}
 	
 	public enum VehicleType{
@@ -18,8 +24,16 @@ public interface Constants {
 		motorbike
 	}
 	
+	public enum VehicleEngine{
+		diesel,
+		petrol,
+		hybrid,
+		electric
+	}
+	
 	public enum ServiceCategory{
 		base,
 		extra;
 	}
+	
 }
