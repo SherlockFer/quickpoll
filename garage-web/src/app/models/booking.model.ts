@@ -7,11 +7,11 @@ export interface Booking{
     date: Date;
     status: string;
     comments: string;
-    service_id: string;
+    base_service: string;
     vehicle_type: string;
-    customer_id: number;
-    mechanic_id:number;
-    service_ids: number[];
+    customer: number;
+    mechanic:number;
+    base_service: number[];
     total:string;
-    part_ids:number[];
+    parts:number[];
 }

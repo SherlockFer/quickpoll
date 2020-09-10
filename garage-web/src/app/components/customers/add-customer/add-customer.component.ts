@@ -35,9 +35,9 @@ export class AddCustomerComponent implements OnInit {
   public onSubmit() {
     let user = this.form.value;
 
-    this.http.post<Response<User>>(`${this.BOOKING_API}`, user).subscribe(
+    this.http.post<User>(`${this.BOOKING_API}`, user).subscribe(
       res => {
-        let user: User = res.data;
+        let user: User = res;
         this.toastr.success('Your account has been registered correctly', 'Congratulations');;
         this.router.navigate([`/login`]);
       },

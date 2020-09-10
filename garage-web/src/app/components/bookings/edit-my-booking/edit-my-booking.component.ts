@@ -47,8 +47,8 @@ export class EditMyBookingComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: [, Validators.required],
       status: [],
-      mechanic_id: [],
-      customer_id: [],
+      mechanic: [],
+      customer: [],
       date: [, Validators.required],
       service_id: [, Validators.required],
       vehicle_type: [],
@@ -57,48 +57,48 @@ export class EditMyBookingComponent implements OnInit {
       vehicle_model: [],
       vehicle_engine: [],
       comments: [],
-      service_ids: [[]],
-      part_ids: [[]],
+      base_service: [[]],
+      parts: [[]],
     });
 
 
     // Base services
-    this.http.get<Response<Service[]>>(`${this.API_URL}/services/?filter[category]=base`).subscribe(
+    this.http.get<Service[]>(`${this.API_URL}/services/?filter[category]=base`).subscribe(
       res => {
-        this.base_services = res.data
+        this.base_services = res
       }
     );
 
     // Extra services
-    this.http.get<Response<Service[]>>(`${this.API_URL}/services/?filter[category]=extra`).subscribe(
+    this.http.get<Service[]>(`${this.API_URL}/services/?filter[category]=extra`).subscribe(
       res => {
-        this.extra_services = res.data
+        this.extra_services = res
       }
     );
 
     // Autoparts
-    this.http.get<Response<Part[]>>(`${this.API_URL}/vehicles/parts`).subscribe(
+    this.http.get<Part[]>(`${this.API_URL}/vehicles/parts`).subscribe(
       res => {
-        this.parts = res.data
+        this.parts = res
       }
     );
 
     // Mechanics
-    this.http.get<Response<User[]>>(`${this.API_URL}/users/?filter[role]=mechanic`).subscribe(
+    this.http.get<User[]>(`${this.API_URL}/users/?filter[role]=mechanic`).subscribe(
       res => {
-        this.mechanics = res.data
+        this.mechanics = res
       }
     );
 
-    this.http.get<Response<Booking>>(`${this.API_URL}/bookings/${booking_id}`).subscribe(
+    this.http.get<Booking>(`${this.API_URL}/bookings/${booking_id}`).subscribe(
       res => {
-        let booking = res.data;
+        let booking = res;
         delete booking.total; // Removing read-only field
         this.form.setValue(booking);
         //start customer
-        this.http.get<Response<User>>(`${this.API_URL}/users/${res.data.customer_id}`).subscribe(
+        this.http.get<User>(`${this.API_URL}/users/${res.customer}`).subscribe(
           res => {
-            this.customer=res.data;
+            this.customer=res;
             this.isLoading = false;
           }
         );
@@ -109,7 +109,7 @@ export class EditMyBookingComponent implements OnInit {
 
   public onSubmit() {
     let booking = this.form.value;
-    this.http.put<Response<Booking>>(`${this.API_URL}/bookings/${booking.id}`, booking).subscribe(
+    this.http.put<Booking>(`${this.API_URL}/bookings/${booking.id}`, booking).subscribe(
       res => {
         this.toastr.success('Your booking has been modify correctly');;
         this.router.navigate(["/my-bookings"]);

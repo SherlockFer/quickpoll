@@ -29,8 +29,8 @@ export class ShowCustomerComponent implements OnInit {
   }
 
   public showCustomer(id: Number){
-    this.http.get<Response<User>>(`${this.API_URL}/${id}`).subscribe(
-      res => { this.customer = res.data; this.isLoading = false;},
+    this.http.get<User>(`${this.API_URL}/${id}`).subscribe(
+      res => { this.customer = res; this.isLoading = false;},
     );
   }
   

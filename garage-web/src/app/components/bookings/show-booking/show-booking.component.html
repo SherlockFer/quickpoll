@@ -55,7 +55,7 @@
 </div>
 
 <!-- Service details -->
-<div *ngIf="booking?.service_ids?.length > 0">
+<div *ngIf="booking?.base_service?.length > 0">
     <div class="container  py-4">
         <div class="row">
             <div class="col-md-8" *ngIf="!isLoading">
@@ -65,10 +65,10 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-borderless">
-                            <tr *ngFor="let service_id of booking.service_ids">
-                                <td>{{getExtraServiceById(service_id).name}}</td>
+                            <tr *ngFor="let base_service of booking.base_service">
+                                <td>{{getExtraServiceById(base_service).name}}</td>
                                 <td class="text-right">
-                                    {{ (getExtraServiceById(service_id).price) | currency :'EUR':'symbol':'1.2-2'   }}
+                                    {{ (getExtraServiceById(base_service).price) | currency :'EUR':'symbol':'1.2-2'   }}
                                 </td>
                             </tr>
                         </table>
@@ -80,7 +80,7 @@
 </div>
 
 <!-- Parts -->
-<div *ngIf="booking?.part_ids?.length > 0">
+<div *ngIf="booking?.parts?.length > 0">
     <div class="container  py-4">
         <div class="row">
             <div class="col-md-8" *ngIf="!isLoading">
@@ -90,7 +90,7 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-borderless">
-                            <tr *ngFor="let part_id of booking.part_ids">
+                            <tr *ngFor="let part_id of booking.parts">
                                 <td>{{getPartById(part_id).name}}</td>
                                 <td class="text-right">
                                     {{ (getPartById(part_id).price) | currency :'EUR':'symbol':'1.2-2'   }}</td>

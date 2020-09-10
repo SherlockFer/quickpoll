@@ -24,7 +24,7 @@ export class EditCustomerComponent implements OnInit {
 
   ngOnInit() {
 
-    let customer_id = Number((this.route.snapshot.params.id))
+    let customer = Number((this.route.snapshot.params.id))
 
     this.form = this.formBuilder.group({
       id: [],
@@ -34,16 +34,16 @@ export class EditCustomerComponent implements OnInit {
       role: [],
     });
 
-    this.http.get<Response<User>>(`${this.API_URL}/users/${customer_id}`).subscribe(
+    this.http.get<User>(`${this.API_URL}/users/${customer}`).subscribe(
       res => {
-        this.form.setValue(res.data);
+        this.form.setValue(res);
       },
     );
   }
 
   public onSubmit() {
     let customer = this.form.value;
-    this.http.put<Response<User>>(`${this.API_URL}/users/${customer.id}`, customer).subscribe(
+    this.http.put<User>(`${this.API_URL}/users/${customer.id}`, customer).subscribe(
       res => {
         this.toastr.success('The account has been correctly modified');;
         this.router.navigate(["admin/customers"]);

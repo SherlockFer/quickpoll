@@ -34,16 +34,16 @@ export class EditEmployeeComponent implements OnInit {
       role: [],
     });
 
-    this.http.get<Response<User>>(`${this.API_URL}/users/${employee_id}`).subscribe(
+    this.http.get<User>(`${this.API_URL}/users/${employee_id}`).subscribe(
       res => {
-        this.form.setValue(res.data);
+        this.form.setValue(res);
       }
     );
   }
 
   public onSubmit() {
     let employee = this.form.value;
-    this.http.put<Response<User>>(`${this.API_URL}/users/${employee.id}`, employee).subscribe(
+    this.http.put<User>(`${this.API_URL}/users/${employee.id}`, employee).subscribe(
       res => {
         console.log(res);
         this.toastr.success('the account has been correctly modified ');;

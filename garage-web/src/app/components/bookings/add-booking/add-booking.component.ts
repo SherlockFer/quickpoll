@@ -18,7 +18,7 @@ export class AddBookingComponent implements OnInit {
 
   BOOKING_API     = `${environment.apiUrl}`;
   datetoday       = new Date();
-  base_services   : Service[];
+  base_service   : Service[];
   vehicle_engines = VEHICLE_ENGINES;
   vehicle_types   = VEHICLE_TYPES;
 
@@ -28,7 +28,7 @@ export class AddBookingComponent implements OnInit {
 
   form = new FormGroup({
     date: new FormControl('', [Validators.required]),
-    service_id: new FormControl('', [Validators.required]),
+    base_service: new FormControl('', [Validators.required]),
     vehicle_type: new FormControl('', [Validators.required]),
     vehicle_brand: new FormControl(''),
     vehicle_number_plate: new FormControl('', [Validators.required]),
@@ -38,16 +38,16 @@ export class AddBookingComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.http.get<Response<Service[]>>(`${this.BOOKING_API}/services/?filter[category]=base`).subscribe(
+    this.http.get<Service[]>(`${this.BOOKING_API}/services/?filter[category]=base`).subscribe(
       res => {
-        this.base_services = res.data;
+        this.base_service = res;
       }
     );
 
-    this.http.get<Response<Booking>>(`${this.BOOKING_API}/bookings?limit=1`).subscribe(
+    this.http.get<Booking>(`${this.BOOKING_API}/bookings?limit=1`).subscribe(
       res => {
-        if (Object.keys(res.data).length) {//check if json data is empty
-          let last_booking = res.data[0];
+        if (Object.keys(res).length) {//check if json data is empty
+          let last_booking = res[0];
           this.form.get('vehicle_type').setValue(last_booking.vehicle_type);
           this.form.get('vehicle_brand').setValue(last_booking.vehicle_brand);
           this.form.get('vehicle_number_plate').setValue(last_booking.vehicle_number_plate);
@@ -60,9 +60,9 @@ export class AddBookingComponent implements OnInit {
 
   public onSubmit() {
     let booking = this.form.value;
-    this.http.post<Response<Booking>>(`${this.BOOKING_API}/bookings`, booking).subscribe(
+    this.http.post<Booking>(`${this.BOOKING_API}/bookings`, booking).subscribe(
       res => {
-        let booking: Booking = res.data;
+        let booking: Booking = res;
         this.toastr.success('Your booking has been registered correctly', 'Congratulations');;
         this.router.navigate([`/my-bookings`]);
       }
@@ -71,7 +71,7 @@ export class AddBookingComponent implements OnInit {
 
   public fillForm() {
     this.form.get("date").setValue("2019-08-20");
-    this.form.get("service_id").setValue("1");
+    this.form.get("base_service").setValue("1");
     this.form.get("vehicle_type").setValue("car");
     this.form.get("vehicle_number_plate").setValue("ABC-123");
     this.form.get("vehicle_brand").setValue("Ford");

@@ -28,7 +28,7 @@ export class ListBookingsComponent implements OnInit {
   curr_bookings: Booking[];
   on_site_booking: Booking[];
   past_bookings: Booking[];
-  base_services: Service[];
+  base_service: Service[];
   customers: User[];
   vehicle_engines = VEHICLE_ENGINES;
   vehicle_types = VEHICLE_TYPES;
@@ -46,14 +46,14 @@ export class ListBookingsComponent implements OnInit {
     }
 
     //customers
-    this.http.get<Response<User[]>>(`${this.API_URL}/users`).subscribe(
-      res => { this.customers = res.data;},
+    this.http.get<User[]>(`${this.API_URL}/users`).subscribe(
+      res => { this.customers = res;},
     );
 
     // Base services
-    this.http.get<Response<Service[]>>(`${this.API_URL}/services/?filter[category]=base`).subscribe(
+    this.http.get<Service[]>(`${this.API_URL}/services/?filter[category]=base`).subscribe(
       res => {
-        this.base_services = res.data
+        this.base_service = res
       }
     );
 
@@ -63,7 +63,7 @@ export class ListBookingsComponent implements OnInit {
   }
 
   public getServiceById(id: number) {
-    return this.base_services.find(service => service.id === id);
+    return this.base_service.find(service => service.id === id);
   }
 
   public getNameById(id: number) {
@@ -82,9 +82,9 @@ export class ListBookingsComponent implements OnInit {
 
   // Bookings
   public setBooking() {
-    this.http.get<Response<Booking[]>>(`${this.API_URL}/bookings`).subscribe(
+    this.http.get<Booking[]>(`${this.API_URL}/bookings`).subscribe(
       res => {
-        let bookings = res.data;
+        let bookings = res;
         this.curr_bookings = bookings.filter(
           booking => ["booked"].includes(booking.status)
         );

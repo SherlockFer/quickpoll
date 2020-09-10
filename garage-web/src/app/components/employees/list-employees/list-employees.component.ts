@@ -23,8 +23,8 @@ export class ListEmployeesComponent implements OnInit {
   API_URL = `${environment.apiUrl}/users`;
 
   ngOnInit() {
-    this.http.get<Response<User[]>>(`${this.API_URL}` + "?filter[role]=mechanic").subscribe(
-      res => { this.mechanics = res.data; },
+    this.http.get<User[]>(`${this.API_URL}` + "?filter[role]=mechanic").subscribe(
+      res => { this.mechanics = res; },
     );
   }
 

@@ -50,8 +50,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="mechanic_id" class="text-muted form-label-sm">Mechanic</label>
-                            <select id="mechanic_id" formControlName="mechanic_id" class="browser-default custom-select form-control form-control-lg" >
+                            <label for="mechanic" class="text-muted form-label-sm">Mechanic</label>
+                            <select id="mechanic" formControlName="mechanic" class="browser-default custom-select form-control form-control-lg" >
                                 <option [ngValue]="mechanic.id" *ngFor="let mechanic of mechanics">
                                     {{mechanic.full_name}}
                                 </option>
@@ -67,14 +67,15 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="service_id" class="text-muted form-label-sm">Select a service (*)</label>
-                            <select id="service_id" formControlName="service_id" class="browser-default custom-select form-control form-control-lg" > 
                                 <option [ngValue]="service.id" *ngFor="let service of base_services">
+                            <label for="base_service" class="text-muted form-label-sm">Select a service (*)</label>
+                            <select id="base_service" formControlName="base_service" class="browser-default custom-select form-control form-control-lg" > 
+                                <option [ngValue]="service.id" *ngFor="let service of base_service">
                                     {{service.name}}
                                 </option>
                             </select>
                             <label class="text-danger"
-                                *ngIf="form.get('service_id').touched && form.get('service_id').invalid">
+                                *ngIf="form.get('base_service').touched && form.get('base_service').invalid">
                                 Enter a valid service!
                             </label>
                         </div>
@@ -130,8 +131,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="service_ids" class="text-muted form-label-sm">Additional services</label>
-                            <select id="service_ids" formControlName="service_ids" multiple class="form-control form-control-lg" > 
+                            <label for="base_service" class="text-muted form-label-sm">Additional services</label>
+                            <select id="base_service" formControlName="base_service" multiple class="form-control form-control-lg" > 
                                 <option [ngValue]="service.id" *ngFor="let service of extra_services">
                                     {{service.name}}
                                 </option>
@@ -139,8 +140,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="part_ids" class="text-muted form-label-sm">Additional Autoparts</label>
-                            <select id="part_ids" formControlName="part_ids" multiple class="form-control form-control-lg" > 
+                            <label for="parts" class="text-muted form-label-sm">Additional Autoparts</label>
+                            <select id="parts" formControlName="parts" multiple class="form-control form-control-lg" > 
                                 <option [ngValue]="part.id" *ngFor="let part of parts">
                                     {{part.name}}
                                 </option> 

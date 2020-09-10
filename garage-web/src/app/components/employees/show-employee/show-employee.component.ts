@@ -30,8 +30,8 @@ export class ShowEmployeeComponent implements OnInit {
   }
 
   public showMechanic(id: Number){
-    this.http.get<Response<User>>(`${this.API_URL}/${id}`).subscribe(
-      res => { this.mechanic= res.data;this.isLoading = false; },
+    this.http.get<User>(`${this.API_URL}/${id}`).subscribe(
+      res => { this.mechanic= res;this.isLoading = false; },
     ); 
   }
 

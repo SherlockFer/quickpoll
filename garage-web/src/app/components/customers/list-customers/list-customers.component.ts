@@ -23,8 +23,8 @@ export class ListCustomersComponent implements OnInit {
   API_URL = `${environment.apiUrl}/users?filter[role]=customer`;
 
   ngOnInit() {
-    this.http.get<Response<User[]>>(`${this.API_URL}`).subscribe(
-      res => { this.customers = res.data; },
+    this.http.get<User[]>(`${this.API_URL}`).subscribe(
+      res => { this.customers = res; },
     );
   }
 

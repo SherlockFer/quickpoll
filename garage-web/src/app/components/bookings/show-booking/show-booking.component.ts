@@ -22,7 +22,7 @@ export class ShowBookingComponent implements OnInit {
   API_URL         = `${environment.apiUrl}`;
 
   extra_services  : Service[];
-  base_services   : Service[];
+  base_service   : Service[];
   service         : Service;
   parts           : Part[];
   customer        : User;
@@ -45,41 +45,41 @@ export class ShowBookingComponent implements OnInit {
     let booking_id = Number((this.route.snapshot.params.id))
     
     // Base services
-    this.http.get<Response<Service[]>>(`${this.API_URL}/services/?filter[category]=base`).subscribe(
+    this.http.get<Service[]>(`${this.API_URL}/services/?filter[category]=base`).subscribe(
       res => {
-        this.base_services = res.data
+        this.base_service = res
       }
     );
 
     // Extra services
-    this.http.get<Response<Service[]>>(`${this.API_URL}/services/?filter[category]=extra`).subscribe(
+    this.http.get<Service[]>(`${this.API_URL}/services/?filter[category]=extra`).subscribe(
       res => {
-        this.extra_services = res.data
+        this.extra_services = res
       }
     );
 
     // Autoparts
-    this.http.get<Response<Part[]>>(`${this.API_URL}/vehicles/parts`).subscribe(
+    this.http.get<Part[]>(`${this.API_URL}/vehicles/parts`).subscribe(
       res => {
-        this.parts = res.data;        
+        this.parts = res;        
       }
     );
 
-    this.http.get<Response<Booking>>(`${this.API_URL}/bookings/${booking_id}`).subscribe(
+    this.http.get<Booking>(`${this.API_URL}/bookings/${booking_id}`).subscribe(
       res => {
-        this.booking=res.data;
+        this.booking=res;
         //start customer
-        this.http.get<Response<User>>(`${this.API_URL}/users/${res.data.customer_id}`).subscribe(
+        this.http.get<User>(`${this.API_URL}/users/${res.customer}`).subscribe(
           res => {
-            this.customer=res.data;
+            this.customer=res;
           }
         );
         //finish customer
 
         // start service
-        this.http.get<Response<Service>>(`${this.API_URL}/services/${this.booking.service_id}`).subscribe(
+        this.http.get<Service>(`${this.API_URL}/services/${this.booking.base_service}`).subscribe(
           res => {
-            this.service = res.data
+            this.service = res
             this.isLoading = false;
           }
         );
@@ -92,7 +92,7 @@ export class ShowBookingComponent implements OnInit {
   }
 
   public getBaseServiceById(id: number){
-    return this.base_services.find(service => service.id === id);
+    return this.base_service.find(service => service.id === id);
   }
 
   public getPartById(id: number){
