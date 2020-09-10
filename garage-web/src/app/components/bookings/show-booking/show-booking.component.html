@@ -66,9 +66,9 @@
                     <div class="card-body">
                         <table class="table table-borderless">
                             <tr *ngFor="let base_service of booking.base_service">
-                                <td>{{getExtraServiceById(base_service).name}}</td>
+                                <td>{{base_service.name}}</td>
                                 <td class="text-right">
-                                    {{ (getExtraServiceById(base_service).price) | currency :'EUR':'symbol':'1.2-2'   }}
+                                    {{ base_service.price | currency :'EUR':'symbol':'1.2-2'   }}
                                 </td>
                             </tr>
                         </table>

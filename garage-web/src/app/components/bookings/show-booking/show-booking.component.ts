@@ -22,7 +22,7 @@ export class ShowBookingComponent implements OnInit {
   API_URL         = `${environment.apiUrl}`;
 
   extra_services  : Service[];
-  base_service   : Service[];
+  base_service    : Service[];
   service         : Service;
   parts           : Part[];
   customer        : User;
@@ -69,7 +69,7 @@ export class ShowBookingComponent implements OnInit {
       res => {
         this.booking=res;
         //start customer
-        this.http.get<User>(`${this.API_URL}/users/${res.customer}`).subscribe(
+        this.http.get<User>(`${this.API_URL}/users/${this.booking.customer.id}`).subscribe(
           res => {
             this.customer=res;
           }
@@ -77,7 +77,7 @@ export class ShowBookingComponent implements OnInit {
         //finish customer
 
         // start service
-        this.http.get<Service>(`${this.API_URL}/services/${this.booking.base_service}`).subscribe(
+        this.http.get<Service>(`${this.API_URL}/services/${this.booking.base_service.id}`).subscribe(
           res => {
             this.service = res
             this.isLoading = false;

@@ -1,5 +1,6 @@
 import { Service } from './service.model';
 import { Part } from './part.model';
+import { User } from './user.model';
 
 export interface Booking{ 
     id: number;
@@ -12,8 +13,8 @@ export interface Booking{
     comments: string;
     base_service: Service;
     vehicle_type: string;
-    customer: number;
-    mechanic:number;
+    customer: User;
+    mechanic: User;
     extra_service: Service[];
     total:string;
     parts: Part[];
