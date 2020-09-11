@@ -13,15 +13,15 @@
     
 	<!-- parent pom -->
     <groupId>com.garage</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>garage-parent</artifactId>
     <packaging>pom</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
 	<!-- sub modules -->
 	<modules>
-        <module>api</module>
+        <module>garage-api</module>
         <module>garage-geo</module>
-        <module>audit</module>
+        <module>garage-audit</module>
     </modules>
 
 </project>

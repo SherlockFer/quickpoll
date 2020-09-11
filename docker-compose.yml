@@ -32,8 +32,8 @@ services:
   
   audit:
     build:
-      context: audit
-    image: audit
+      context: garage-audit
+    image: garage-audit
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
@@ -41,8 +41,8 @@ services:
       
   api:
     build:
-      context: api
-    image: api
+      context: garage-api
+    image: garage-api
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
@@ -51,7 +51,7 @@ services:
       - postgres
       - rabbitmq
       - garage-geo
-      - audit
+      - garage-audit
     
 volumes:
   rabbitmq_data:
