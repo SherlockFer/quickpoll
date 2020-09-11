@@ -17,9 +17,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.apress.dto.ProductDTO;
@@ -68,8 +65,6 @@ public class ProductControllerTest {
 
 	@Test
 	public void shouldCreateProductWithHttpStatusCreated() {
-		MockHttpServletRequest request = new MockHttpServletRequest();
-		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 		ProductDTO productDTO = ProductDTO.builder().id(1L).name("Annual Service").build();
 		when(productService.save(any())).thenReturn(productDTO);
 
@@ -81,7 +76,6 @@ public class ProductControllerTest {
 
 	@Test
 	public void shouldUpdatedProductWithHttpStatusOk() {
-		ProductDTO productDTO = ProductDTO.builder().id(1L).name("Annual Service").build();
 		when(productService.existsById(1L)).thenReturn(true);
 
 		ResponseEntity<Void> response = controller.update(ProductDTO.builder().name("Annual Service").build(), 1L);
@@ -92,7 +86,6 @@ public class ProductControllerTest {
 
 	@Test
 	public void shouldDeleteProductByIdWithHttpStatusAccepted() {
-		ProductDTO productDTO = ProductDTO.builder().id(1L).name("Annual Service").build();
 		when(productService.existsById(1L)).thenReturn(true);
 
 		ResponseEntity<Void> response = controller.delete(1L);
