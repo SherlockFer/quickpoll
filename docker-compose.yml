@@ -21,7 +21,7 @@ services:
     volumes:
       - rabbitmq_data
       
-  garage-geo:
+  geo:
     build:
       context: garage-geo
     image: garage-geo
@@ -50,8 +50,8 @@ services:
     depends_on:
       - postgres
       - rabbitmq
-      - garage-geo
-      - garage-audit
+      - geo
+      - audit
     
 volumes:
   rabbitmq_data:
