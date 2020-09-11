@@ -31,7 +31,7 @@ public class ProductValidatorTest {
 
 		validator.validate(productDTO);
 
-		verify(productDTO).addError("Category can't be empty");
+		verify(productDTO).addError("Category value is not valid");
 	}
 
 }

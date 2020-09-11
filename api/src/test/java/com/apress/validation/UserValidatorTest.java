@@ -63,6 +63,6 @@ public class UserValidatorTest {
 
 		validator.validate(userDTO);
 
-		verify(userDTO).addError("Role can't be empty");
+		verify(userDTO).addError("Role value is not valid");
 	}
 }

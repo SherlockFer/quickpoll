@@ -30,17 +30,6 @@ public class BookingValidatorTest {
 	private VatServiceClient client;
 
 	@Test
-	void shouldHasErrorWhenCommentIsNotPresent() {
-		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments(" ").vehicleNumberPlate("AAA-111")
-				.status("booked").date(LocalDate.parse("2020-01-01")).build());
-
-		validator.validate(bookingDTO);
-
-		verify(bookingDTO).addError("Comments can't be empty");
-
-	}
-
-	@Test
 	void shouldHasErrorWhenVehiculeNumberPlateIsNotPresent() {
 		BookingDTO bookingDTO = Mockito.spy(BookingDTO.builder().comments("comment").vehicleNumberPlate(" ")
 				.status("booked").date(LocalDate.parse("2020-01-01")).build());
