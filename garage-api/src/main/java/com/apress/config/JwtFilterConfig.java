@@ -18,7 +18,7 @@ public class JwtFilterConfig {
 	public FilterRegistrationBean<JwtFilter> jwtFilter() {
 		final FilterRegistrationBean<JwtFilter> registrationBean = new FilterRegistrationBean<JwtFilter>();
 		registrationBean.setFilter(new JwtFilter(jwtUtil));
-		registrationBean.addUrlPatterns("/bookings/*", "/services/*", "/parts/*", "users/*");
+		registrationBean.addUrlPatterns("/bookings/*", "/services/*", "/parts/*", "/users/*");
 		return registrationBean;
 	}
 
