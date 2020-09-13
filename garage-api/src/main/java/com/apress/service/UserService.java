@@ -31,16 +31,24 @@ public class UserService {
 		Collection<User> users = userRepository.findAll();
 		return userMapper.toUserDTOs(users);
 	}
-	
+
 	public Collection<UserDTO> findAll(UserDTO userDTO) {
-		User user=userMapper.toUser(userDTO);
-		Example<User> example=Example.of(user);
+		User user = userMapper.toUser(userDTO);
+		Example<User> example = Example.of(user);
 		Collection<User> users = userRepository.findAll(example);
 		return userMapper.toUserDTOs(users);
 	}
 
 	public Optional<UserDTO> findById(long id) {
 		Optional<User> user = userRepository.findById(id);
+		if (user.isPresent()) {
+			return Optional.of(userMapper.toUserDTO(user.get()));
+		}
+		return Optional.empty();
+	}
+
+	public Optional<UserDTO> findByEmail(String email) {
+		Optional<User> user = userRepository.findByEmail(email);
 		if (user.isPresent()) {
 			return Optional.of(userMapper.toUserDTO(user.get()));
 		}
