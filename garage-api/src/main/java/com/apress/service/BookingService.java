@@ -73,7 +73,7 @@ public class BookingService {
 		if (bookingDTO.hasErrors()) {
 			return bookingDTO;
 		}
-		bookingDTO.setTotal(bookingTotal.calcTotal(bookingDTO));
+		bookingTotal.updateTotal(bookingDTO);
 		Booking booking = bookingRepository.save(bookingMapper.toBooking(bookingDTO));
 		plateMessageSender.sendVehiclePlate(bookingMapper.toAuditDTO(booking));
 		return bookingMapper.toBookingDTO(booking);

@@ -27,7 +27,7 @@ public class BookingTotal {
 	@Autowired
 	private PartRepository partRepository;
 
-	public double calcTotal(BookingDTO bookingDTO) {
+	public void updateTotal(final BookingDTO bookingDTO) {
 		double total = 0;
 
 		if (bookingDTO.getBaseProduct() != null) {
@@ -46,7 +46,7 @@ public class BookingTotal {
 				total += part.get().getPrice();
 			}
 		}
-		return total;
+		bookingDTO.setTotal(total);
 	}
 
 }
