@@ -13,7 +13,7 @@ pipeline{
         stage('Git: Clone') { 
             steps{
                 sh "test -e .git && git clean -fdx 2>/dev/null || true"                    
-                git credentialsId: "jenkins-rsa", branch: "master", url: "git@github.com:SherlockFer/quickpoll.git"              
+                git credentialsId: "jenkins-rsa", branch: "master", url: "git@github.com:SherlockFer/garage-2.git"        
             }
         } 
         

@@ -81,7 +81,8 @@ public class ProductControllerTest {
 
 	@Test
 	public void shouldUpdatedProductWithHttpStatusOk() {
-		ProductDTO productDTO = ProductDTO.builder().id(1L).name("Annual Service").build();
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 		when(productService.existsById(1L)).thenReturn(true);
 
 		ResponseEntity<Void> response = controller.update(ProductDTO.builder().name("Annual Service").build(), 1L);
@@ -92,7 +93,6 @@ public class ProductControllerTest {
 
 	@Test
 	public void shouldDeleteProductByIdWithHttpStatusAccepted() {
-		ProductDTO productDTO = ProductDTO.builder().id(1L).name("Annual Service").build();
 		when(productService.existsById(1L)).thenReturn(true);
 
 		ResponseEntity<Void> response = controller.delete(1L);

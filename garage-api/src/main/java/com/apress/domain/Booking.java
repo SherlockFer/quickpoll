@@ -72,6 +72,9 @@ public class Booking {
 	@Column(name = "STATUS")
 	private String status;
 
+	@Column(name = "TOTAL")
+	private Double total;
+
 	@Singular(ignoreNullCollections = true)
 	@ManyToMany
 	@JoinTable(name = "BOOKING_PRODUCTS", joinColumns = @JoinColumn(name = "BOOKING_ID"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))

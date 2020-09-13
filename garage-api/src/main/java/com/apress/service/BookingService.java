@@ -39,35 +39,25 @@ public class BookingService {
 
 	public Collection<BookingDTO> findAll() {
 		Collection<Booking> bookings = bookingRepository.findAll();
-		Collection<BookingDTO> bookingDTOs = bookingMapper.toBookingDTOs(bookings);
-		for (BookingDTO bookingDTO : bookingDTOs) {
-			bookingDTO.setTotal(bookingTotal.calcTotal(bookingDTO));
-		}
-		return bookingDTOs;
+		return bookingMapper.toBookingDTOs(bookings);
 	}
 
-	public Collection<BookingDTO> findAll(final BookingDTO bookingDTO, final Integer limit ) {
+	public Collection<BookingDTO> findAll(final BookingDTO bookingDTO, final Integer limit) {
 		Booking booking = bookingMapper.toBooking(bookingDTO);
 		Example<Booking> example = Example.of(booking);
-		Integer size=100;
-		if(limit!=null) {
-			size=limit;
+		Integer size = 100;
+		if (limit != null) {
+			size = limit;
 		}
-		Pageable pageable=PageRequest.of(0,size, Sort.by("date").descending());
+		Pageable pageable = PageRequest.of(0, size, Sort.by("date").descending());
 		Collection<Booking> bookings = bookingRepository.findAll(example, pageable).toList();
-		Collection<BookingDTO> bookingDTOs = bookingMapper.toBookingDTOs(bookings);
-		for (BookingDTO opBookingDTO : bookingDTOs) {
-			opBookingDTO.setTotal(bookingTotal.calcTotal(opBookingDTO));
-		}
-		return bookingDTOs;
+		return bookingMapper.toBookingDTOs(bookings);
 	}
 
 	public Optional<BookingDTO> findById(final Long id) {
 		Optional<Booking> booking = bookingRepository.findById(id);
 		if (booking.isPresent()) {
-			BookingDTO bookingDTO = bookingMapper.toBookingDTO(booking.get());
-			bookingDTO.setTotal(bookingTotal.calcTotal(bookingDTO));
-			return Optional.of(bookingDTO);
+			return Optional.of(bookingMapper.toBookingDTO(booking.get()));
 		}
 		return Optional.empty();
 	}
@@ -83,6 +73,7 @@ public class BookingService {
 		if (bookingDTO.hasErrors()) {
 			return bookingDTO;
 		}
+		bookingTotal.updateTotal(bookingDTO);
 		Booking booking = bookingRepository.save(bookingMapper.toBooking(bookingDTO));
 		plateMessageSender.sendVehiclePlate(bookingMapper.toAuditDTO(booking));
 		return bookingMapper.toBookingDTO(booking);
