@@ -202,6 +202,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.total(290.0)
 				.build());
 		
 		Booking booking2 = bookingRepository
@@ -221,6 +222,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.total(230.0)
 				.build());
 		
 		Booking booking3 = bookingRepository
@@ -240,6 +242,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.total(230.0)
 				.build());
 		
 		Booking booking4 = bookingRepository
@@ -259,6 +262,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.total(230.0)
 				.build());
 		
 		Booking booking5 = bookingRepository
@@ -278,6 +282,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.total(230.0)
 				.build());
 		
 		Booking booking6 = bookingRepository
@@ -297,6 +302,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.total(230.0)
 				.build());
 		
 	}
