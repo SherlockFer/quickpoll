@@ -6,13 +6,13 @@ pipeline{
         stage('Git: Clone') { 
             steps{
                 sh "test -e .git && git clean -fdx 2>/dev/null || true"                    
-                git credentialsId: "jenkins-rsa", branch: "master", url: "git@github.com:SherlockFer/quickpoll.git"              
+                git credentialsId: "jenkins-rsa", branch: "master", url: "git@github.com:SherlockFer/garage-2.git"              
             }
         } 
         
-        stage('Run test booking'){
+        stage('Run test Karate'){
             steps{            
-                sh "cd garage-api-test && java -jar /opt/karate/karate-0.9.6.jar --env=docker booking.feature user.feature part.feature product.feature"
+                sh "cd garage-test && java -jar /opt/karate/karate-0.9.6.jar --env=docker booking.feature user.feature part.feature product.feature"
             }
         }
     }
@@ -24,7 +24,7 @@ pipeline{
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: "garage-api-test/target/cucumber-html-reports",
+                    reportDir: "garage-test/target/cucumber-html-reports",
                     reportFiles: 'overview-features.html',
                     reportName: "Report"
                 ]

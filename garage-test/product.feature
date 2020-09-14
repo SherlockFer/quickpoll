@@ -1,8 +1,13 @@
 Feature: Be able to manage Products
      
+    Background:
+			  * def myFeature = call read('tokenAuthentication.feature') {email:'admin@garage.com', password:'123456'}
+				* def authToken =  myFeature.accessToken 
+     
     Scenario: List Products
         Given url GARAGE_API_URL
         And path "/services"
+        And header Authorization = 'token ' + authToken
         When method get
         Then status 200
         And print response
@@ -20,6 +25,7 @@ Feature: Be able to manage Products
     Scenario: List Products when category=base
         Given url GARAGE_API_URL
         And path "/services"
+        And header Authorization = 'token ' + authToken
         And param filter[category] = "base"
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -39,6 +45,7 @@ Feature: Be able to manage Products
      Scenario: List Products when category=extra
         Given url GARAGE_API_URL
         And path "/services"
+        And header Authorization = 'token ' + authToken
         And param filter[category] = "extra"
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -58,6 +65,7 @@ Feature: Be able to manage Products
     Scenario: Get Products
         Given url GARAGE_API_URL
         And path "/services"
+        And header Authorization = 'token ' + authToken
         When method get
         Then status 200
         And print response
