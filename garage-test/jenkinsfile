@@ -12,7 +12,7 @@ pipeline{
         
         stage('Run test Karate'){
             steps{            
-                sh "cd garage-api-test && java -jar /opt/karate/karate-0.9.6.jar --env=docker booking.feature user.feature part.feature product.feature"
+                sh "cd garage-test && java -jar /opt/karate/karate-0.9.6.jar --env=docker booking.feature user.feature part.feature product.feature"
             }
         }
     }
