@@ -3,7 +3,7 @@ help: ## This help message
 
 up:   ## Start up all containers defined in the docker-compose
 	mvn clean compile package
-	docker-compose up -d --build
+	docker-compose -p garage2 up -d --build
 	
 down: ## Shut down all containers defined in the docker-compose and remove volumes as well
 	docker-compose down -v
