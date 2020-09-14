@@ -24,7 +24,7 @@ pipeline{
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: "garage-api-test/target/cucumber-html-reports",
+                    reportDir: "garage-test/target/cucumber-html-reports",
                     reportFiles: 'overview-features.html',
                     reportName: "Report"
                 ]
