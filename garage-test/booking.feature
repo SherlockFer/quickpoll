@@ -1,8 +1,13 @@
 Feature: Be able to booking
 
+		Background:
+			  * def myFeature = call read('tokenAuthentication.feature') {email:'admin@garage.com', password:'123456'}
+				* def authToken =  myFeature.accessToken
+				
     Scenario: Create Booking
         Given url GARAGE_API_URL
         And path "/bookings"
+        And header Authorization = 'token ' + authToken
         And request 
         """
         {
@@ -24,6 +29,7 @@ Feature: Be able to booking
         And print booking_id
         
         Given path '/bookings/' + booking_id
+        And header Authorization = 'token ' + authToken
         When method get
         Then status 200
         And print response
@@ -35,7 +41,7 @@ Feature: Be able to booking
     			 "comments": "comment1",
     			 "base_service": {
     			 		"price": "#number",
-    			 		"name": "annual_service",
+    			 		"name": "Annual Service",
     			 		"id": 1,
     			 		"category": "base"
     			 	},
@@ -65,6 +71,7 @@ Feature: Be able to booking
 		Scenario: Get Booking
         Given url GARAGE_API_URL
         And path "/bookings/1"
+        And header Authorization = 'token ' + authToken
         When method get
         Then status 200
         And print response
@@ -105,6 +112,7 @@ Feature: Be able to booking
     Scenario: List Bookings
         Given url GARAGE_API_URL
         And path "/bookings"
+        And header Authorization = 'token ' + authToken
         When method get
         Then status 200
         And print response
@@ -146,6 +154,7 @@ Feature: Be able to booking
         Scenario: List Bookings when status=booked
         Given url GARAGE_API_URL
         And path "/bookings"
+        And header Authorization = 'token ' + authToken
         And param filter[status] = "booked"
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -189,6 +198,7 @@ Feature: Be able to booking
     Scenario: List Bookings when status=fixed
         Given url GARAGE_API_URL
         And path "/bookings"
+        And header Authorization = 'token ' + authToken
         And param filter[status] = "fixed"
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -220,7 +230,7 @@ Feature: Be able to booking
     			 "vehicle_engine": "#present",
     			 "status": "fixed",
     			 "customer": {
-		            "id": 1,
+		            "id": "#number",
 		            "full_name": "#string",
 		            "mobile": "#string",
 		            "email": "#string",
@@ -232,6 +242,7 @@ Feature: Be able to booking
     Scenario: List Bookings when status=collected
         Given url GARAGE_API_URL
         And path "/bookings"
+        And header Authorization = 'token ' + authToken
         And param filter[status] = "collected"
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -275,6 +286,7 @@ Feature: Be able to booking
     Scenario: List Bookings when status=in_service
         Given url GARAGE_API_URL
         And path "/bookings"
+        And header Authorization = 'token ' + authToken
         And param filter[status] = "in_service"
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -318,6 +330,7 @@ Feature: Be able to booking
     Scenario: List Bookings when limit=1
         Given url GARAGE_API_URL
         And path "/bookings"
+        And header Authorization = 'token ' + authToken
         And param limit = 1
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -361,6 +374,7 @@ Feature: Be able to booking
     Scenario: List Bookings when limit=2
         Given url GARAGE_API_URL
         And path "/bookings"
+        And header Authorization = 'token ' + authToken
         And param limit = 2
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -404,6 +418,7 @@ Feature: Be able to booking
     Scenario: Update Booking
         Given url GARAGE_API_URL
         And path "/bookings"
+        And header Authorization = 'token ' + authToken
         And request 
         """
         {
@@ -425,6 +440,7 @@ Feature: Be able to booking
         And print booking_id
         
         Given path '/bookings/' + booking_id
+        And header Authorization = 'token ' + authToken
         And request 
         """
 				{
@@ -460,6 +476,7 @@ Feature: Be able to booking
         Then status 201
         
         Given path '/bookings/' + booking_id
+        And header Authorization = 'token ' + authToken
         When method get
         Then status 200
         And print response
@@ -471,7 +488,7 @@ Feature: Be able to booking
     			 "comments": "new comment",
     			 "base_service": {
     			 		"price": "#number",
-    			 		"name": "annual_service",
+    			 		"name": "Annual Service",
     			 		"id": 1,
     			 		"category": "base"
     			 	},
@@ -495,6 +512,7 @@ Feature: Be able to booking
     Scenario: Delete Booking
     		Given url GARAGE_API_URL
         And path "/bookings"
+        And header Authorization = 'token ' + authToken
         And request 
         """
         {
@@ -516,9 +534,11 @@ Feature: Be able to booking
         And print booking_id
         
         Given path '/bookings/' + booking_id
+        And header Authorization = 'token ' + authToken
         When method delete
         Then status 202
         
         Given path '/bookings/' + booking_id
+        And header Authorization = 'token ' + authToken
         When method get
         Then status 404
