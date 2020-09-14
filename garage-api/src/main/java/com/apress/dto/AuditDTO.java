@@ -23,6 +23,5 @@ public class AuditDTO implements Serializable {
 	private Long id;
 
 	@JsonProperty("vehicle_number_plate")
-	private String vehiculeNumberPlate;
-
+	private String vehicleNumberPlate;
 }
