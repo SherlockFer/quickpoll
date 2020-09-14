@@ -1,13 +1,13 @@
 Feature: Be able to manage Users
 
 		Background:
-			  * def myFeature = call read('tokenAuthentication.feature') {email:'admin@garage.com', password:'123456'}
-				* def authToken =  myFeature.accessToken
+			  * def token_response = call read('token.feature') {email:'admin@garage.com', password:'123456'}
+				* def token =  token_response.token
 					
     Scenario: Create User
         Given url GARAGE_API_URL
         And path "/users"
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         And request 
         """
         {
@@ -26,7 +26,7 @@ Feature: Be able to manage Users
         And print user_id
         
         Given path '/users/' + user_id
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         When method get
         Then status 200
         And print response
@@ -42,14 +42,14 @@ Feature: Be able to manage Users
         }
         """
         Given path '/users/' + user_id
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         When method delete
         Then status 202
         
     Scenario: Get User
         Given url GARAGE_API_URL
         And path "/users/1"
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         When method get
         Then status 200
         And print response
@@ -67,7 +67,7 @@ Feature: Be able to manage Users
     Scenario: List Users
         Given url GARAGE_API_URL
         And path "/users"
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         When method get
         Then status 200
         And print response
@@ -86,7 +86,7 @@ Feature: Be able to manage Users
     Scenario: List Users when role=admin
         Given url GARAGE_API_URL
         And path "/users"
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         And param filter[role] = "admin"
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -107,7 +107,7 @@ Feature: Be able to manage Users
     Scenario: List Users when role=customer
         Given url GARAGE_API_URL
         And path "/users"
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         And param filter[role] = "customer"
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -128,7 +128,7 @@ Feature: Be able to manage Users
     Scenario: List Users when role=mechanic
         Given url GARAGE_API_URL
         And path "/users"
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         And param filter[role] = "mechanic"
         And header Content-Type = 'application/json; charset=utf-8'
         When method get
@@ -149,7 +149,7 @@ Feature: Be able to manage Users
     Scenario: Update User
         Given url GARAGE_API_URL
         And path "/users"
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         And request 
         """
         {
@@ -168,7 +168,7 @@ Feature: Be able to manage Users
         And print user_id
         
         Given path '/users/' + user_id
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         When method get
         Then status 200
         And print response
@@ -184,14 +184,14 @@ Feature: Be able to manage Users
         }
         """
         Given path '/users/' + user_id
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         When method delete
         Then status 202
 
     Scenario: Delete User
         Given url GARAGE_API_URL
         And path "/users"
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         And request 
         """
         {
@@ -210,12 +210,12 @@ Feature: Be able to manage Users
         And print user_id 
         
         Given path '/users/' + user_id
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         When method delete
         Then status 202
         
         Given path '/users/' + user_id
-        And header Authorization = 'token ' + authToken
+        And header Authorization = 'token ' + token
         When method get
         Then status 404
         
