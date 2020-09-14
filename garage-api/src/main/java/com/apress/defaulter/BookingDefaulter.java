@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.apress.client.GeoLocationClient;
@@ -42,8 +44,9 @@ public class BookingDefaulter {
 	}
 
 	private void populateCustomer(BookingDTO bookingDTO) {
-		Optional<User> user=userRepository.findById((long) 1);
-		UserDTO userDTO=userMapper.toUserDTO(user.get());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Optional<User> user = userRepository.findById((long) authentication.getPrincipal());
+		UserDTO userDTO = userMapper.toUserDTO(user.get());
 		bookingDTO.setCustomer(userDTO);
 	}
 
