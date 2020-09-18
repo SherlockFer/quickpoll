@@ -59,7 +59,7 @@ public class JwtFilter extends GenericFilterBean {
 					Claims claims = jwtUtil.decode(token);
 					log.info("Token details: {}", claims);
 					String role = (String) claims.get("role");
-					Integer userId = (Integer) claims.get("user_id");
+					Long userId = Long.valueOf(claims.get("user_id").toString());
 					Authentication authentication = new UsernamePasswordAuthenticationToken(userId, null,
 							Arrays.asList(new SimpleGrantedAuthority(role)));
 					SecurityContextHolder.getContext().setAuthentication(authentication);

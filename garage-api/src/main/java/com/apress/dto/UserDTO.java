@@ -14,6 +14,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class UserDTO extends BaseDTO {
 
 	private Long id;
@@ -32,5 +33,9 @@ public class UserDTO extends BaseDTO {
 
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
+	
+	public UserDTO(long id) {
+	    this.id = id;
+	}
 
 }

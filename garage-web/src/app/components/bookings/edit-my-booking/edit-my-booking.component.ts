@@ -23,7 +23,7 @@ export class EditMyBookingComponent implements OnInit {
 
   form            : FormGroup;
   extra_services  : Service[];
-  base_services   : Service[];
+  base_service    : Service;
   parts           : Part[];
   customer        : User;
   mechanics       : User[];  
@@ -50,22 +50,22 @@ export class EditMyBookingComponent implements OnInit {
       mechanic: [],
       customer: [],
       date: [, Validators.required],
-      service_id: [, Validators.required],
+      base_service: [, Validators.required],
       vehicle_type: [],
       vehicle_brand: [],
       vehicle_number_plate:[, Validators.required],
       vehicle_model: [],
       vehicle_engine: [],
       comments: [],
-      base_service: [[]],
+      base_service2: [[]],
       parts: [[]],
     });
 
 
     // Base services
-    this.http.get<Service[]>(`${this.API_URL}/services/?filter[category]=base`).subscribe(
+    this.http.get<Service>(`${this.API_URL}/services/?filter[category]=base`).subscribe(
       res => {
-        this.base_services = res
+        this.base_service = res
       }
     );
 
@@ -94,9 +94,9 @@ export class EditMyBookingComponent implements OnInit {
       res => {
         let booking = res;
         delete booking.total; // Removing read-only field
-        this.form.setValue(booking);
+        this.form.patchValue(booking);
         //start customer
-        this.http.get<User>(`${this.API_URL}/users/${res.customer}`).subscribe(
+        this.http.get<User>(`${this.API_URL}/users/${res.customer.id}`).subscribe(
           res => {
             this.customer=res;
             this.isLoading = false;

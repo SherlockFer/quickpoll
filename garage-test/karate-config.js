@@ -5,7 +5,7 @@ function(){
 		config.GARAGE_API_URL = 'http://localhost:8080';
 	}
 	if (karate.env == 'docker'){
-		config.GARAGE_API_URL = 'http://host.docker.internal:8080';
+		config.GARAGE_API_URL = 'http://api:8080';
 	}
 	
 	return config;

@@ -56,6 +56,7 @@ export class EditBookingComponent implements OnInit {
       vehicle_engine: [],
       comments: [],
       parts: [[]],
+      extra_services: [[]],
     });
 
 
@@ -92,9 +93,9 @@ export class EditBookingComponent implements OnInit {
       res => {
         let booking = res;
         delete booking.total; // Removing read-only field
-        this.form.setValue(booking);
+        this.form.patchValue(booking);
         //Start customer
-        this.http.get<User>(`${this.API_URL}/users/${booking.customer}`).subscribe(
+        this.http.get<User>(`${this.API_URL}/users/${res.customer.id}`).subscribe(
           res => {
             this.customer = res;
             this.isLoading = false;
