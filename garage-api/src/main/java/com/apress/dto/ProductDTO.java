@@ -30,5 +30,9 @@ public class ProductDTO extends BaseDTO {
 
 	@JsonProperty("price")
 	private Integer price;
+	
+	public ProductDTO(long id) {
+	    this.id = id;
+	}
 
 }
