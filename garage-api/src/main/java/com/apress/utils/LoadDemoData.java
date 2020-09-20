@@ -73,9 +73,9 @@ public class LoadDemoData implements ApplicationRunner {
 		
 		User user4 = userRepository
 				.save(User.builder()
-				.role(UserRole.customer.name())
+				.role(UserRole.mechanic.name())
 				.password("123456")
-				.fullName("Customer-3")
+				.fullName("Mechanic-3")
 				.mobile("123456789")
 				.email("mechanic-3@garage.com")
 				.build());

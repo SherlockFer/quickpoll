@@ -37,7 +37,7 @@ public class UserValidator {
 	}
 
 	private void validatePassword(UserDTO userDTO) {
-		if (StringUtils.isBlank(userDTO.getPassword())) {
+		if (StringUtils.isBlank(userDTO.getPassword()) && userDTO.getId()==null) {
 			userDTO.addError("Password can't be empty");
 		}
 	}

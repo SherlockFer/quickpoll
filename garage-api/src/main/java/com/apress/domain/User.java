@@ -50,7 +50,7 @@ public class User {
 	@Column(name = "ROLE")
 	private String role;
 
-	@Column(name = "PASSWORD", nullable = false)
+	@Column(name = "PASSWORD")
 	private String password;
 
 	@Column(name = "CREATED_AT", insertable = true, updatable = false)
