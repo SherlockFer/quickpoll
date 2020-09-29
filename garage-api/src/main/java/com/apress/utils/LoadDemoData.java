@@ -24,7 +24,7 @@ import com.apress.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Component
+//@Component
 public class LoadDemoData implements ApplicationRunner {
 
 	@Autowired
