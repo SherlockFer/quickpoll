@@ -16,7 +16,7 @@ public class BookingNotificationScheduler {
 	@Autowired
 	private BookingRepository bookingRepository;
 
-	@Scheduled(cron = "* 3 * * * *", zone = "Europe/Dublin")
+	@Scheduled(cron = "0 */2 * * * *", zone = "Europe/Dublin")
 	public void sendPendingBookings() {
 		log.info("Pending Bookings: {} " + bookingRepository.count());
 	}
