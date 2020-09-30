@@ -1,6 +1,7 @@
 package com.apress.utils;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import com.apress.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-//@Component
+@Component
 public class LoadDemoData implements ApplicationRunner {
 
 	@Autowired
@@ -44,145 +45,77 @@ public class LoadDemoData implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		log.info("Loading database");
 
-		User user1 = userRepository
-				.save(User.builder()
-				.role(UserRole.admin.name())
-				.password("123456")
-				.fullName("Administrator")
-				.mobile("123456789")
-				.email("admin@garage.com")
-				.build());
+		Optional<User> user1 = userRepository
+				.findById(1L);
 		
-		User user2 = userRepository
-				.save(User.builder()
-				.role(UserRole.mechanic.name())
-				.password("123456")
-				.fullName("Mechanic-1")
-				.mobile("123456789")
-				.email("mechanic-1@garage.com")
-				.build());
+		Optional<User> user2 = userRepository
+				.findById(2L);
 		
-		User user3 = userRepository
-				.save(User.builder()
-				.role(UserRole.mechanic.name())
-				.password("123456")
-				.fullName("Mechanic-2")
-				.mobile("123456789")
-				.email("mechanic-2@garage.com")
-				.build());
+		Optional<User> user3 = userRepository
+				.findById(3L);
 		
-		User user4 = userRepository
-				.save(User.builder()
-				.role(UserRole.mechanic.name())
-				.password("123456")
-				.fullName("Mechanic-3")
-				.mobile("123456789")
-				.email("mechanic-3@garage.com")
-				.build());
+		Optional<User> user4 = userRepository
+				.findById(4L);
 		
-		User user5 = userRepository
-				.save(User.builder()
-				.role(UserRole.customer.name())
-				.password("123456")
-				.fullName("Customer-1")
-				.mobile("123456789")
-				.email("customer-1@garage.com")
-				.build());
-		
-		User user6 = userRepository
-				.save(User.builder()
-				.role(UserRole.customer.name())
-				.password("123456")
-				.fullName("Customer-2")
-				.mobile("123456789")
-				.email("customer-2@garage.com")
-				.build());
-		
-		User user7 = userRepository
-				.save(User.builder()
-				.role(UserRole.customer.name())
-				.password("123456")
-				.fullName("Customer-3")
-				.mobile("123456789")
-				.email("customer-3@garage.com")
-				.build());
+//		User user5 = userRepository
+//				.save(User.builder()
+//				.id(5L)
+//				.role(UserRole.customer.name())
+//				.password("123456")
+//				.fullName("Customer-1")
+//				.mobile("123456789")
+//				.email("customer-1@garage.com")
+//				.build());
+//		
+//		User user6 = userRepository
+//				.save(User.builder()
+//				.id(6L)
+//				.role(UserRole.customer.name())
+//				.password("123456")
+//				.fullName("Customer-2")
+//				.mobile("123456789")
+//				.email("customer-2@garage.com")
+//				.build());
+//		
+//		User user7 = userRepository
+//				.save(User.builder()
+//				.id(7L)
+//				.role(UserRole.customer.name())
+//				.password("123456")
+//				.fullName("Customer-3")
+//				.mobile("123456789")
+//				.email("customer-3@garage.com")
+//				.build());
 
-		Product product1 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Annual Service")
-				.category("base")
-				.price(50)
-				.build());
+		Optional<Product> product1 = productRepository
+				.findById(1L);
+			
+		Optional<Product> product2 = productRepository
+				.findById(2L);
 		
-		Product product2 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Major Service")
-				.category("base")
-				.price(60)
-				.build());
+		Optional<Product> product3 = productRepository
+				.findById(3L);
 		
-		Product product3 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Repair or Fault")
-				.category("base")
-				.price(70)
-				.build());
+		Optional<Product> product4 = productRepository
+				.findById(4L);
 		
-		Product product4 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Major Repair")
-				.category("base")
-				.price(80)
-				.build());
+		Optional<Product> product5 = productRepository
+				.findById(5L);
 		
-		Product product5 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Wheel alignment")
-				.category("extra")
-				.price(90)
-				.build());
+		Optional<Product> product6 = productRepository
+				.findById(6L);
 		
-		Product product6 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Grease and lubricat")
-				.category("extra")
-				.price(70)
-				.build());
-		
-		Product product7 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Suspension")
-				.category("extra")
-				.price(70)
-				.build());
+		Optional<Product> product7 = productRepository
+				.findById(7L);
 
-		Part part1 = partRepository
-				.save(Part.builder()
-				.sku(UUID.randomUUID().toString())
-				.name("Engine motor oil")
-				.price(50)
-				.build());
+		Optional<Part> part1 = partRepository
+				.findById(1L);
 		
-		Part part2 = partRepository
-				.save(Part.builder()
-				.sku(UUID.randomUUID().toString())
-				.name("Filter oil")
-				.price(60)
-				.build());
+		Optional<Part> part2 = partRepository
+				.findById(2L);
 		
-		Part part3 = partRepository
-				.save(Part.builder()
-				.sku(UUID.randomUUID().toString())
-				.name("Filer ai")
-				.price(70)
-				.build());
+		Optional<Part> part3 = partRepository
+				.findById(3L);
 
 		Booking booking1 = bookingRepository
 				.save(Booking.builder()
@@ -195,13 +128,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("AAA-111")
 				.vehicleType(VehicleType.car.name())
-				.part(part1)
-				.part(part2)
-				.mechanic(user2)
-				.customer(user1)
-				.baseProduct(product1)
-				.extraProduct(product2)
-				.extraProduct(product3)
+				.part(part1.get())
+				.part(part2.get())
+				.mechanic(user2.get())
+				.customer(user1.get())
+				.baseProduct(product1.get())
+				.extraProduct(product2.get())
+				.extraProduct(product3.get())
 				.total(290.0)
 				.build());
 		
@@ -216,12 +149,12 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("BBB-222")
 				.vehicleType(VehicleType.car.name())
-				.part(part1)
-				.mechanic(user2)
-				.customer(user1)
-				.baseProduct(product1)
-				.extraProduct(product2)
-				.extraProduct(product3)
+				.part(part1.get())
+				.mechanic(user2.get())
+				.customer(user1.get())
+				.baseProduct(product1.get())
+				.extraProduct(product2.get())
+				.extraProduct(product3.get())
 				.total(230.0)
 				.build());
 		
@@ -236,12 +169,12 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("CCC-333")
 				.vehicleType(VehicleType.small_van.name())
-				.part(part1)
-				.mechanic(user2)
-				.customer(user1)
-				.baseProduct(product1)
-				.extraProduct(product2)
-				.extraProduct(product3)
+				.part(part1.get())
+				.mechanic(user2.get())
+				.customer(user1.get())
+				.baseProduct(product1.get())
+				.extraProduct(product2.get())
+				.extraProduct(product3.get())
 				.total(230.0)
 				.build());
 		
@@ -256,12 +189,12 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("DDD-444")
 				.vehicleType(VehicleType.small_bus.name())
-				.part(part1)
-				.mechanic(user2)
-				.customer(user1)
-				.baseProduct(product1)
-				.extraProduct(product2)
-				.extraProduct(product3)
+				.part(part1.get())
+				.mechanic(user2.get())
+				.customer(user1.get())
+				.baseProduct(product1.get())
+				.extraProduct(product2.get())
+				.extraProduct(product3.get())
 				.total(230.0)
 				.build());
 		
@@ -276,12 +209,12 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("EEE-666")
 				.vehicleType(VehicleType.small_bus.name())
-				.part(part1)
-				.mechanic(user2)
-				.customer(user1)
-				.baseProduct(product1)
-				.extraProduct(product2)
-				.extraProduct(product3)
+				.part(part1.get())
+				.mechanic(user2.get())
+				.customer(user1.get())
+				.baseProduct(product1.get())
+				.extraProduct(product2.get())
+				.extraProduct(product3.get())
 				.total(230.0)
 				.build());
 		
@@ -296,12 +229,12 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("FFF-777")
 				.vehicleType(VehicleType.car.name())
-				.part(part1)
-				.mechanic(user2)
-				.customer(user1)
-				.baseProduct(product1)
-				.extraProduct(product2)
-				.extraProduct(product3)
+				.part(part1.get())
+				.mechanic(user2.get())
+				.customer(user1.get())
+				.baseProduct(product1.get())
+				.extraProduct(product2.get())
+				.extraProduct(product3.get())
 				.total(230.0)
 				.build());
 		
