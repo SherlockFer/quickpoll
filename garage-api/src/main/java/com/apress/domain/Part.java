@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
@@ -33,6 +34,7 @@ public class Part {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "part_id_seq")
+	@SequenceGenerator(name = "part_id_seq", sequenceName = "part_id_seq", allocationSize = 1)
 	@Column(name = "ID")
 	private Long id;
 

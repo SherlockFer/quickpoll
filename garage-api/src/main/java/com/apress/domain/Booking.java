@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
@@ -40,6 +41,7 @@ public class Booking {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_id_seq")
+	@SequenceGenerator(name = "booking_id_seq", sequenceName = "booking_id_seq", allocationSize = 1)
 	@Column(name = "ID")
 	private Long id;
 
