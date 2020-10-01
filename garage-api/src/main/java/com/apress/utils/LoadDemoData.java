@@ -45,77 +45,74 @@ public class LoadDemoData implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		log.info("Loading database");
 
-		Optional<User> user1 = userRepository
-				.findById(1L);
+		User user1 = userRepository
+				.findById(1L).get();
 		
-		Optional<User> user2 = userRepository
-				.findById(2L);
+		User user2 = userRepository
+				.findById(2L).get();
 		
-		Optional<User> user3 = userRepository
-				.findById(3L);
+		User user3 = userRepository
+				.findById(3L).get();
 		
-		Optional<User> user4 = userRepository
-				.findById(4L);
+		User user4 = userRepository
+				.findById(4L).get();
 		
-//		User user5 = userRepository
-//				.save(User.builder()
-//				.id(5L)
-//				.role(UserRole.customer.name())
-//				.password("123456")
-//				.fullName("Customer-1")
-//				.mobile("123456789")
-//				.email("customer-1@garage.com")
-//				.build());
-//		
-//		User user6 = userRepository
-//				.save(User.builder()
-//				.id(6L)
-//				.role(UserRole.customer.name())
-//				.password("123456")
-//				.fullName("Customer-2")
-//				.mobile("123456789")
-//				.email("customer-2@garage.com")
-//				.build());
-//		
-//		User user7 = userRepository
-//				.save(User.builder()
-//				.id(7L)
-//				.role(UserRole.customer.name())
-//				.password("123456")
-//				.fullName("Customer-3")
-//				.mobile("123456789")
-//				.email("customer-3@garage.com")
-//				.build());
+		User user5 = userRepository
+				.save(User.builder()
+				.role(UserRole.customer.name())
+				.password("123456")
+				.fullName("Customer-1")
+				.mobile("123456789")
+				.email("customer-1@garage.com")
+				.build());
+		
+		User user6 = userRepository
+				.save(User.builder()
+				.role(UserRole.customer.name())
+				.password("123456")
+				.fullName("Customer-2")
+				.mobile("123456789")
+				.email("customer-2@garage.com")
+				.build());
+		
+		User user7 = userRepository
+				.save(User.builder()
+				.role(UserRole.customer.name())
+				.password("123456")
+				.fullName("Customer-3")
+				.mobile("123456789")
+				.email("customer-3@garage.com")
+				.build());
 
-		Optional<Product> product1 = productRepository
-				.findById(1L);
+		Product product1 = productRepository
+				.findById(1L).get();
 			
-		Optional<Product> product2 = productRepository
-				.findById(2L);
+		Product product2 = productRepository
+				.findById(2L).get();
 		
-		Optional<Product> product3 = productRepository
-				.findById(3L);
+		Product product3 = productRepository
+				.findById(3L).get();
 		
-		Optional<Product> product4 = productRepository
-				.findById(4L);
+		Product product4 = productRepository
+				.findById(4L).get();
 		
-		Optional<Product> product5 = productRepository
-				.findById(5L);
+		Product product5 = productRepository
+				.findById(5L).get();
 		
-		Optional<Product> product6 = productRepository
-				.findById(6L);
+		Product product6 = productRepository
+				.findById(6L).get();
 		
-		Optional<Product> product7 = productRepository
-				.findById(7L);
+		Product product7 = productRepository
+				.findById(7L).get();
 
-		Optional<Part> part1 = partRepository
-				.findById(1L);
+		Part part1 = partRepository
+				.findById(1L).get();
 		
-		Optional<Part> part2 = partRepository
-				.findById(2L);
+		Part part2 = partRepository
+				.findById(2L).get();
 		
-		Optional<Part> part3 = partRepository
-				.findById(3L);
+		Part part3 = partRepository
+				.findById(3L).get();
 
 		Booking booking1 = bookingRepository
 				.save(Booking.builder()
@@ -128,13 +125,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("AAA-111")
 				.vehicleType(VehicleType.car.name())
-				.part(part1.get())
-				.part(part2.get())
-				.mechanic(user2.get())
-				.customer(user1.get())
-				.baseProduct(product1.get())
-				.extraProduct(product2.get())
-				.extraProduct(product3.get())
+				.part(part1)
+				.part(part2)
+				.mechanic(user2)
+				.customer(user1)
+				.baseProduct(product1)
+				.extraProduct(product2)
+				.extraProduct(product3)
 				.total(290.0)
 				.build());
 		
@@ -149,12 +146,12 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("BBB-222")
 				.vehicleType(VehicleType.car.name())
-				.part(part1.get())
-				.mechanic(user2.get())
-				.customer(user1.get())
-				.baseProduct(product1.get())
-				.extraProduct(product2.get())
-				.extraProduct(product3.get())
+				.part(part1)
+				.mechanic(user2)
+				.customer(user1)
+				.baseProduct(product1)
+				.extraProduct(product2)
+				.extraProduct(product3)
 				.total(230.0)
 				.build());
 		
@@ -169,12 +166,12 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("CCC-333")
 				.vehicleType(VehicleType.small_van.name())
-				.part(part1.get())
-				.mechanic(user2.get())
-				.customer(user1.get())
-				.baseProduct(product1.get())
-				.extraProduct(product2.get())
-				.extraProduct(product3.get())
+				.part(part1)
+				.mechanic(user2)
+				.customer(user1)
+				.baseProduct(product1)
+				.extraProduct(product2)
+				.extraProduct(product3)
 				.total(230.0)
 				.build());
 		
@@ -189,12 +186,12 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("DDD-444")
 				.vehicleType(VehicleType.small_bus.name())
-				.part(part1.get())
-				.mechanic(user2.get())
-				.customer(user1.get())
-				.baseProduct(product1.get())
-				.extraProduct(product2.get())
-				.extraProduct(product3.get())
+				.part(part1)
+				.mechanic(user2)
+				.customer(user1)
+				.baseProduct(product1)
+				.extraProduct(product2)
+				.extraProduct(product3)
 				.total(230.0)
 				.build());
 		
@@ -209,12 +206,12 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("EEE-666")
 				.vehicleType(VehicleType.small_bus.name())
-				.part(part1.get())
-				.mechanic(user2.get())
-				.customer(user1.get())
-				.baseProduct(product1.get())
-				.extraProduct(product2.get())
-				.extraProduct(product3.get())
+				.part(part1)
+				.mechanic(user2)
+				.customer(user1)
+				.baseProduct(product1)
+				.extraProduct(product2)
+				.extraProduct(product3)
 				.total(230.0)
 				.build());
 		
@@ -229,12 +226,12 @@ public class LoadDemoData implements ApplicationRunner {
 				.vehicleModel("M5")
 				.vehicleNumberPlate("FFF-777")
 				.vehicleType(VehicleType.car.name())
-				.part(part1.get())
-				.mechanic(user2.get())
-				.customer(user1.get())
-				.baseProduct(product1.get())
-				.extraProduct(product2.get())
-				.extraProduct(product3.get())
+				.part(part1)
+				.mechanic(user2)
+				.customer(user1)
+				.baseProduct(product1)
+				.extraProduct(product2)
+				.extraProduct(product3)
 				.total(230.0)
 				.build());
 		
