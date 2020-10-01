@@ -11,14 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 
 @Service
-public class BookingNotificationScheduler {
+public class BookingNotificationTask {
 
 	@Autowired
 	private BookingRepository bookingRepository;
 
-	@Scheduled(cron = "0 */2 * * * *", zone = "Europe/Dublin")
+	@Scheduled(cron = "0 */1 * * * *", zone = "Europe/Dublin")
 	public void sendPendingBookings() {
-		log.info("Pending Bookings: {} " + bookingRepository.count());
+		log.info("Pending Bookings : {} " + bookingRepository.countByStatus("booked"));
 	}
 
 }
