@@ -156,6 +156,18 @@
 			<artifactId>flyway-core</artifactId>
 			<version>6.3.2</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>net.javacrumbs.shedlock</groupId>
+		    <artifactId>shedlock-spring</artifactId>
+		    <version>4.7.1</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>net.javacrumbs.shedlock</groupId>
+		    <artifactId>shedlock-provider-jdbc-template</artifactId>
+		    <version>4.7.1</version>
+		</dependency>
 
 	</dependencies>
 
