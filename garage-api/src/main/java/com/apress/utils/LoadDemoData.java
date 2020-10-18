@@ -1,6 +1,7 @@
 package com.apress.utils;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,6 +45,12 @@ public class LoadDemoData implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		log.info("Loading database");
+		
+		LocalDate date1 = LocalDate.now();
+		LocalDate date2 = LocalDate.now().minusDays(5);
+		LocalDate date3 = LocalDate.now().minusDays(10);
+		LocalDate date4 = LocalDate.now().plusDays(5);
+		LocalDate date5 = LocalDate.now().plusDays(10);
 
 		User user1 = userRepository
 				.findById(1L).get();
@@ -114,9 +121,11 @@ public class LoadDemoData implements ApplicationRunner {
 		Part part3 = partRepository
 				.findById(3L).get();
 
+
+		
 		Booking booking1 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-01"))
+				.date(date1)
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 1")
 				.status(BookingStatus.booked.name())
@@ -137,7 +146,7 @@ public class LoadDemoData implements ApplicationRunner {
 		
 		Booking booking2 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-02"))
+				.date(date2)
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 2")
 				.status(BookingStatus.booked.name())
@@ -157,7 +166,7 @@ public class LoadDemoData implements ApplicationRunner {
 		
 		Booking booking3 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-03"))
+				.date(date3)
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 3")
 				.status(BookingStatus.in_service.name())
@@ -177,7 +186,7 @@ public class LoadDemoData implements ApplicationRunner {
 		
 		Booking booking4 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-04"))
+				.date(date4)
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 4")
 				.status(BookingStatus.fixed.name())
@@ -197,7 +206,7 @@ public class LoadDemoData implements ApplicationRunner {
 		
 		Booking booking5 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-05"))
+				.date(date5)
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 5")
 				.status(BookingStatus.collected.name())
@@ -217,7 +226,7 @@ public class LoadDemoData implements ApplicationRunner {
 		
 		Booking booking6 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-06"))
+				.date(date2)
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 6")
 				.status(BookingStatus.unrepairable.name())
