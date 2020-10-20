@@ -26,6 +26,7 @@ public class LocationService {
 			responseLocationDTO = restTemplate.getForEntity("http://ip-api.com/json/" + ip, LocationDTO.class);
 		} catch (RuntimeException e) {
 			log.error("ip-api.com Service Error" + responseLocationDTO, e);
+			throw e;
 		}
 
 		return responseLocationDTO.getBody();
@@ -38,7 +39,8 @@ public class LocationService {
 		try {
 			response = restTemplate.getForEntity("https://api.ipify.org/", String.class);
 		} catch (RuntimeException e) {
-			log.error("ip-api.com Service Error" + response, e);
+			log.error("api.ipify.org Service Error" + response, e);
+			throw e;
 		}
 		return response.getBody();
 
