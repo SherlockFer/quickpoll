@@ -1,0 +1,9 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <SOAP-ENV:Fault>
+            <faultcode>SOAP-ENV:Client</faultcode>
+            <faultstring xml:lang="en">The security token could not be authenticated or authorized; nested exception is org.apache.wss4j.common.ext.WSSecurityException: The security token could not be authenticated or authorized</faultstring>
+        </SOAP-ENV:Fault>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
