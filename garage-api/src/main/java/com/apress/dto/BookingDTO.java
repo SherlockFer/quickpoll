@@ -71,6 +71,9 @@ public class BookingDTO extends BaseDTO {
 
 	@JsonProperty("total")
 	private Double total;
+	
+	@JsonProperty("slot")
+	private SlotDTO slot;
 
 	@JsonProperty("vat_number")
 	private String vatNumber;

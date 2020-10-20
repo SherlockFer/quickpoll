@@ -16,6 +16,7 @@ CREATE TABLE bookings (
 	vehicle_model varchar(255) NULL,
 	vehicle_number_plate varchar(255) NOT NULL,
 	vehicle_type varchar(255) NOT NULL,
+	slot_id int8 NULL,
 	product_id int8 NOT NULL,
 	customer_id int8 NULL,
 	mechanic_id int8 NULL,
@@ -26,6 +27,8 @@ CREATE TABLE bookings (
 ALTER TABLE bookings ADD CONSTRAINT fk624671ymniidpsqki9p6patf7 FOREIGN KEY (mechanic_id) REFERENCES users(id);
 ALTER TABLE bookings ADD CONSTRAINT fkib6gjgj2e9binkktxmm175bmm FOREIGN KEY (customer_id) REFERENCES users(id);
 ALTER TABLE bookings ADD CONSTRAINT fklmdmerb98p3rhxcmvc9iunj2d FOREIGN KEY (product_id) REFERENCES products(id);
+ALTER TABLE bookings ADD CONSTRAINT fklmdmerb22p3rhxcmvc8iunj2d FOREIGN KEY (slot_id) REFERENCES slot(id);
+
 
 CREATE SEQUENCE booking_id_seq
 	INCREMENT BY 1

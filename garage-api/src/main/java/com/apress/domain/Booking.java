@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -90,6 +92,10 @@ public class Booking {
 	@OneToOne
 	@JoinColumn(name = "PRODUCT_ID", nullable = false)
 	private Product baseProduct;
+	
+	@ManyToOne
+	@JoinColumn(name = "SLOT_ID")
+	private Slot slot;
 
 	@ManyToOne
 	@JoinColumn(name = "MECHANIC_ID")

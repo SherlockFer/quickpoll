@@ -1,6 +1,7 @@
 package com.apress.utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -17,10 +18,12 @@ import com.apress.constants.Constants.VehicleType;
 import com.apress.domain.Booking;
 import com.apress.domain.Part;
 import com.apress.domain.Product;
+import com.apress.domain.Slot;
 import com.apress.domain.User;
 import com.apress.repository.BookingRepository;
 import com.apress.repository.PartRepository;
 import com.apress.repository.ProductRepository;
+import com.apress.repository.TimeSlotRepository;
 import com.apress.repository.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +43,9 @@ public class LoadDemoData implements ApplicationRunner {
 
 	@Autowired
 	private PartRepository partRepository;
+	
+	@Autowired
+	private TimeSlotRepository timeSlotRepository;
 
 	@SuppressWarnings("unused")
 	@Override
@@ -90,6 +96,42 @@ public class LoadDemoData implements ApplicationRunner {
 				.mobile("123456789")
 				.email("customer-3@garage.com")
 				.build());
+		
+		
+		Slot timeSlot1 = timeSlotRepository
+				.save(Slot.builder()
+						.id((long) 4)
+						.startTime(date1.atTime(9,0))
+						.endTime(date1.atTime(11,0))
+						.build());
+		
+		Slot timeSlot2 = timeSlotRepository
+				.save(Slot.builder()
+						.id((long) 5)
+						.startTime(date2.atTime(9,0))
+						.endTime(date2.atTime(11,0))
+						.build());
+		
+		Slot timeSlot3 = timeSlotRepository
+				.save(Slot.builder()
+						.id((long) 1)
+						.startTime(date3.atTime(9,0))
+						.endTime(date3.atTime(11,0))
+						.build());
+		
+		Slot timeSlot4 = timeSlotRepository
+				.save(Slot.builder()
+						.id((long) 2)
+						.startTime(date4.atTime(9,0))
+						.endTime(date4.atTime(11,0))
+						.build());
+		
+		Slot timeSlot5 = timeSlotRepository
+				.save(Slot.builder()
+						.id((long) 3)
+						.startTime(date5.atTime(9,0))
+						.endTime(date5.atTime(11,0))
+						.build());
 
 		Product product1 = productRepository
 				.findById(1L).get();
@@ -122,6 +164,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.findById(3L).get();
 
 
+
 		
 		Booking booking1 = bookingRepository
 				.save(Booking.builder()
@@ -141,6 +184,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(timeSlot1)
 				.total(290.0)
 				.build());
 		
@@ -161,6 +205,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(timeSlot2)
 				.total(230.0)
 				.build());
 		
@@ -181,6 +226,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(timeSlot3)
 				.total(230.0)
 				.build());
 		
@@ -201,6 +247,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(timeSlot4)
 				.total(230.0)
 				.build());
 		
@@ -221,6 +268,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(timeSlot5)
 				.total(230.0)
 				.build());
 		
@@ -241,6 +289,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(timeSlot2)
 				.total(230.0)
 				.build());
 		
