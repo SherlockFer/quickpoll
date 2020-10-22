@@ -51,12 +51,6 @@ public class LoadDemoData implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		log.info("Loading database");
-		
-		LocalDate date1 = LocalDate.now();
-		LocalDate date2 = LocalDate.now().minusDays(5);
-		LocalDate date3 = LocalDate.now().minusDays(10);
-		LocalDate date4 = LocalDate.now().plusDays(5);
-		LocalDate date5 = LocalDate.now().plusDays(10);
 
 		User user1 = userRepository
 				.findById(1L).get();
@@ -97,42 +91,24 @@ public class LoadDemoData implements ApplicationRunner {
 				.email("customer-3@garage.com")
 				.build());
 		
+		Slot slot1=new Slot(LocalDate.now().atTime(9,0)
+				,LocalDate.now().atTime(11,0));
 		
-		Slot timeSlot1 = timeSlotRepository
-				.save(Slot.builder()
-						.id((long) 4)
-						.startTime(date1.atTime(9,0))
-						.endTime(date1.atTime(11,0))
-						.build());
+		Slot slot2=new Slot(LocalDate.now().plusDays(5).atTime(9,0)
+				,LocalDate.now().plusDays(5).atTime(11,0));
 		
-		Slot timeSlot2 = timeSlotRepository
-				.save(Slot.builder()
-						.id((long) 5)
-						.startTime(date2.atTime(9,0))
-						.endTime(date2.atTime(11,0))
-						.build());
+		Slot slot3=new Slot(LocalDate.now().minusDays(1).atTime(9,0)
+				,LocalDate.now().minusDays(1).atTime(11,0));
 		
-		Slot timeSlot3 = timeSlotRepository
-				.save(Slot.builder()
-						.id((long) 1)
-						.startTime(date3.atTime(9,0))
-						.endTime(date3.atTime(11,0))
-						.build());
+		Slot slot4=new Slot(LocalDate.now().minusDays(10).atTime(9,0)
+				,LocalDate.now().minusDays(10).atTime(11,0));
 		
-		Slot timeSlot4 = timeSlotRepository
-				.save(Slot.builder()
-						.id((long) 2)
-						.startTime(date4.atTime(9,0))
-						.endTime(date4.atTime(11,0))
-						.build());
+		Slot slot5=new Slot(LocalDate.now().minusDays(15).atTime(9,0)
+				,LocalDate.now().minusDays(15).atTime(11,0));
 		
-		Slot timeSlot5 = timeSlotRepository
-				.save(Slot.builder()
-						.id((long) 3)
-						.startTime(date5.atTime(9,0))
-						.endTime(date5.atTime(11,0))
-						.build());
-
+		Slot slot6=new Slot(LocalDate.now().minusDays(30).atTime(9,0)
+				,LocalDate.now().minusDays(30).atTime(11,0));
+		
 		Product product1 = productRepository
 				.findById(1L).get();
 			
@@ -163,12 +139,9 @@ public class LoadDemoData implements ApplicationRunner {
 		Part part3 = partRepository
 				.findById(3L).get();
 
-
-
-		
 		Booking booking1 = bookingRepository
 				.save(Booking.builder()
-				.date(date1)
+				.date(LocalDate.now())
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 1")
 				.status(BookingStatus.booked.name())
@@ -184,13 +157,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
-				.slot(timeSlot1)
+				.slot(slot1)
 				.total(290.0)
 				.build());
 		
 		Booking booking2 = bookingRepository
 				.save(Booking.builder()
-				.date(date2)
+				.date(LocalDate.now().plusDays(5))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 2")
 				.status(BookingStatus.booked.name())
@@ -205,13 +178,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
-				.slot(timeSlot2)
+				.slot(slot2)
 				.total(230.0)
 				.build());
 		
 		Booking booking3 = bookingRepository
 				.save(Booking.builder()
-				.date(date3)
+				.date(LocalDate.now().minusDays(1))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 3")
 				.status(BookingStatus.in_service.name())
@@ -226,13 +199,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
-				.slot(timeSlot3)
+				.slot(slot3)
 				.total(230.0)
 				.build());
 		
 		Booking booking4 = bookingRepository
 				.save(Booking.builder()
-				.date(date4)
+				.date(LocalDate.now().minusDays(10))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 4")
 				.status(BookingStatus.fixed.name())
@@ -247,13 +220,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
-				.slot(timeSlot4)
+				.slot(slot4)
 				.total(230.0)
 				.build());
 		
 		Booking booking5 = bookingRepository
 				.save(Booking.builder()
-				.date(date5)
+				.date(LocalDate.now().minusDays(15))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 5")
 				.status(BookingStatus.collected.name())
@@ -268,13 +241,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
-				.slot(timeSlot5)
+				.slot(slot5)
 				.total(230.0)
 				.build());
 		
 		Booking booking6 = bookingRepository
 				.save(Booking.builder()
-				.date(date2)
+				.date(LocalDate.now().minusDays(30))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 6")
 				.status(BookingStatus.unrepairable.name())
@@ -289,7 +262,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
-				.slot(timeSlot2)
+				.slot(slot6)
 				.total(230.0)
 				.build());
 		

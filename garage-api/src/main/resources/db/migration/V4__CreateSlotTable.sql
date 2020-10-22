@@ -2,6 +2,8 @@ CREATE TABLE slot (
 	id int8 NOT NULL,
 	start_time timestamp NULL,
 	end_time timestamp NULL,
+    created_at timestamp NULL,
+	modified_at timestamp NULL,
 	CONSTRAINT slot_pkey PRIMARY KEY (id)
 );
 

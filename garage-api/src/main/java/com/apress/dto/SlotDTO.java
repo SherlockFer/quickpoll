@@ -29,7 +29,7 @@ public class SlotDTO {
 	private LocalDateTime startTime;       
 
 	@JsonProperty("end_time")
-	private LocalDateTime endtime;
+	private LocalDateTime endTime;
 	
 	public SlotDTO(long id) {
 	    this.id = id;

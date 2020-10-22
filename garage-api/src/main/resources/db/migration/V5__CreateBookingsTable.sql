@@ -16,7 +16,7 @@ CREATE TABLE bookings (
 	vehicle_model varchar(255) NULL,
 	vehicle_number_plate varchar(255) NOT NULL,
 	vehicle_type varchar(255) NOT NULL,
-	slot_id int8 NULL,
+	slot_id int8 NOT NULL,
 	product_id int8 NOT NULL,
 	customer_id int8 NULL,
 	mechanic_id int8 NULL,

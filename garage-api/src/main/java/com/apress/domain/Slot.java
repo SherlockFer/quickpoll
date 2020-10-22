@@ -3,11 +3,13 @@ package com.apress.domain;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
@@ -35,9 +37,9 @@ import lombok.Setter;
 @Entity
 @Table(name = "SLOT")
 public class Slot {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "slot_id_seq")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "slot_id_seq")
 	@SequenceGenerator(name = "slot_id_seq", sequenceName = "slot_id_seq", allocationSize = 1)
 	@Column(name = "ID")
 	private Long id;
@@ -47,5 +49,27 @@ public class Slot {
 	
 	@Column(name = "END_TIME")
 	private LocalDateTime endTime;
+	
+	@Column(name = "CREATED_AT", insertable = true, updatable = false)
+	private LocalDateTime created;
+
+	@Column(name = "MODIFIED_AT")
+	private LocalDateTime modified;
+
+	@PrePersist
+	void onCreate() {
+		this.setCreated(LocalDateTime.now());
+		this.setModified(LocalDateTime.now());
+	}
+
+	@PreUpdate
+	void onUpdate() {
+		this.setModified(LocalDateTime.now());
+	}
+
+	public Slot(LocalDateTime startTime,LocalDateTime endTime) {
+		this.startTime=startTime;
+		this.endTime=endTime;
+	}
 	
 }

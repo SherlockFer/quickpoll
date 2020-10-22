@@ -93,9 +93,12 @@ public class Booking {
 	@JoinColumn(name = "PRODUCT_ID", nullable = false)
 	private Product baseProduct;
 	
-	@ManyToOne
+	@OneToOne(
+	   cascade = CascadeType.ALL,
+	   orphanRemoval = true
+	)
 	@JoinColumn(name = "SLOT_ID")
-	private Slot slot;
+    private Slot slot;
 
 	@ManyToOne
 	@JoinColumn(name = "MECHANIC_ID")
