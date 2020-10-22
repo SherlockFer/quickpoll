@@ -23,7 +23,6 @@ import com.apress.domain.User;
 import com.apress.repository.BookingRepository;
 import com.apress.repository.PartRepository;
 import com.apress.repository.ProductRepository;
-import com.apress.repository.TimeSlotRepository;
 import com.apress.repository.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,9 +42,6 @@ public class LoadDemoData implements ApplicationRunner {
 
 	@Autowired
 	private PartRepository partRepository;
-	
-	@Autowired
-	private TimeSlotRepository timeSlotRepository;
 
 	@SuppressWarnings("unused")
 	@Override

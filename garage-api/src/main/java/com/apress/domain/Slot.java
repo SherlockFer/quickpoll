@@ -1,24 +1,16 @@
 package com.apress.domain;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.NaturalId;
-
-import com.apress.domain.Product.ProductBuilder;
-import com.apress.domain.User.UserBuilder;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

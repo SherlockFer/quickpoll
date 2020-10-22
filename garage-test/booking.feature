@@ -17,7 +17,11 @@ Feature: Be able to booking
     			 "vehicle_type": "car",
     			 "base_service": {
         	 "id": 1
-    			 }
+    			 },
+    			 "slot": {
+            "start_time": "2020-12-31T09:00:00",
+            "end_time": "2020-12-31T12:00:00"
+        		}
         }
         """
         And header Content-Type = 'application/json; charset=utf-8'
@@ -64,6 +68,11 @@ Feature: Be able to booking
 		            "mobile": "#string",
 		            "email": "#string",
 		            "role": "#string"
+        		},
+        		"slot": {
+		        		"id": "#number",
+		            "start_time": "#string",
+		            "end_time": "#string"
         		}
     		}
         """
@@ -105,6 +114,11 @@ Feature: Be able to booking
 		            "mobile": "#string",
 		            "email": "#string",
 		            "role": "#string"
+        		},
+        		"slot": {
+		        		"id": "#number",
+		            "start_time": "#string",
+		            "end_time": "#string"
         		}
     		}
         """
@@ -147,6 +161,11 @@ Feature: Be able to booking
 		            "mobile": "#string",
 		            "email": "#string",
 		            "role": "#string"
+        		},
+        	 "slot": {
+		        		"id": "#number",
+		            "start_time": "#string",
+		            "end_time": "#string"
         		}
     		}
         """
@@ -191,6 +210,11 @@ Feature: Be able to booking
 		            "mobile": "#string",
 		            "email": "#string",
 		            "role": "#string"
+        		},
+        		"slot": {
+		        		"id": "#number",
+		            "start_time": "#string",
+		            "end_time": "#string"
         		}
     		}
         """
@@ -235,6 +259,11 @@ Feature: Be able to booking
 		            "mobile": "#string",
 		            "email": "#string",
 		            "role": "#string"
+        	 },
+        	 "slot": {
+		        		"id": "#number",
+		            "start_time": "#string",
+		            "end_time": "#string"
         		}
     		}
         """
@@ -279,7 +308,12 @@ Feature: Be able to booking
 		            "mobile": "#string",
 		            "email": "#string",
 		            "role": "#string"
-        		}
+        	 },
+        	"slot": {
+		        		"id": "#number",
+		            "start_time": "#string",
+		            "end_time": "#string"
+        	 }
     		}
         """
         
@@ -323,7 +357,13 @@ Feature: Be able to booking
 		            "mobile": "#string",
 		            "email": "#string",
 		            "role": "#string"
+        		},
+        	"slot": {
+		        		"id": "#number",
+		            "start_time": "#string",
+		            "end_time": "#string"
         		}
+        		
     		}
         """
         
@@ -367,7 +407,12 @@ Feature: Be able to booking
 		            "mobile": "#string",
 		            "email": "#string",
 		            "role": "#string"
-        		}
+        		},
+        	 "slot": {
+		        		"id": "#number",
+		            "start_time": "#string",
+		            "end_time": "#string"
+        		}	
     		}
         """
         
@@ -411,7 +456,12 @@ Feature: Be able to booking
 		            "mobile": "#string",
 		            "email": "#string",
 		            "role": "#string"
-        		}
+        		},
+        	 "slot": {
+		        		"id": "#number",
+		            "start_time": "#string",
+		            "end_time": "#string"
+        		}	
     		}
         """
     
@@ -428,7 +478,11 @@ Feature: Be able to booking
     			 "vehicle_type": "car",
     			 "base_service": {
         	 "id": 1
-    			 }
+    			  },
+    			 "slot": {
+		            "start_time": "2020-10-27T09:00:00",
+           		  "end_time": "2020-10-27T11:00:00"
+        		}
         }
         """
         And header Content-Type = 'application/json; charset=utf-8'
@@ -468,7 +522,11 @@ Feature: Be able to booking
         		},
 				    "date": "2020-01-02",
 				    "comments": "new comment",
-				    "vat_number": null
+				    "vat_number": null,
+				    "slot": {
+		            "start_time": "2020-10-27T11:00:00",
+           		  "end_time": "2020-10-27T12:00:00"
+        		}
 				}
         """
 
@@ -505,7 +563,12 @@ Feature: Be able to booking
     			 "id": "#number",
     			 "vehicle_engine": "#null",
     			 "status": "booked",
-    			 "customer": "#present"
+    			 "customer": "#present",
+    			 "slot": {
+		        		"id": "#number",
+		            "start_time": "#string",
+		            "end_time": "#string"
+        		}
     		}
         """
         
@@ -522,7 +585,11 @@ Feature: Be able to booking
     			 "vehicle_type": "car",
     			 "base_service": {
         	 "id": 1
-    			 }
+    			 },
+				   "slot": {
+		            "start_time": "2020-10-27T11:00:00",
+           		  "end_time": "2020-10-27T12:00:00"
+        		}
         }
         """
         And header Content-Type = 'application/json; charset=utf-8'
