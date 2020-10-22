@@ -24,7 +24,7 @@ public class TableLister implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		try (Connection con = dataSource.getConnection();
-				ResultSet rs = con.getMetaData().getTables("garageDB", "public", "%", null)) {
+				ResultSet rs = con.getMetaData().getTables("garage", "public", "%", null)) {
 			while (rs.next()) {
 				logger.info("{}", rs.getString(3));
 			}
