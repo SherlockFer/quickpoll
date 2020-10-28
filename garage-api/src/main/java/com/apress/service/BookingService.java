@@ -72,7 +72,6 @@ public class BookingService {
 	@Transactional
 	public BookingDTO save(BookingDTO bookingDTO) {
 		bookingDefaulter.populateDefaults(bookingDTO);
-//		timeSlotDefaulter.populateDefaults(bookingDTO.getTimeSlot());
 		bookingValidator.validate(bookingDTO);
 		if (bookingDTO.hasErrors()) {
 			return bookingDTO;
