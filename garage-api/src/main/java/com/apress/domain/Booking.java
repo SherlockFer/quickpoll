@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
@@ -40,6 +43,7 @@ public class Booking {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_id_seq")
+	@SequenceGenerator(name = "booking_id_seq", sequenceName = "booking_id_seq", allocationSize = 1)
 	@Column(name = "ID")
 	private Long id;
 
@@ -88,6 +92,13 @@ public class Booking {
 	@OneToOne
 	@JoinColumn(name = "PRODUCT_ID", nullable = false)
 	private Product baseProduct;
+	
+	@OneToOne(
+	   cascade = CascadeType.ALL,
+	   orphanRemoval = true
+	)
+	@JoinColumn(name = "SLOT_ID")
+    private Slot slot;
 
 	@ManyToOne
 	@JoinColumn(name = "MECHANIC_ID")

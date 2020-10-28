@@ -1,6 +1,9 @@
 package com.apress.utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import com.apress.constants.Constants.VehicleType;
 import com.apress.domain.Booking;
 import com.apress.domain.Part;
 import com.apress.domain.Product;
+import com.apress.domain.Slot;
 import com.apress.domain.User;
 import com.apress.repository.BookingRepository;
 import com.apress.repository.PartRepository;
@@ -45,40 +49,16 @@ public class LoadDemoData implements ApplicationRunner {
 		log.info("Loading database");
 
 		User user1 = userRepository
-				.save(User.builder()
-				.role(UserRole.admin.name())
-				.password("123456")
-				.fullName("Administrator")
-				.mobile("123456789")
-				.email("admin@garage.com")
-				.build());
+				.findById(1L).get();
 		
 		User user2 = userRepository
-				.save(User.builder()
-				.role(UserRole.mechanic.name())
-				.password("123456")
-				.fullName("Mechanic-1")
-				.mobile("123456789")
-				.email("mechanic-1@garage.com")
-				.build());
+				.findById(2L).get();
 		
 		User user3 = userRepository
-				.save(User.builder()
-				.role(UserRole.mechanic.name())
-				.password("123456")
-				.fullName("Mechanic-2")
-				.mobile("123456789")
-				.email("mechanic-2@garage.com")
-				.build());
+				.findById(3L).get();
 		
 		User user4 = userRepository
-				.save(User.builder()
-				.role(UserRole.customer.name())
-				.password("123456")
-				.fullName("Customer-3")
-				.mobile("123456789")
-				.email("mechanic-3@garage.com")
-				.build());
+				.findById(4L).get();
 		
 		User user5 = userRepository
 				.save(User.builder()
@@ -106,87 +86,58 @@ public class LoadDemoData implements ApplicationRunner {
 				.mobile("123456789")
 				.email("customer-3@garage.com")
 				.build());
-
-		Product product1 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Annual Service")
-				.category("base")
-				.price(50)
-				.build());
 		
+		Slot slot1=new Slot(LocalDate.now().atTime(9,0)
+				,LocalDate.now().atTime(11,0));
+		
+		Slot slot2=new Slot(LocalDate.now().plusDays(5).atTime(9,0)
+				,LocalDate.now().plusDays(5).atTime(11,0));
+		
+		Slot slot3=new Slot(LocalDate.now().minusDays(1).atTime(9,0)
+				,LocalDate.now().minusDays(1).atTime(11,0));
+		
+		Slot slot4=new Slot(LocalDate.now().minusDays(10).atTime(9,0)
+				,LocalDate.now().minusDays(10).atTime(11,0));
+		
+		Slot slot5=new Slot(LocalDate.now().minusDays(15).atTime(9,0)
+				,LocalDate.now().minusDays(15).atTime(11,0));
+		
+		Slot slot6=new Slot(LocalDate.now().minusDays(30).atTime(9,0)
+				,LocalDate.now().minusDays(30).atTime(11,0));
+		
+		Product product1 = productRepository
+				.findById(1L).get();
+			
 		Product product2 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Major Service")
-				.category("base")
-				.price(60)
-				.build());
+				.findById(2L).get();
 		
 		Product product3 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Repair or Fault")
-				.category("base")
-				.price(70)
-				.build());
+				.findById(3L).get();
 		
 		Product product4 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Major Repair")
-				.category("base")
-				.price(80)
-				.build());
+				.findById(4L).get();
 		
 		Product product5 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Wheel alignment")
-				.category("extra")
-				.price(90)
-				.build());
+				.findById(5L).get();
 		
 		Product product6 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Grease and lubricat")
-				.category("extra")
-				.price(70)
-				.build());
+				.findById(6L).get();
 		
 		Product product7 = productRepository
-				.save(Product.builder()
-				.reference(UUID.randomUUID().toString())
-				.name("Suspension")
-				.category("extra")
-				.price(70)
-				.build());
+				.findById(7L).get();
 
 		Part part1 = partRepository
-				.save(Part.builder()
-				.sku(UUID.randomUUID().toString())
-				.name("Engine motor oil")
-				.price(50)
-				.build());
+				.findById(1L).get();
 		
 		Part part2 = partRepository
-				.save(Part.builder()
-				.sku(UUID.randomUUID().toString())
-				.name("Filter oil")
-				.price(60)
-				.build());
+				.findById(2L).get();
 		
 		Part part3 = partRepository
-				.save(Part.builder()
-				.sku(UUID.randomUUID().toString())
-				.name("Filer ai")
-				.price(70)
-				.build());
+				.findById(3L).get();
 
 		Booking booking1 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-01"))
+				.date(LocalDate.now())
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 1")
 				.status(BookingStatus.booked.name())
@@ -202,12 +153,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(slot1)
 				.total(290.0)
 				.build());
 		
 		Booking booking2 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-02"))
+				.date(LocalDate.now().plusDays(5))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 2")
 				.status(BookingStatus.booked.name())
@@ -222,12 +174,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(slot2)
 				.total(230.0)
 				.build());
 		
 		Booking booking3 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-03"))
+				.date(LocalDate.now().minusDays(1))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 3")
 				.status(BookingStatus.in_service.name())
@@ -242,12 +195,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(slot3)
 				.total(230.0)
 				.build());
 		
 		Booking booking4 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-04"))
+				.date(LocalDate.now().minusDays(10))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 4")
 				.status(BookingStatus.fixed.name())
@@ -262,12 +216,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(slot4)
 				.total(230.0)
 				.build());
 		
 		Booking booking5 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-05"))
+				.date(LocalDate.now().minusDays(15))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 5")
 				.status(BookingStatus.collected.name())
@@ -282,12 +237,13 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(slot5)
 				.total(230.0)
 				.build());
 		
 		Booking booking6 = bookingRepository
 				.save(Booking.builder()
-				.date(LocalDate.parse("2020-10-06"))
+				.date(LocalDate.now().minusDays(30))
 				.reference(UUID.randomUUID().toString())
 				.comments("comentario 6")
 				.status(BookingStatus.unrepairable.name())
@@ -302,6 +258,7 @@ public class LoadDemoData implements ApplicationRunner {
 				.baseProduct(product1)
 				.extraProduct(product2)
 				.extraProduct(product3)
+				.slot(slot6)
 				.total(230.0)
 				.build());
 		

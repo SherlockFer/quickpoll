@@ -1,0 +1,13 @@
+1. Name: Booking date by slots
+2. Description: We needs to show how many slot (each 2 hours) per day are in a specific day
+3. Flow
+
+	After a click in the button "Book a service", appear the form to book a service, in the 
+	section choose a day, It must appear a window where shows a calendar and each day must show how
+	many slots has, once a click in an available day it must shows the available hours.
+
+	The slots should be each 2 hours starting from 9 am to 12pm and 2pm to 4pm.
+	In case of sunday must shows unable, and saturday just one slot at 9 am
+	
+
+	

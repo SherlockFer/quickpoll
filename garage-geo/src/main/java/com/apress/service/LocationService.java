@@ -3,10 +3,15 @@ package com.apress.service;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.apress.dto.LocationDTO;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 
 @Service
 public class LocationService {
@@ -16,13 +21,29 @@ public class LocationService {
 			ip = getPublicIp();
 		}
 		RestTemplate restTemplate = new RestTemplate();
-		LocationDTO locationDTO = restTemplate.getForObject("http://ip-api.com/json/" + ip, LocationDTO.class);
-		return locationDTO;
+		ResponseEntity<LocationDTO> responseLocationDTO = null;
+		try {
+			responseLocationDTO = restTemplate.getForEntity("http://ip-api.com/json/" + ip, LocationDTO.class);
+		} catch (RuntimeException e) {
+			log.error("ip-api.com Service Error" + responseLocationDTO, e);
+			throw e;
+		}
+
+		return responseLocationDTO.getBody();
 	}
 
 	private String getPublicIp() {
+
 		RestTemplate restTemplate = new RestTemplate();
-		return restTemplate.getForObject("https://api.ipify.org/", String.class);
+		ResponseEntity<String> response = null;
+		try {
+			response = restTemplate.getForEntity("https://api.ipify.org/", String.class);
+		} catch (RuntimeException e) {
+			log.error("api.ipify.org Service Error" + response, e);
+			throw e;
+		}
+		return response.getBody();
+
 	}
 
 	private boolean isPrivateIp(String ip) {

@@ -12,8 +12,6 @@ import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.NaturalId;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -29,29 +27,21 @@ import lombok.Setter;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 @Entity
-@Table(name = "PRODUCTS")
-public class Product {
+@Table(name = "SLOT")
+public class Slot {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_seq")
-	@SequenceGenerator(name = "product_id_seq", sequenceName = "product_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "slot_id_seq")
+	@SequenceGenerator(name = "slot_id_seq", sequenceName = "slot_id_seq", allocationSize = 1)
 	@Column(name = "ID")
 	private Long id;
-
-	@NaturalId(mutable = false)
-	@EqualsAndHashCode.Include
-	@Column(name = "REFERENCE", nullable = false, updatable = false, unique = true)
-	private String reference;
-
-	@Column(name = "NAME")
-	private String name;
-
-	@Column(name = "CATEGORY")
-	private String category;
-
-	@Column(name = "PRICE")
-	private Integer price;
-
+	
+	@Column(name = "START_TIME")
+	private LocalDateTime startTime;
+	
+	@Column(name = "END_TIME")
+	private LocalDateTime endTime;
+	
 	@Column(name = "CREATED_AT", insertable = true, updatable = false)
 	private LocalDateTime created;
 
@@ -69,4 +59,9 @@ public class Product {
 		this.setModified(LocalDateTime.now());
 	}
 
+	public Slot(LocalDateTime startTime,LocalDateTime endTime) {
+		this.startTime=startTime;
+		this.endTime=endTime;
+	}
+	
 }

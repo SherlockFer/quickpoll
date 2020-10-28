@@ -1,0 +1,10 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <ns2:GetLocationResponse xmlns:ns2="urn:garage:services:geolocation:types">
+            <ns2:status>success</ns2:status>
+            <ns2:country>Peru</ns2:country>
+            <ns2:city>Arequipa</ns2:city>
+        </ns2:GetLocationResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

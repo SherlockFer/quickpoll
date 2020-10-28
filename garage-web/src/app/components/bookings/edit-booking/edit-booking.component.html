@@ -132,7 +132,7 @@
                         <div class="form-group">
                             <label for="extra_services" class="text-muted form-label-sm">Additional services</label>
                             <select id="extra_services" formControlName="extra_services" multiple class="form-control form-control-lg" > 
-                                <option [ngValue]="extra_services.id" *ngFor="let extra_service of extra_services">
+                                <option [ngValue]="extra_service.id" *ngFor="let extra_service of extra_services">
                                     {{extra_service.name}}
                                 </option>
                             </select>

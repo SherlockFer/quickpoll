@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.apress.defaulter.BookingDefaulter;
+import com.apress.defaulter.SlotDefaulter;
 import com.apress.domain.Booking;
 import com.apress.dto.BookingDTO;
 import com.apress.helper.BookingTotal;
@@ -30,6 +31,8 @@ public class BookingService {
 	private BookingMapper bookingMapper;
 	@Autowired
 	private BookingDefaulter bookingDefaulter;
+	@Autowired
+	private SlotDefaulter slotDefaulter;
 	@Autowired
 	private BookingValidator bookingValidator;
 	@Autowired
